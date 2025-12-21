@@ -21,6 +21,7 @@ const FitnessGoal = require('./fitnessgoal.model');
 const FitnessAssessment = require('./fitnessassessment.model');
 const Achievement = require('./achievement.model');
 const ExerciseImage = require('./exerciseimage.model');
+const NutritionImage = require('./nutritionimage.model');
 const MotivationalMessage = require('./motivationalmessage.model');
 const Badge = require('./badge.model');
 const UserSurvey = require('./usersurvey.model');

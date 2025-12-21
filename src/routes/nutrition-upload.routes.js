@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const nutritionUploadController = require('../controllers/nutrition-upload.controller');
-const { protect, restrictTo } = require('../middleware/auth');
+const { authenticate, requireRole } = require('../middleware/auth');
 const { upload } = require('../middleware/upload.middleware');
 
 // All routes require authentication
-router.use(protect);
+router.use(authenticate);
 
 /**
  * @route   POST /api/nutrition-upload/folders
@@ -14,7 +14,7 @@ router.use(protect);
  */
 router.post(
     '/folders',
-    restrictTo('admin', 'instructor'),
+    requireRole('admin', 'instructor'),
     nutritionUploadController.createNutritionFolder
 );
 
@@ -25,7 +25,7 @@ router.post(
  */
 router.post(
     '/images',
-    restrictTo('admin', 'instructor'),
+    requireRole('admin', 'instructor'),
     upload.array('images', 10), // Allow up to 10 images at once
     nutritionUploadController.uploadNutritionImage
 );
@@ -47,7 +47,7 @@ router.get(
  */
 router.delete(
     '/images/:id',
-    restrictTo('admin', 'instructor'),
+    requireRole('admin', 'instructor'),
     nutritionUploadController.deleteNutritionImage
 );
 
@@ -58,7 +58,7 @@ router.delete(
  */
 router.put(
     '/images/:id/primary',
-    restrictTo('admin', 'instructor'),
+    requireRole('admin', 'instructor'),
     nutritionUploadController.setPrimaryImage
 );
 
