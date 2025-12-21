@@ -314,12 +314,28 @@ npm run test:coverage
 
 ## 📖 Additional Documentation
 
-- [OTP Authentication Guide](./OTP_AUTHENTICATION_GUIDE.md)
-- [OAuth Setup Guide](./OAUTH_AUTHENTICATION_GUIDE.md)
-- [Google Workspace SMTP Setup](./GOOGLE_WORKSPACE_SMTP_SETUP.md)
-- [AI Workout System](./AI_WORKOUT_SYSTEM_GUIDE.md)
-- [Deployment Guide](./DEPLOYMENT.md)
-- [Quick Start](./QUICKSTART.md)
+All comprehensive documentation is available in the [`docs`](./docs) folder:
+
+**Getting Started:**
+- [Quick Start Guide](./docs/QUICKSTART.md)
+- [Setup Guide](./docs/SETUP_GUIDE.md)
+- [Quick Reference](./docs/QUICK_REFERENCE.md)
+
+**Authentication:**
+- [OTP Authentication Guide](./docs/OTP_AUTHENTICATION_GUIDE.md)
+- [OAuth Setup Guide](./docs/OAUTH_AUTHENTICATION_GUIDE.md)
+- [Google Workspace SMTP Setup](./docs/GOOGLE_WORKSPACE_SMTP_SETUP.md)
+
+**Features:**
+- [AI Workout System](./docs/AI_WORKOUT_SYSTEM_GUIDE.md)
+- [Nutrition System Guide](./docs/NUTRITION_SYSTEM_GUIDE.md)
+- [Fitness API Documentation](./docs/FITNESS_API_DOCUMENTATION.md)
+
+**Database & Deployment:**
+- [Database Setup Guide](./docs/DATABASE_SETUP_GUIDE.md)
+- [Deployment Guide](./docs/DEPLOYMENT.md)
+
+**📚 [View All Documentation →](./docs/README.md)**
 
 ---
 
