@@ -33,7 +33,7 @@ const Advertisement = sequelize.define('Advertisement', {
     defaultValue: 'general',
     comment: 'Advertisement category'
   },
-  
+
   // Media
   imageUrl: {
     type: DataTypes.STRING(500),
@@ -50,7 +50,7 @@ const Advertisement = sequelize.define('Advertisement', {
     allowNull: true,
     comment: 'Video advertisement URL'
   },
-  
+
   // Link & CTA
   targetUrl: {
     type: DataTypes.STRING(1000),
@@ -63,7 +63,7 @@ const Advertisement = sequelize.define('Advertisement', {
     defaultValue: 'Learn More',
     comment: 'Call-to-action button text'
   },
-  
+
   // Placement & Display
   placement: {
     type: DataTypes.JSON,
@@ -81,7 +81,7 @@ const Advertisement = sequelize.define('Advertisement', {
     defaultValue: {},
     comment: 'Width and height: {width: 728, height: 90}'
   },
-  
+
   // Scheduling
   startDate: {
     type: DataTypes.DATE,
@@ -94,7 +94,7 @@ const Advertisement = sequelize.define('Advertisement', {
     allowNull: true,
     comment: 'When ad should stop showing (null = indefinite)'
   },
-  
+
   // Targeting
   targetAudience: {
     type: DataTypes.JSON,
@@ -106,7 +106,7 @@ const Advertisement = sequelize.define('Advertisement', {
     defaultValue: ['desktop', 'mobile', 'tablet'],
     comment: 'Device types to show ad on'
   },
-  
+
   // Priority & Budget
   priority: {
     type: DataTypes.INTEGER,
@@ -138,7 +138,7 @@ const Advertisement = sequelize.define('Advertisement', {
     allowNull: true,
     comment: 'Cost per 1000 impressions (CPM)'
   },
-  
+
   // Analytics
   impressions: {
     type: DataTypes.INTEGER,
@@ -160,7 +160,7 @@ const Advertisement = sequelize.define('Advertisement', {
     defaultValue: 0,
     comment: 'Total amount spent on this ad'
   },
-  
+
   // Advertiser Information
   advertiserName: {
     type: DataTypes.STRING(255),
@@ -182,7 +182,7 @@ const Advertisement = sequelize.define('Advertisement', {
     allowNull: true,
     comment: 'Advertiser website'
   },
-  
+
   // Status & Moderation
   status: {
     type: DataTypes.ENUM('draft', 'pending', 'approved', 'active', 'paused', 'completed', 'rejected'),
@@ -200,7 +200,7 @@ const Advertisement = sequelize.define('Advertisement', {
     allowNull: true,
     comment: 'Notes from moderation/review'
   },
-  
+
   // Management
   createdBy: {
     type: DataTypes.INTEGER,
@@ -225,7 +225,7 @@ const Advertisement = sequelize.define('Advertisement', {
     allowNull: true,
     comment: 'When ad was approved'
   },
-  
+
   // Additional Settings
   maxImpressions: {
     type: DataTypes.INTEGER,
@@ -271,9 +271,9 @@ const Advertisement = sequelize.define('Advertisement', {
     beforeSave: (ad) => {
       // Auto-set isActive based on status and dates
       const now = new Date();
-      if (ad.status === 'active' && 
-          ad.startDate <= now && 
-          (!ad.endDate || ad.endDate >= now)) {
+      if (ad.status === 'active' &&
+        ad.startDate <= now &&
+        (!ad.endDate || ad.endDate >= now)) {
         ad.isActive = true;
       } else {
         ad.isActive = false;

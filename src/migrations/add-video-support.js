@@ -14,16 +14,16 @@ const { QueryTypes } = require('sequelize');
 
 async function up() {
     const transaction = await sequelize.transaction();
-    
+
     try {
         console.log('Starting migration: Add video support to exercise_images table');
-        
+
         // Check if columns already exist
         const [columns] = await sequelize.query(
             `SHOW COLUMNS FROM exercise_images LIKE 'mediaType'`,
             { transaction }
         );
-        
+
         if (columns.length === 0) {
             // Add mediaType column
             await sequelize.query(
@@ -34,7 +34,7 @@ async function up() {
                 { transaction }
             );
             console.log('✓ Added mediaType column');
-            
+
             // Add duration column
             await sequelize.query(
                 `ALTER TABLE exercise_images 
@@ -44,7 +44,7 @@ async function up() {
                 { transaction }
             );
             console.log('✓ Added duration column');
-            
+
             // Add thumbnailUrl column
             await sequelize.query(
                 `ALTER TABLE exercise_images 
@@ -54,7 +54,7 @@ async function up() {
                 { transaction }
             );
             console.log('✓ Added thumbnailUrl column');
-            
+
             // Add indexes
             await sequelize.query(
                 `ALTER TABLE exercise_images 
@@ -62,14 +62,14 @@ async function up() {
                 { transaction }
             );
             console.log('✓ Added index on mediaType');
-            
+
             await sequelize.query(
                 `ALTER TABLE exercise_images 
                  ADD INDEX idx_exerciseSlug_mediaType (exerciseSlug, mediaType)`,
                 { transaction }
             );
             console.log('✓ Added composite index on exerciseSlug and mediaType');
-            
+
             await transaction.commit();
             console.log('✅ Migration completed successfully!');
         } else {
@@ -85,42 +85,42 @@ async function up() {
 
 async function down() {
     const transaction = await sequelize.transaction();
-    
+
     try {
         console.log('Starting rollback: Remove video support from exercise_images table');
-        
+
         // Remove indexes
         await sequelize.query(
             `ALTER TABLE exercise_images DROP INDEX IF EXISTS idx_mediaType`,
             { transaction }
         );
         console.log('✓ Removed index on mediaType');
-        
+
         await sequelize.query(
             `ALTER TABLE exercise_images DROP INDEX IF EXISTS idx_exerciseSlug_mediaType`,
             { transaction }
         );
         console.log('✓ Removed composite index');
-        
+
         // Remove columns
         await sequelize.query(
             `ALTER TABLE exercise_images DROP COLUMN IF EXISTS thumbnailUrl`,
             { transaction }
         );
         console.log('✓ Removed thumbnailUrl column');
-        
+
         await sequelize.query(
             `ALTER TABLE exercise_images DROP COLUMN IF EXISTS duration`,
             { transaction }
         );
         console.log('✓ Removed duration column');
-        
+
         await sequelize.query(
             `ALTER TABLE exercise_images DROP COLUMN IF EXISTS mediaType`,
             { transaction }
         );
         console.log('✓ Removed mediaType column');
-        
+
         await transaction.commit();
         console.log('✅ Rollback completed successfully!');
     } catch (error) {
@@ -133,7 +133,7 @@ async function down() {
 // Run migration if called directly
 if (require.main === module) {
     const command = process.argv[2];
-    
+
     if (command === 'up') {
         up()
             .then(() => process.exit(0))

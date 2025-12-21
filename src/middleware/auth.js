@@ -8,7 +8,7 @@ const authenticate = async (req, res, next) => {
   try {
     // Get token from header
     const authHeader = req.headers.authorization;
-    
+
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return res.status(401).json({
         success: false,
@@ -25,7 +25,7 @@ const authenticate = async (req, res, next) => {
     const user = await User.findByPk(decoded.userId, {
       attributes: { exclude: ['password'] }
     });
-    
+
     if (!user) {
       return res.status(401).json({
         success: false,
@@ -43,7 +43,7 @@ const authenticate = async (req, res, next) => {
     // Attach user to request
     req.user = user;
     req.userId = user.id;
-    
+
     next();
   } catch (error) {
     if (error.name === 'JsonWebTokenError') {
@@ -52,7 +52,7 @@ const authenticate = async (req, res, next) => {
         message: 'Invalid token. Authorization denied.'
       });
     }
-    
+
     if (error.name === 'TokenExpiredError') {
       return res.status(401).json({
         success: false,
@@ -74,7 +74,7 @@ const authenticate = async (req, res, next) => {
 const optionalAuth = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
-    
+
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return next();
     }
@@ -84,12 +84,12 @@ const optionalAuth = async (req, res, next) => {
     const user = await User.findByPk(decoded.userId, {
       attributes: { exclude: ['password'] }
     });
-    
+
     if (user && user.isActive) {
       req.user = user;
       req.userId = user.id;
     }
-    
+
     next();
   } catch (error) {
     // Continue without authentication
