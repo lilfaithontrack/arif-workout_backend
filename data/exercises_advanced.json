@@ -1,0 +1,916 @@
+{
+  "version": "2.0.0",
+  "description": "Advanced exercise database with detailed metadata for AI recommendations",
+  "lastUpdated": "2024-12-02T23:40:00Z",
+  "totalExercises": 10,
+  
+  "exerciseCategories": {
+    "strength": ["compound", "isolation", "bodyweight", "free_weights", "machines"],
+    "cardio": ["steady_state", "interval", "hiit", "liss"],
+    "flexibility": ["static_stretching", "dynamic_stretching", "yoga", "pilates"],
+    "balance": ["stability", "proprioception", "core"],
+    "functional": ["daily_movements", "sports_specific", "rehabilitation"],
+    "plyometric": ["explosive", "power", "athletic"]
+  },
+  
+  "intensityLevels": {
+    "very_low": {"heartRateZone": "50-60%", "rpe": "1-3", "description": "Recovery, warm-up"},
+    "low": {"heartRateZone": "60-70%", "rpe": "4-5", "description": "Fat burning, endurance base"},
+    "moderate": {"heartRateZone": "70-80%", "rpe": "6-7", "description": "Aerobic fitness, general conditioning"},
+    "high": {"heartRateZone": "80-90%", "rpe": "8-9", "description": "Anaerobic threshold, performance"},
+    "maximum": {"heartRateZone": "90-100%", "rpe": "10", "description": "Maximum effort, sprint"}
+  },
+  
+  "exercises": [
+    {
+      "id": "ex_001",
+      "name": "Push-ups",
+      "slug": "pushups",
+      "category": "strength",
+      "subcategory": "bodyweight",
+      "type": "compound",
+      "muscleGroups": {
+        "primary": ["chest", "triceps"],
+        "secondary": ["shoulders", "core"],
+        "stabilizers": ["serratus_anterior", "rotator_cuff"]
+      },
+      "equipment": ["none"],
+      "difficulty": "beginner",
+      "skillLevel": {
+        "beginner": {"sets": 3, "reps": "8-12", "rest": 60},
+        "intermediate": {"sets": 4, "reps": "12-20", "rest": 45},
+        "advanced": {"sets": 5, "reps": "20-30", "rest": 30}
+      },
+      "biomechanics": {
+        "movementPattern": "horizontal_push",
+        "planeOfMotion": "sagittal",
+        "jointActions": ["shoulder_flexion", "elbow_extension", "scapular_protraction"]
+      },
+      "caloriesBurnedPerMinute": 7.5,
+      "metValue": 3.8,
+      "duration": 300,
+      "instructions": [
+        "Start in plank position with hands shoulder-width apart",
+        "Keep body in straight line from head to heels",
+        "Lower body until chest nearly touches floor",
+        "Push back up to starting position",
+        "Keep core tight throughout movement"
+      ],
+      "videoUrl": "/videos/exercises/pushups.mp4",
+      "imageUrl": "/images/exercises/pushups.jpg",
+      "thumbnailUrl": "/images/thumbnails/exercises/pushups_thumb.jpg",
+      "commonMistakes": [
+        "Hips sagging or piking",
+        "Elbows flaring out too wide",
+        "Incomplete range of motion",
+        "Holding breath"
+      ],
+      "tips": [
+        "Keep core engaged throughout",
+        "Breathe out as you push up",
+        "Maintain neutral spine",
+        "Focus on chest touching ground, not nose"
+      ],
+      "variations": [
+        {
+          "name": "Knee Push-ups",
+          "difficulty": "easier",
+          "modification": "Perform on knees instead of toes",
+          "suitableFor": ["beginners", "rehabilitation", "underweight"]
+        },
+        {
+          "name": "Diamond Push-ups",
+          "difficulty": "harder",
+          "modification": "Hands close together forming diamond",
+          "suitableFor": ["advanced", "tricep_focus"]
+        },
+        {
+          "name": "Decline Push-ups",
+          "difficulty": "harder",
+          "modification": "Feet elevated on bench",
+          "suitableFor": ["advanced", "upper_chest_focus"]
+        },
+        {
+          "name": "Plyometric Push-ups",
+          "difficulty": "advanced",
+          "modification": "Explosive push with hands leaving ground",
+          "suitableFor": ["advanced", "power_training"]
+        }
+      ],
+      "goals": ["muscle_gain", "strength", "endurance", "toning"],
+      "contraindications": ["shoulder_injury", "wrist_pain", "rotator_cuff_tear", "recent_chest_surgery"],
+      "suitableFor": {
+        "bmiCategories": ["underweight_mild", "normal_weight", "overweight", "obese_class1"],
+        "fitnessLevels": ["beginner", "intermediate", "advanced"],
+        "ageGroups": ["teen", "adult", "senior_modified"],
+        "pregnancyStages": ["first_trimester_modified", "not_recommended_later"]
+      },
+      "progressionPath": ["wall_pushups", "knee_pushups", "standard_pushups", "decline_pushups", "plyometric_pushups"],
+      "tags": ["upper_body", "no_equipment", "home_workout", "compound_movement"],
+      "popularityScore": 95,
+      "effectivenessScore": 88,
+      "injuryRisk": "low",
+      "learningCurve": "easy"
+    },
+    {
+      "id": "ex_002",
+      "name": "Barbell Back Squat",
+      "slug": "barbell-back-squat",
+      "category": "strength",
+      "subcategory": "free_weights",
+      "type": "compound",
+      "muscleGroups": {
+        "primary": ["quadriceps", "glutes"],
+        "secondary": ["hamstrings", "calves", "core"],
+        "stabilizers": ["erector_spinae", "abdominals", "obliques"]
+      },
+      "equipment": ["barbell", "squat_rack", "weight_plates"],
+      "difficulty": "intermediate",
+      "skillLevel": {
+        "beginner": {"sets": 3, "reps": "8-10", "weight": "bodyweight_only", "rest": 120},
+        "intermediate": {"sets": 4, "reps": "8-12", "weight": "0.8-1.2x_bodyweight", "rest": 90},
+        "advanced": {"sets": 5, "reps": "5-8", "weight": "1.5-2x_bodyweight", "rest": 180}
+      },
+      "biomechanics": {
+        "movementPattern": "squat",
+        "planeOfMotion": "sagittal",
+        "jointActions": ["hip_flexion_extension", "knee_flexion_extension", "ankle_dorsiflexion"]
+      },
+      "caloriesBurnedPerMinute": 9.5,
+      "metValue": 5.0,
+      "duration": 360,
+      "instructions": [
+        "Position barbell on upper back (trapezius)",
+        "Stand with feet shoulder-width apart, toes slightly out",
+        "Brace core and maintain neutral spine",
+        "Descend by bending knees and hips simultaneously",
+        "Lower until thighs parallel to ground or below",
+        "Drive through heels to return to starting position",
+        "Keep chest up and knees tracking over toes"
+      ],
+      "videoUrl": "/videos/exercises/barbell-back-squat.mp4",
+      "imageUrl": "/images/exercises/squats.jpg",
+      "thumbnailUrl": "/images/thumbnails/exercises/squats_thumb.jpg",
+      "commonMistakes": [
+        "Knees caving inward (valgus collapse)",
+        "Rounding lower back (butt wink)",
+        "Heels lifting off ground",
+        "Not reaching proper depth",
+        "Bar rolling forward",
+        "Looking up or down excessively"
+      ],
+      "tips": [
+        "Keep weight on mid-foot to heels",
+        "Push knees out to maintain alignment",
+        "Take deep breath before descent, hold during rep",
+        "Imagine sitting back into a chair",
+        "Keep elbows down and back tight"
+      ],
+      "variations": [
+        {
+          "name": "Goblet Squat",
+          "difficulty": "easier",
+          "modification": "Hold dumbbell or kettlebell at chest",
+          "suitableFor": ["beginners", "learning_squat_pattern"]
+        },
+        {
+          "name": "Front Squat",
+          "difficulty": "same",
+          "modification": "Bar rests on front deltoids",
+          "suitableFor": ["quad_emphasis", "olympic_lifting"]
+        },
+        {
+          "name": "Box Squat",
+          "difficulty": "easier",
+          "modification": "Squat to box or bench",
+          "suitableFor": ["learning_depth", "powerlifting"]
+        },
+        {
+          "name": "Pause Squat",
+          "difficulty": "harder",
+          "modification": "Pause 2-3 seconds at bottom",
+          "suitableFor": ["strength_building", "technique_refinement"]
+        }
+      ],
+      "goals": ["muscle_gain", "strength", "power", "athletic_performance"],
+      "contraindications": ["knee_injury", "hip_injury", "lower_back_injury", "severe_obesity", "balance_issues"],
+      "suitableFor": {
+        "bmiCategories": ["underweight_mild", "normal_weight", "overweight"],
+        "fitnessLevels": ["intermediate", "advanced"],
+        "ageGroups": ["teen", "adult"],
+        "pregnancyStages": ["not_recommended"]
+      },
+      "progressionPath": ["bodyweight_squat", "goblet_squat", "barbell_squat", "heavy_barbell_squat", "olympic_squat"],
+      "tags": ["lower_body", "compound", "mass_builder", "functional", "athletic"],
+      "popularityScore": 98,
+      "effectivenessScore": 97,
+      "injuryRisk": "moderate",
+      "learningCurve": "moderate",
+      "powerlifting": true,
+      "olympic": false
+    },
+    {
+      "id": "ex_003",
+      "name": "Walking (Brisk)",
+      "slug": "brisk-walking",
+      "category": "cardio",
+      "subcategory": "steady_state",
+      "type": "low_impact",
+      "muscleGroups": {
+        "primary": ["legs", "glutes"],
+        "secondary": ["core", "calves"],
+        "stabilizers": ["hip_flexors", "core"]
+      },
+      "equipment": ["none"],
+      "difficulty": "beginner",
+      "skillLevel": {
+        "beginner": {"duration": "15-20 minutes", "pace": "3-4 km/h", "frequency": "daily"},
+        "intermediate": {"duration": "30-45 minutes", "pace": "5-6 km/h", "frequency": "daily"},
+        "advanced": {"duration": "60+ minutes", "pace": "6-7 km/h", "frequency": "daily"}
+      },
+      "biomechanics": {
+        "movementPattern": "gait",
+        "planeOfMotion": "sagittal",
+        "jointActions": ["hip_flexion_extension", "knee_flexion_extension", "ankle_plantarflexion"]
+      },
+      "caloriesBurnedPerMinute": 4.5,
+      "metValue": 3.5,
+      "duration": 1800,
+      "instructions": [
+        "Stand tall with good posture",
+        "Swing arms naturally at sides",
+        "Land heel first, roll through to toe",
+        "Maintain steady, brisk pace",
+        "Breathe rhythmically",
+        "Keep core engaged"
+      ],
+      "videoUrl": "/videos/exercises/brisk-walking.mp4",
+      "imageUrl": "/images/exercises/walking.jpg",
+      "thumbnailUrl": "/images/thumbnails/exercises/walking_thumb.jpg",
+      "commonMistakes": [
+        "Slouching posture",
+        "Looking down at ground",
+        "Overstriding",
+        "Tensing shoulders"
+      ],
+      "tips": [
+        "Aim for 10,000 steps per day",
+        "Use comfortable, supportive shoes",
+        "Gradually increase duration and pace",
+        "Walk outdoors for vitamin D and mental health",
+        "Use walking as active recovery"
+      ],
+      "variations": [
+        {
+          "name": "Incline Walking",
+          "difficulty": "harder",
+          "modification": "Walk on incline or hills",
+          "suitableFor": ["glute_activation", "calorie_burn"]
+        },
+        {
+          "name": "Nordic Walking",
+          "difficulty": "same",
+          "modification": "Use walking poles",
+          "suitableFor": ["full_body_engagement", "seniors"]
+        },
+        {
+          "name": "Interval Walking",
+          "difficulty": "harder",
+          "modification": "Alternate fast and slow pace",
+          "suitableFor": ["fat_loss", "cardiovascular_fitness"]
+        }
+      ],
+      "goals": ["weight_loss", "cardiovascular_health", "endurance", "rehabilitation", "active_recovery"],
+      "contraindications": ["severe_ankle_injury", "acute_foot_pain"],
+      "suitableFor": {
+        "bmiCategories": ["all"],
+        "fitnessLevels": ["all"],
+        "ageGroups": ["all"],
+        "pregnancyStages": ["all_trimesters", "postpartum"]
+      },
+      "progressionPath": ["slow_walking", "brisk_walking", "power_walking", "incline_walking", "hiking"],
+      "tags": ["cardio", "low_impact", "beginner_friendly", "outdoor", "daily_activity"],
+      "popularityScore": 100,
+      "effectivenessScore": 75,
+      "injuryRisk": "very_low",
+      "learningCurve": "none",
+      "idealFor": ["obese_class2", "obese_class3", "seniors", "rehabilitation", "beginners"]
+    },
+    {
+      "id": "ex_004",
+      "name": "Deadlift (Conventional)",
+      "slug": "conventional-deadlift",
+      "category": "strength",
+      "subcategory": "free_weights",
+      "type": "compound",
+      "muscleGroups": {
+        "primary": ["erector_spinae", "glutes", "hamstrings"],
+        "secondary": ["quadriceps", "traps", "lats", "forearms"],
+        "stabilizers": ["core", "rhomboids", "rear_delts"]
+      },
+      "equipment": ["barbell", "weight_plates"],
+      "difficulty": "advanced",
+      "skillLevel": {
+        "beginner": {"sets": 3, "reps": "5-8", "weight": "0.5-0.8x_bodyweight", "rest": 180},
+        "intermediate": {"sets": 4, "reps": "5-8", "weight": "1.0-1.5x_bodyweight", "rest": 180},
+        "advanced": {"sets": 5, "reps": "3-5", "weight": "1.5-2.5x_bodyweight", "rest": 240}
+      },
+      "biomechanics": {
+        "movementPattern": "hip_hinge",
+        "planeOfMotion": "sagittal",
+        "jointActions": ["hip_extension", "knee_extension", "spine_stabilization"]
+      },
+      "caloriesBurnedPerMinute": 8.5,
+      "metValue": 6.0,
+      "duration": 300,
+      "instructions": [
+        "Stand with feet hip-width apart, bar over mid-foot",
+        "Bend at hips and knees to grip bar just outside legs",
+        "Set back flat, chest up, shoulders over bar",
+        "Take deep breath, brace core",
+        "Drive through heels, extend hips and knees simultaneously",
+        "Keep bar close to body throughout lift",
+        "Stand fully erect at top, squeeze glutes",
+        "Lower bar with control, maintaining back position"
+      ],
+      "videoUrl": "/videos/exercises/deadlifts.mp4",
+      "imageUrl": "/images/exercises/deadlifts.jpg",
+      "thumbnailUrl": "/images/thumbnails/exercises/deadlifts_thumb.jpg",
+      "commonMistakes": [
+        "Rounding lower back",
+        "Bar drifting away from body",
+        "Hyperextending at top",
+        "Jerking the bar off ground",
+        "Not engaging lats",
+        "Improper breathing"
+      ],
+      "tips": [
+        "Think 'push the floor away' not 'pull the bar up'",
+        "Keep bar in contact with legs throughout",
+        "Engage lats by 'bending the bar'",
+        "Use mixed grip or straps for heavy weights",
+        "Film yourself to check form"
+      ],
+      "variations": [
+        {
+          "name": "Romanian Deadlift",
+          "difficulty": "same",
+          "modification": "Minimal knee bend, focus on hip hinge",
+          "suitableFor": ["hamstring_focus", "hypertrophy"]
+        },
+        {
+          "name": "Sumo Deadlift",
+          "difficulty": "same",
+          "modification": "Wide stance, hands inside legs",
+          "suitableFor": ["different_leverages", "powerlifting"]
+        },
+        {
+          "name": "Trap Bar Deadlift",
+          "difficulty": "easier",
+          "modification": "Use trap/hex bar",
+          "suitableFor": ["beginners", "back_safety"]
+        },
+        {
+          "name": "Deficit Deadlift",
+          "difficulty": "harder",
+          "modification": "Stand on platform for increased range",
+          "suitableFor": ["advanced", "strength_building"]
+        }
+      ],
+      "goals": ["strength", "power", "muscle_gain", "athletic_performance"],
+      "contraindications": ["lower_back_injury", "herniated_disc", "severe_scoliosis", "recent_back_surgery"],
+      "suitableFor": {
+        "bmiCategories": ["underweight_mild", "normal_weight", "overweight"],
+        "fitnessLevels": ["intermediate", "advanced"],
+        "ageGroups": ["teen", "adult"],
+        "pregnancyStages": ["not_recommended"]
+      },
+      "progressionPath": ["romanian_deadlift", "trap_bar_deadlift", "conventional_deadlift", "heavy_deadlift", "competition_deadlift"],
+      "tags": ["full_body", "compound", "mass_builder", "powerlifting", "functional"],
+      "popularityScore": 92,
+      "effectivenessScore": 98,
+      "injuryRisk": "high",
+      "learningCurve": "difficult",
+      "powerlifting": true,
+      "requiresCoaching": true
+    },
+    {
+      "id": "ex_005",
+      "name": "Chair-Assisted Sit-to-Stand",
+      "slug": "chair-sit-to-stand",
+      "category": "functional",
+      "subcategory": "rehabilitation",
+      "type": "bodyweight",
+      "muscleGroups": {
+        "primary": ["quadriceps", "glutes"],
+        "secondary": ["core", "calves"],
+        "stabilizers": ["hip_stabilizers", "ankle_stabilizers"]
+      },
+      "equipment": ["chair"],
+      "difficulty": "beginner",
+      "skillLevel": {
+        "beginner": {"sets": 3, "reps": "8-10", "rest": 60},
+        "intermediate": {"sets": 3, "reps": "12-15", "rest": 45},
+        "advanced": {"sets": 4, "reps": "15-20", "rest": 30}
+      },
+      "biomechanics": {
+        "movementPattern": "squat",
+        "planeOfMotion": "sagittal",
+        "jointActions": ["hip_extension", "knee_extension"]
+      },
+      "caloriesBurnedPerMinute": 3.5,
+      "metValue": 2.5,
+      "duration": 180,
+      "instructions": [
+        "Sit on edge of sturdy chair",
+        "Place feet flat on floor, hip-width apart",
+        "Lean forward slightly from hips",
+        "Push through heels to stand up",
+        "Extend hips and knees fully",
+        "Slowly lower back to seated position with control"
+      ],
+      "videoUrl": "/videos/exercises/chair-sit-stand.mp4",
+      "imageUrl": "/images/exercises/chair-exercises.jpg",
+      "thumbnailUrl": "/images/thumbnails/exercises/chair-exercises_thumb.jpg",
+      "commonMistakes": [
+        "Using momentum to stand",
+        "Not fully extending hips",
+        "Dropping into chair",
+        "Knees caving inward"
+      ],
+      "tips": [
+        "Use arms for assistance if needed",
+        "Focus on controlled movement",
+        "Breathe out as you stand",
+        "Progress to no-hands version"
+      ],
+      "variations": [
+        {
+          "name": "No-Hands Sit-to-Stand",
+          "difficulty": "harder",
+          "modification": "Cross arms over chest",
+          "suitableFor": ["progression", "balance_improvement"]
+        },
+        {
+          "name": "Single-Leg Sit-to-Stand",
+          "difficulty": "advanced",
+          "modification": "Stand on one leg",
+          "suitableFor": ["advanced", "balance", "unilateral_strength"]
+        }
+      ],
+      "goals": ["rehabilitation", "functional_fitness", "mobility", "independence"],
+      "contraindications": ["severe_knee_pain", "recent_hip_replacement_early_stage"],
+      "suitableFor": {
+        "bmiCategories": ["all"],
+        "fitnessLevels": ["beginner", "rehabilitation"],
+        "ageGroups": ["senior", "elderly"],
+        "pregnancyStages": ["all_trimesters", "postpartum"]
+      },
+      "progressionPath": ["assisted_sit_stand", "unassisted_sit_stand", "bodyweight_squat"],
+      "tags": ["functional", "senior_friendly", "rehabilitation", "daily_living", "low_impact"],
+      "popularityScore": 70,
+      "effectivenessScore": 85,
+      "injuryRisk": "very_low",
+      "learningCurve": "very_easy",
+      "idealFor": ["obese_class2", "obese_class3", "seniors", "post_surgery", "limited_mobility"]
+    },
+    {
+      "id": "ex_021",
+      "name": "Dumbbell Bicep Curls",
+      "slug": "dumbbell-bicep-curls",
+      "category": "strength",
+      "subcategory": "isolation",
+      "type": "isolation",
+      "muscleGroups": {
+        "primary": ["biceps"],
+        "secondary": ["forearms"],
+        "stabilizers": ["core", "shoulders"]
+      },
+      "equipment": ["dumbbells"],
+      "difficulty": "beginner",
+      "skillLevel": {
+        "beginner": {"sets": 3, "reps": "10-12", "weight": "5-10kg", "rest": 60},
+        "intermediate": {"sets": 4, "reps": "12-15", "weight": "10-15kg", "rest": 45},
+        "advanced": {"sets": 4, "reps": "15-20", "weight": "15-20kg", "rest": 30}
+      },
+      "biomechanics": {
+        "movementPattern": "elbow_flexion",
+        "planeOfMotion": "sagittal",
+        "jointActions": ["elbow_flexion"]
+      },
+      "caloriesBurnedPerMinute": 4.0,
+      "metValue": 3.0,
+      "duration": 240,
+      "instructions": [
+        "Stand with feet shoulder-width apart",
+        "Hold dumbbells at sides with palms facing forward",
+        "Keep elbows close to torso",
+        "Curl weights up to shoulder level",
+        "Squeeze biceps at top",
+        "Lower with control"
+      ],
+      "videoUrl": "/videos/exercises/bicep-curls.mp4",
+      "imageUrl": "/images/exercises/bicep-curls.jpg",
+      "thumbnailUrl": "/images/thumbnails/exercises/bicep-curls_thumb.jpg",
+      "commonMistakes": [
+        "Swinging body for momentum",
+        "Elbows moving forward",
+        "Not fully extending at bottom",
+        "Using too much weight"
+      ],
+      "tips": [
+        "Keep elbows stationary",
+        "Control the negative",
+        "Focus on bicep contraction",
+        "Don't lean back"
+      ],
+      "variations": [
+        {"name": "Hammer Curls", "difficulty": "same", "modification": "Palms facing each other"},
+        {"name": "Concentration Curls", "difficulty": "same", "modification": "Seated, one arm at a time"},
+        {"name": "Cable Curls", "difficulty": "same", "modification": "Using cable machine"}
+      ],
+      "goals": ["muscle_gain", "arm_development", "strength"],
+      "contraindications": ["elbow_injury", "bicep_tendonitis"],
+      "suitableFor": {
+        "bmiCategories": ["underweight", "normal_weight", "overweight"],
+        "fitnessLevels": ["beginner", "intermediate", "advanced"],
+        "ageGroups": ["teen", "adult", "senior"],
+        "pregnancyStages": ["all_trimesters_light_weight"]
+      },
+      "progressionPath": ["resistance_band_curls", "light_dumbbell_curls", "moderate_weight_curls", "heavy_curls"],
+      "tags": ["arms", "isolation", "biceps", "gym"],
+      "popularityScore": 90,
+      "effectivenessScore": 75,
+      "injuryRisk": "low",
+      "learningCurve": "easy"
+    },
+    {
+      "id": "ex_022",
+      "name": "Lat Pulldown",
+      "slug": "lat-pulldown",
+      "category": "strength",
+      "subcategory": "machines",
+      "type": "compound",
+      "muscleGroups": {
+        "primary": ["lats", "upper_back"],
+        "secondary": ["biceps", "rear_delts"],
+        "stabilizers": ["core", "forearms"]
+      },
+      "equipment": ["lat_pulldown_machine"],
+      "difficulty": "beginner",
+      "skillLevel": {
+        "beginner": {"sets": 3, "reps": "10-12", "weight": "30-40kg", "rest": 60},
+        "intermediate": {"sets": 4, "reps": "10-15", "weight": "50-70kg", "rest": 60},
+        "advanced": {"sets": 4, "reps": "8-12", "weight": "80-100kg", "rest": 90}
+      },
+      "biomechanics": {
+        "movementPattern": "vertical_pull",
+        "planeOfMotion": "frontal",
+        "jointActions": ["shoulder_adduction", "elbow_flexion", "scapular_depression"]
+      },
+      "caloriesBurnedPerMinute": 5.5,
+      "metValue": 3.5,
+      "duration": 300,
+      "instructions": [
+        "Sit at lat pulldown machine, adjust thigh pad",
+        "Grip bar wider than shoulder-width",
+        "Lean back slightly, chest up",
+        "Pull bar down to upper chest",
+        "Squeeze shoulder blades together",
+        "Return to start with control"
+      ],
+      "videoUrl": "/videos/exercises/lat-pulldown.mp4",
+      "imageUrl": "/images/exercises/lat-pulldown.jpg",
+      "thumbnailUrl": "/images/thumbnails/exercises/lat-pulldown_thumb.jpg",
+      "commonMistakes": [
+        "Pulling behind neck",
+        "Using momentum",
+        "Not fully extending arms",
+        "Leaning back too far"
+      ],
+      "tips": [
+        "Focus on pulling elbows down",
+        "Engage lats, not just arms",
+        "Keep chest up throughout",
+        "Control the eccentric phase"
+      ],
+      "variations": [
+        {"name": "Close-Grip Pulldown", "difficulty": "same", "modification": "Narrow grip"},
+        {"name": "Underhand Pulldown", "difficulty": "same", "modification": "Palms facing you"},
+        {"name": "Single-Arm Pulldown", "difficulty": "harder", "modification": "One arm at a time"}
+      ],
+      "goals": ["muscle_gain", "back_development", "strength", "v_taper"],
+      "contraindications": ["shoulder_impingement", "rotator_cuff_injury"],
+      "suitableFor": {
+        "bmiCategories": ["all"],
+        "fitnessLevels": ["beginner", "intermediate", "advanced"],
+        "ageGroups": ["teen", "adult", "senior"],
+        "pregnancyStages": ["first_trimester_light"]
+      },
+      "progressionPath": ["assisted_pullup", "lat_pulldown", "pullups", "weighted_pullups"],
+      "tags": ["back", "compound", "machine", "gym", "mass_builder"],
+      "popularityScore": 88,
+      "effectivenessScore": 85,
+      "injuryRisk": "low",
+      "learningCurve": "easy"
+    },
+    {
+      "id": "ex_023",
+      "name": "Leg Press",
+      "slug": "leg-press",
+      "category": "strength",
+      "subcategory": "machines",
+      "type": "compound",
+      "muscleGroups": {
+        "primary": ["quadriceps", "glutes"],
+        "secondary": ["hamstrings", "calves"],
+        "stabilizers": ["core"]
+      },
+      "equipment": ["leg_press_machine"],
+      "difficulty": "beginner",
+      "skillLevel": {
+        "beginner": {"sets": 3, "reps": "10-12", "weight": "50-80kg", "rest": 90},
+        "intermediate": {"sets": 4, "reps": "10-15", "weight": "100-150kg", "rest": 90},
+        "advanced": {"sets": 4, "reps": "8-12", "weight": "200-300kg", "rest": 120}
+      },
+      "biomechanics": {
+        "movementPattern": "leg_press",
+        "planeOfMotion": "sagittal",
+        "jointActions": ["hip_extension", "knee_extension"]
+      },
+      "caloriesBurnedPerMinute": 6.5,
+      "metValue": 4.0,
+      "duration": 300,
+      "instructions": [
+        "Sit in leg press machine, back flat against pad",
+        "Place feet shoulder-width on platform",
+        "Release safety bars",
+        "Lower weight by bending knees",
+        "Stop when knees at 90 degrees",
+        "Push through heels to extend legs"
+      ],
+      "videoUrl": "/videos/exercises/leg-press.mp4",
+      "imageUrl": "/images/exercises/leg-press.jpg",
+      "thumbnailUrl": "/images/thumbnails/exercises/leg-press_thumb.jpg",
+      "commonMistakes": [
+        "Locking knees at top",
+        "Lower back lifting off pad",
+        "Feet too high or too low",
+        "Partial range of motion"
+      ],
+      "tips": [
+        "Keep lower back pressed to pad",
+        "Don't lock knees at top",
+        "Push through heels",
+        "Control the descent"
+      ],
+      "variations": [
+        {"name": "Single-Leg Press", "difficulty": "harder", "modification": "One leg at a time"},
+        {"name": "High Foot Placement", "difficulty": "same", "modification": "Targets glutes/hamstrings"},
+        {"name": "Low Foot Placement", "difficulty": "same", "modification": "Targets quads"}
+      ],
+      "goals": ["muscle_gain", "leg_development", "strength"],
+      "contraindications": ["knee_injury", "lower_back_injury"],
+      "suitableFor": {
+        "bmiCategories": ["all"],
+        "fitnessLevels": ["beginner", "intermediate", "advanced"],
+        "ageGroups": ["teen", "adult", "senior"],
+        "pregnancyStages": ["first_trimester_light"]
+      },
+      "progressionPath": ["bodyweight_squat", "goblet_squat", "leg_press", "barbell_squat"],
+      "tags": ["legs", "compound", "machine", "mass_builder", "quad_focus"],
+      "popularityScore": 85,
+      "effectivenessScore": 82,
+      "injuryRisk": "moderate",
+      "learningCurve": "easy"
+    },
+    {
+      "id": "ex_024",
+      "name": "Bench Dips",
+      "slug": "bench-dips",
+      "category": "strength",
+      "subcategory": "bodyweight",
+      "type": "compound",
+      "muscleGroups": {
+        "primary": ["triceps"],
+        "secondary": ["chest", "shoulders"],
+        "stabilizers": ["core"]
+      },
+      "equipment": ["bench"],
+      "difficulty": "beginner",
+      "skillLevel": {
+        "beginner": {"sets": 3, "reps": "8-10", "rest": 60},
+        "intermediate": {"sets": 3, "reps": "12-15", "rest": 45},
+        "advanced": {"sets": 4, "reps": "15-20", "rest": 30}
+      },
+      "biomechanics": {
+        "movementPattern": "vertical_push",
+        "planeOfMotion": "sagittal",
+        "jointActions": ["shoulder_extension", "elbow_extension"]
+      },
+      "caloriesBurnedPerMinute": 5.0,
+      "metValue": 3.5,
+      "duration": 180,
+      "instructions": [
+        "Place hands on bench behind you, fingers forward",
+        "Extend legs forward, heels on ground",
+        "Lower body by bending elbows to 90 degrees",
+        "Keep elbows pointing back",
+        "Push back up to starting position"
+      ],
+      "videoUrl": "/videos/exercises/bench-dips.mp4",
+      "imageUrl": "/images/exercises/tricep-dips.jpg",
+      "thumbnailUrl": "/images/thumbnails/exercises/tricep-dips_thumb.jpg",
+      "commonMistakes": [
+        "Elbows flaring out",
+        "Going too deep",
+        "Shoulders shrugging",
+        "Using momentum"
+      ],
+      "tips": [
+        "Keep elbows close to body",
+        "Don't go below 90 degrees",
+        "Control the movement",
+        "Focus on triceps"
+      ],
+      "variations": [
+        {"name": "Bent-Knee Dips", "difficulty": "easier", "modification": "Bend knees for less resistance"},
+        {"name": "Weighted Dips", "difficulty": "harder", "modification": "Add weight on lap"},
+        {"name": "Parallel Bar Dips", "difficulty": "harder", "modification": "Use dip bars"}
+      ],
+      "goals": ["muscle_gain", "arm_development", "tricep_strength"],
+      "contraindications": ["shoulder_injury", "elbow_pain", "wrist_pain"],
+      "suitableFor": {
+        "bmiCategories": ["underweight", "normal_weight", "overweight"],
+        "fitnessLevels": ["beginner", "intermediate", "advanced"],
+        "ageGroups": ["teen", "adult"],
+        "pregnancyStages": ["not_recommended"]
+      },
+      "progressionPath": ["wall_pushups", "bench_dips", "parallel_bar_dips", "weighted_dips"],
+      "tags": ["triceps", "bodyweight", "upper_body", "home_workout"],
+      "popularityScore": 78,
+      "effectivenessScore": 80,
+      "injuryRisk": "moderate",
+      "learningCurve": "easy"
+    },
+    {
+      "id": "ex_025",
+      "name": "Rowing Machine",
+      "slug": "rowing-machine",
+      "category": "cardio",
+      "subcategory": "steady_state",
+      "type": "full_body",
+      "muscleGroups": {
+        "primary": ["back", "legs"],
+        "secondary": ["arms", "core", "shoulders"],
+        "stabilizers": ["core", "glutes"]
+      },
+      "equipment": ["rowing_machine"],
+      "difficulty": "intermediate",
+      "skillLevel": {
+        "beginner": {"duration": "10-15 minutes", "pace": "moderate", "spm": "20-24"},
+        "intermediate": {"duration": "20-30 minutes", "pace": "moderate_to_high", "spm": "24-28"},
+        "advanced": {"duration": "30-45 minutes", "pace": "high", "spm": "28-32"}
+      },
+      "biomechanics": {
+        "movementPattern": "rowing",
+        "planeOfMotion": "sagittal",
+        "jointActions": ["hip_extension", "knee_extension", "shoulder_extension", "elbow_flexion"]
+      },
+      "caloriesBurnedPerMinute": 10.0,
+      "metValue": 7.0,
+      "duration": 1200,
+      "instructions": [
+        "Sit on rowing machine, secure feet",
+        "Grab handle with overhand grip",
+        "Start with legs bent, arms extended",
+        "Push with legs first",
+        "Lean back slightly, pull handle to chest",
+        "Reverse the movement with control"
+      ],
+      "videoUrl": "/videos/exercises/rowing-machine.mp4",
+      "imageUrl": "/images/exercises/rowing.jpg",
+      "thumbnailUrl": "/images/thumbnails/exercises/rowing_thumb.jpg",
+      "commonMistakes": [
+        "Pulling with arms first",
+        "Rounding back",
+        "Leaning too far back",
+        "Rushing the recovery"
+      ],
+      "tips": [
+        "Legs, core, then arms on drive",
+        "Arms, core, then legs on recovery",
+        "Keep back straight",
+        "Smooth, controlled strokes"
+      ],
+      "variations": [
+        {"name": "Interval Rowing", "difficulty": "harder", "modification": "Alternate high/low intensity"},
+        {"name": "Steady State Rowing", "difficulty": "same", "modification": "Consistent pace"},
+        {"name": "Sprint Rowing", "difficulty": "harder", "modification": "Max effort intervals"}
+      ],
+      "goals": ["weight_loss", "endurance", "cardiovascular_health", "full_body_conditioning"],
+      "contraindications": ["lower_back_injury", "knee_injury"],
+      "suitableFor": {
+        "bmiCategories": ["normal_weight", "overweight", "obese_class1"],
+        "fitnessLevels": ["beginner", "intermediate", "advanced"],
+        "ageGroups": ["teen", "adult", "senior"],
+        "pregnancyStages": ["first_trimester_light"]
+      },
+      "progressionPath": ["walking", "cycling", "rowing", "hiit_rowing"],
+      "tags": ["cardio", "full_body", "low_impact", "gym", "endurance"],
+      "popularityScore": 82,
+      "effectivenessScore": 90,
+      "injuryRisk": "low",
+      "learningCurve": "moderate"
+    }
+  ],
+  
+  "workoutTemplates": {
+    "underweight_muscle_building": {
+      "name": "Underweight Muscle Building Program",
+      "description": "Focus on compound movements with adequate rest for muscle growth",
+      "frequency": 4,
+      "duration": 60,
+      "exercises": [
+        {"exerciseId": "ex_002", "sets": 4, "reps": "8-10", "rest": 120},
+        {"exerciseId": "ex_001", "sets": 4, "reps": "10-12", "rest": 90},
+        {"exerciseId": "ex_004", "sets": 3, "reps": "6-8", "rest": 180}
+      ],
+      "nutritionGuidance": "Calorie surplus of 500-800, high protein (2g/kg bodyweight)",
+      "supplementation": ["protein_powder", "creatine", "multivitamin"]
+    },
+    "obese_beginner_program": {
+      "name": "Obesity-Friendly Beginner Program",
+      "description": "Low-impact exercises focusing on movement and calorie burn",
+      "frequency": 5,
+      "duration": 30,
+      "exercises": [
+        {"exerciseId": "ex_003", "duration": "20 minutes", "intensity": "moderate"},
+        {"exerciseId": "ex_005", "sets": 3, "reps": "10-12", "rest": 60}
+      ],
+      "nutritionGuidance": "Calorie deficit of 500-750, high protein to preserve muscle",
+      "supplementation": ["multivitamin", "omega3", "vitamin_d"]
+    },
+    "strength_hypertrophy": {
+      "name": "Hypertrophy Strength Program",
+      "description": "Muscle building focus with moderate to high volume",
+      "frequency": 5,
+      "duration": 75,
+      "split": "push_pull_legs",
+      "exercises": {
+        "push_day": [
+          {"exerciseId": "ex_001", "sets": 4, "reps": "8-12", "rest": 90},
+          {"exerciseId": "ex_022", "sets": 4, "reps": "10-12", "rest": 60},
+          {"exerciseId": "ex_024", "sets": 3, "reps": "12-15", "rest": 60}
+        ],
+        "pull_day": [
+          {"exerciseId": "ex_022", "sets": 4, "reps": "8-12", "rest": 90},
+          {"exerciseId": "ex_021", "sets": 4, "reps": "10-12", "rest": 60}
+        ],
+        "leg_day": [
+          {"exerciseId": "ex_002", "sets": 4, "reps": "8-10", "rest": 120},
+          {"exerciseId": "ex_023", "sets": 4, "reps": "10-12", "rest": 90}
+        ]
+      },
+      "nutritionGuidance": "Slight calorie surplus (200-300), protein 1.8-2.2g/kg",
+      "supplementation": ["protein_powder", "creatine"]
+    },
+    "cardio_endurance": {
+      "name": "Cardiovascular Endurance Program",
+      "description": "Build aerobic capacity and stamina",
+      "frequency": 5,
+      "duration": 45,
+      "exercises": [
+        {"exerciseId": "ex_003", "duration": "30 minutes", "intensity": "moderate", "days": ["mon", "wed", "fri"]},
+        {"exerciseId": "ex_025", "duration": "20 minutes", "intensity": "moderate", "days": ["tue", "thu"]}
+      ],
+      "nutritionGuidance": "Maintenance calories, carb focus for energy",
+      "supplementation": ["electrolytes", "bcaa"]
+    },
+    "senior_mobility": {
+      "name": "Senior Mobility & Strength",
+      "description": "Safe, effective program for older adults",
+      "frequency": 3,
+      "duration": 30,
+      "exercises": [
+        {"exerciseId": "ex_005", "sets": 3, "reps": "10-12", "rest": 60},
+        {"exerciseId": "ex_003", "duration": "15 minutes", "intensity": "low"}
+      ],
+      "nutritionGuidance": "Maintenance calories, adequate protein (1.2g/kg)",
+      "supplementation": ["multivitamin", "vitamin_d", "calcium", "omega3"]
+    },
+    "athletic_performance": {
+      "name": "Athletic Performance Enhancement",
+      "description": "Sport-specific training for athletes",
+      "frequency": 6,
+      "duration": 90,
+      "exercises": [
+        {"exerciseId": "ex_002", "sets": 5, "reps": "5-8", "rest": 180, "focus": "power"},
+        {"exerciseId": "ex_004", "sets": 5, "reps": "3-5", "rest": 240, "focus": "strength"},
+        {"exerciseId": "ex_025", "duration": "30 minutes", "intensity": "interval", "focus": "conditioning"}
+      ],
+      "nutritionGuidance": "Maintenance to slight surplus, carb cycling",
+      "supplementation": ["protein_powder", "creatine", "bcaa", "beta_alanine"]
+    }
+  }
+}

@@ -1,0 +1,26 @@
+PLACEHOLDER: broccoli
+
+This is a placeholder for the nutrition image: broccoli
+
+To add the actual image:
+1. Download/create the image for "broccoli"
+2. Save it as: broccoli.jpg or broccoli.png
+3. Replace this placeholder file
+
+Recommended image specifications:
+- Format: JPG or PNG
+- Size: 800x600px (landscape) or 600x800px (portrait)
+- Max file size: 500KB
+- Quality: High resolution, clear, well-lit
+
+Free image sources:
+- Unsplash: https://unsplash.com/s/photos/broccoli
+- Pexels: https://www.pexels.com/search/broccoli
+- Pixabay: https://pixabay.com/images/search/broccoli
+
+For nutrition:
+
+- High-quality food photography
+- Well-plated and appealing
+- Natural lighting
+

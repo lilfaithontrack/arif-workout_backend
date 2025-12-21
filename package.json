@@ -1,0 +1,55 @@
+{
+  "name": "arif-workout-backend",
+  "version": "1.0.0",
+  "description": "Fitness platform backend with MongoDB, Express, and Node.js",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "test": "jest --coverage",
+    "db:sync": "node src/scripts/sync-database.js",
+    "db:sync:generators": "node src/scripts/sync-generator-models.js",
+    "migrate:generators": "node src/migrations/create-generator-tables.js up",
+    "migrate:generators:down": "node src/migrations/create-generator-tables.js down",
+    "migrate:video": "node src/migrations/add-video-support.js up",
+    "migrate:ads": "node src/migrations/create-advertisements-table.js up",
+    "migrate:ads:down": "node src/migrations/create-advertisements-table.js down"
+  },
+  "keywords": [
+    "fitness",
+    "workout",
+    "mongodb",
+    "express"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.9",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.1",
+    "express-session": "^1.18.2",
+    "express-validator": "^7.3.1",
+    "google-auth-library": "^9.15.0",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^9.0.0",
+    "morgan": "^1.10.1",
+    "multer": "^2.0.2",
+    "mysql2": "^3.15.3",
+    "nodemailer": "^6.9.17",
+    "passport": "^0.7.0",
+    "passport-facebook": "^3.0.0",
+    "passport-google-oauth20": "^2.0.0",
+    "sequelize": "^6.37.7",
+    "stripe": "^17.7.0",
+    "twilio": "^5.10.6"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.11",
+    "supertest": "^6.3.4"
+  }
+}

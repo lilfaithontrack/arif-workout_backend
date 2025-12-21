@@ -1,0 +1,26 @@
+PLACEHOLDER: brown-rice
+
+This is a placeholder for the nutrition image: brown-rice
+
+To add the actual image:
+1. Download/create the image for "brown-rice"
+2. Save it as: brown-rice.jpg or brown-rice.png
+3. Replace this placeholder file
+
+Recommended image specifications:
+- Format: JPG or PNG
+- Size: 800x600px (landscape) or 600x800px (portrait)
+- Max file size: 500KB
+- Quality: High resolution, clear, well-lit
+
+Free image sources:
+- Unsplash: https://unsplash.com/s/photos/brown-rice
+- Pexels: https://www.pexels.com/search/brown%20rice
+- Pixabay: https://pixabay.com/images/search/brown%20rice
+
+For nutrition:
+
+- High-quality food photography
+- Well-plated and appealing
+- Natural lighting
+

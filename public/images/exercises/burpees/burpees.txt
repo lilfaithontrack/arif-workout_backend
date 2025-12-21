@@ -1,0 +1,24 @@
+PLACEHOLDER: burpees
+
+This is a placeholder for the exercise image: burpees
+
+To add the actual image:
+1. Download/create the image for "burpees"
+2. Save it as: burpees.jpg or burpees.png
+3. Replace this placeholder file
+
+Recommended image specifications:
+- Format: JPG or PNG
+- Size: 800x600px (landscape) or 600x800px (portrait)
+- Max file size: 500KB
+- Quality: High resolution, clear, well-lit
+
+Free image sources:
+- Unsplash: https://unsplash.com/s/photos/burpees
+- Pexels: https://www.pexels.com/search/burpees
+- Pixabay: https://pixabay.com/images/search/burpees
+
+For exercise:
+- Show proper form and technique
+- Clear view of the movement
+- Professional quality

@@ -1,0 +1,657 @@
+{
+  "version": "2.0.0",
+  "description": "Advanced user profile schema for AI-powered fitness recommendations",
+  "lastUpdated": "2024-12-02T23:30:00Z",
+  
+  "userProfileSchema": {
+    "personalInfo": {
+      "age": "number (13-120)",
+      "gender": "male | female | other",
+      "height": "number (cm)",
+      "weight": "number (kg)",
+      "targetWeight": "number (kg)",
+      "ethnicity": "string (optional - affects metabolism calculations)"
+    },
+    
+    "bodyComposition": {
+      "currentBMI": "number (calculated)",
+      "bmiCategory": "underweight | normal | overweight | obese_class1 | obese_class2 | obese_class3",
+      "bodyFatPercentage": "number (optional)",
+      "muscleMass": "number (kg, optional)",
+      "visceralFat": "number (1-59 scale, optional)",
+      "boneDensity": "low | normal | high (optional)",
+      "metabolicAge": "number (optional)"
+    },
+    
+    "fitnessGoals": {
+      "primary": "weight_loss | muscle_gain | strength | endurance | flexibility | athletic_performance | rehabilitation | maintenance | body_recomposition | toning",
+      "secondary": ["array of additional goals"],
+      "targetDate": "date (optional)",
+      "weeklyWeightChangeTarget": "number (kg, -1 to +1)",
+      "specificTargets": {
+        "targetBodyFat": "number (percentage)",
+        "targetMuscleMass": "number (kg)",
+        "targetWaist": "number (cm)",
+        "targetChest": "number (cm)",
+        "performanceGoals": {
+          "benchPress": "number (kg)",
+          "squat": "number (kg)",
+          "deadlift": "number (kg)",
+          "runDistance": "number (km)",
+          "runTime": "string (HH:MM:SS)"
+        }
+      }
+    },
+    
+    "activityLevel": {
+      "current": "sedentary | lightly_active | moderately_active | very_active | extremely_active",
+      "occupation": "desk_job | standing_job | physical_labor | athlete",
+      "dailySteps": "number (average)",
+      "sleepHours": "number (6-10)",
+      "sleepQuality": "poor | fair | good | excellent",
+      "stressLevel": "low | moderate | high | very_high"
+    },
+    
+    "healthConditions": {
+      "chronic": ["diabetes_type1", "diabetes_type2", "hypertension", "heart_disease", "asthma", "copd", "arthritis", "osteoporosis", "thyroid_disorder", "pcos", "sleep_apnea"],
+      "injuries": ["knee_injury", "back_injury", "shoulder_injury", "ankle_injury", "wrist_injury", "hip_injury", "neck_injury"],
+      "limitations": ["limited_mobility", "balance_issues", "chronic_pain", "fatigue", "dizziness"],
+      "medications": ["beta_blockers", "blood_thinners", "insulin", "steroids", "pain_medication"],
+      "surgeries": ["knee_surgery", "back_surgery", "heart_surgery", "joint_replacement"],
+      "pregnancy": {
+        "isPregnant": "boolean",
+        "trimester": "1 | 2 | 3",
+        "postpartum": "boolean",
+        "weeksPostpartum": "number"
+      }
+    },
+    
+    "dietaryProfile": {
+      "preferences": ["vegetarian", "vegan", "pescatarian", "keto", "paleo", "mediterranean", "low_carb", "high_protein", "intermittent_fasting", "halal", "kosher"],
+      "allergens": ["dairy", "eggs", "nuts", "peanuts", "soy", "gluten", "shellfish", "fish", "wheat"],
+      "intolerances": ["lactose", "gluten", "fructose", "histamine"],
+      "dislikes": ["array of disliked foods"],
+      "mealFrequency": "number (2-6 meals per day)",
+      "fastingWindow": "number (hours, for IF)",
+      "waterIntake": "number (liters per day)",
+      "supplementation": ["protein_powder", "creatine", "bcaa", "multivitamin", "omega3", "vitamin_d", "calcium"]
+    },
+    
+    "workoutPreferences": {
+      "experienceLevel": {
+        "overall": "beginner | intermediate | advanced | elite",
+        "strength": "beginner | intermediate | advanced",
+        "cardio": "beginner | intermediate | advanced",
+        "flexibility": "beginner | intermediate | advanced"
+      },
+      "frequency": "number (1-7 days per week)",
+      "duration": "number (15-180 minutes per session)",
+      "timeOfDay": "early_morning | morning | afternoon | evening | night | flexible",
+      "location": "home | gym | outdoor | hybrid",
+      "availableEquipment": ["dumbbells", "barbell", "kettlebell", "resistance_bands", "pull_up_bar", "bench", "squat_rack", "cable_machine", "treadmill", "bike", "rowing_machine", "yoga_mat", "foam_roller", "medicine_ball", "trx", "none"],
+      "preferredExerciseTypes": ["strength", "cardio", "hiit", "yoga", "pilates", "crossfit", "bodyweight", "powerlifting", "olympic_lifting", "functional", "sports_specific"],
+      "avoidExercises": ["array of exercises to avoid"],
+      "restDays": ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"],
+      "workoutBuddy": "boolean",
+      "musicPreference": "high_energy | calm | no_music"
+    },
+    
+    "psychologicalProfile": {
+      "motivation": "weight_loss | health | appearance | performance | medical | social | competition",
+      "adherenceHistory": "poor | fair | good | excellent",
+      "barriers": ["time", "motivation", "knowledge", "equipment", "injury", "fatigue", "social"],
+      "preferredFeedback": "encouraging | direct | data_driven | minimal",
+      "competitiveness": "low | moderate | high",
+      "needsAccountability": "boolean",
+      "learningStyle": "visual | auditory | kinesthetic | reading"
+    },
+    
+    "progressTracking": {
+      "startDate": "date",
+      "currentStreak": "number (days)",
+      "longestStreak": "number (days)",
+      "totalWorkouts": "number",
+      "totalCaloriesBurned": "number",
+      "averageWorkoutDuration": "number (minutes)",
+      "completionRate": "number (0-100%)",
+      "measurements": {
+        "history": [
+          {
+            "date": "date",
+            "weight": "number",
+            "bodyFat": "number",
+            "chest": "number",
+            "waist": "number",
+            "hips": "number",
+            "arms": "number",
+            "thighs": "number"
+          }
+        ]
+      },
+      "performanceMetrics": {
+        "strengthProgress": {
+          "benchPress": [{"date": "date", "weight": "number", "reps": "number"}],
+          "squat": [{"date": "date", "weight": "number", "reps": "number"}],
+          "deadlift": [{"date": "date", "weight": "number", "reps": "number"}]
+        },
+        "cardioProgress": {
+          "runDistance": [{"date": "date", "distance": "number", "time": "string"}],
+          "cycleDistance": [{"date": "date", "distance": "number", "time": "string"}]
+        }
+      }
+    }
+  },
+  
+  "bmiCategories": {
+    "underweight_severe": {
+      "range": [0, 16],
+      "description": "Severely underweight",
+      "healthRisks": ["malnutrition", "weakened_immune_system", "osteoporosis", "anemia"],
+      "recommendedGoals": ["healthy_weight_gain", "muscle_building", "nutrition_focus"],
+      "calorieAdjustment": "+500 to +800",
+      "proteinMultiplier": 2.0,
+      "exerciseFocus": ["strength_training", "low_intensity_cardio"],
+      "medicalConsultation": "required"
+    },
+    "underweight_moderate": {
+      "range": [16, 17],
+      "description": "Moderately underweight",
+      "healthRisks": ["nutrient_deficiency", "fatigue", "weakened_immunity"],
+      "recommendedGoals": ["healthy_weight_gain", "muscle_building"],
+      "calorieAdjustment": "+400 to +600",
+      "proteinMultiplier": 1.8,
+      "exerciseFocus": ["strength_training", "moderate_cardio"],
+      "medicalConsultation": "recommended"
+    },
+    "underweight_mild": {
+      "range": [17, 18.5],
+      "description": "Mildly underweight",
+      "healthRisks": ["low_energy", "potential_nutrient_gaps"],
+      "recommendedGoals": ["healthy_weight_gain", "muscle_building", "balanced_nutrition"],
+      "calorieAdjustment": "+300 to +500",
+      "proteinMultiplier": 1.6,
+      "exerciseFocus": ["strength_training", "balanced_cardio"],
+      "medicalConsultation": "optional"
+    },
+    "normal_weight": {
+      "range": [18.5, 24.9],
+      "description": "Normal healthy weight",
+      "healthRisks": ["minimal"],
+      "recommendedGoals": ["maintenance", "muscle_toning", "athletic_performance", "body_recomposition"],
+      "calorieAdjustment": "0 to +200",
+      "proteinMultiplier": 1.6,
+      "exerciseFocus": ["balanced_training", "goal_specific"],
+      "medicalConsultation": "not_required"
+    },
+    "overweight": {
+      "range": [25, 29.9],
+      "description": "Overweight",
+      "healthRisks": ["increased_risk_diabetes", "hypertension", "heart_disease", "joint_stress"],
+      "recommendedGoals": ["weight_loss", "fat_loss", "cardiovascular_health"],
+      "calorieAdjustment": "-300 to -500",
+      "proteinMultiplier": 2.0,
+      "exerciseFocus": ["cardio", "strength_training", "hiit"],
+      "medicalConsultation": "recommended"
+    },
+    "obese_class1": {
+      "range": [30, 34.9],
+      "description": "Obesity Class I",
+      "healthRisks": ["diabetes", "hypertension", "heart_disease", "sleep_apnea", "joint_problems"],
+      "recommendedGoals": ["significant_weight_loss", "health_improvement", "lifestyle_change"],
+      "calorieAdjustment": "-500 to -750",
+      "proteinMultiplier": 2.2,
+      "exerciseFocus": ["low_impact_cardio", "strength_training", "flexibility"],
+      "medicalConsultation": "strongly_recommended"
+    },
+    "obese_class2": {
+      "range": [35, 39.9],
+      "description": "Obesity Class II",
+      "healthRisks": ["severe_diabetes_risk", "cardiovascular_disease", "stroke", "cancer_risk", "mobility_issues"],
+      "recommendedGoals": ["major_weight_loss", "medical_supervision", "gradual_progression"],
+      "calorieAdjustment": "-500 to -1000",
+      "proteinMultiplier": 2.4,
+      "exerciseFocus": ["very_low_impact", "water_exercises", "seated_exercises", "gradual_progression"],
+      "medicalConsultation": "required"
+    },
+    "obese_class3": {
+      "range": [40, 100],
+      "description": "Obesity Class III (Severe/Morbid)",
+      "healthRisks": ["life_threatening_conditions", "severe_mobility_limitations", "organ_damage"],
+      "recommendedGoals": ["medical_weight_loss_program", "supervised_exercise", "nutritionist_consultation"],
+      "calorieAdjustment": "-750 to -1000",
+      "proteinMultiplier": 2.5,
+      "exerciseFocus": ["chair_exercises", "water_therapy", "physical_therapy", "medical_supervision"],
+      "medicalConsultation": "mandatory"
+    }
+  },
+  
+  "goalProfiles": {
+    "extreme_weight_loss": {
+      "targetWeeklyLoss": "0.75-1.0 kg",
+      "calorieDeficit": 750,
+      "macroRatio": {"protein": 40, "carbs": 30, "fats": 30},
+      "cardioMinutes": 300,
+      "strengthSessions": 3,
+      "restDays": 1,
+      "supplementsRecommended": ["multivitamin", "omega3", "protein"],
+      "progressCheckFrequency": "weekly"
+    },
+    "moderate_weight_loss": {
+      "targetWeeklyLoss": "0.5-0.75 kg",
+      "calorieDeficit": 500,
+      "macroRatio": {"protein": 35, "carbs": 35, "fats": 30},
+      "cardioMinutes": 200,
+      "strengthSessions": 3,
+      "restDays": 2,
+      "supplementsRecommended": ["multivitamin", "protein"],
+      "progressCheckFrequency": "weekly"
+    },
+    "lean_weight_loss": {
+      "targetWeeklyLoss": "0.25-0.5 kg",
+      "calorieDeficit": 300,
+      "macroRatio": {"protein": 30, "carbs": 40, "fats": 30},
+      "cardioMinutes": 150,
+      "strengthSessions": 4,
+      "restDays": 2,
+      "supplementsRecommended": ["protein"],
+      "progressCheckFrequency": "bi-weekly"
+    },
+    "muscle_gain_aggressive": {
+      "targetWeeklyGain": "0.5-0.75 kg",
+      "calorieSurplus": 500,
+      "macroRatio": {"protein": 30, "carbs": 50, "fats": 20},
+      "cardioMinutes": 60,
+      "strengthSessions": 5,
+      "restDays": 2,
+      "supplementsRecommended": ["protein", "creatine", "bcaa"],
+      "progressCheckFrequency": "weekly"
+    },
+    "muscle_gain_lean": {
+      "targetWeeklyGain": "0.25-0.5 kg",
+      "calorieSurplus": 300,
+      "macroRatio": {"protein": 30, "carbs": 45, "fats": 25},
+      "cardioMinutes": 90,
+      "strengthSessions": 4,
+      "restDays": 2,
+      "supplementsRecommended": ["protein", "creatine"],
+      "progressCheckFrequency": "bi-weekly"
+    },
+    "body_recomposition": {
+      "targetWeeklyChange": "0 kg (lose fat, gain muscle)",
+      "calorieAdjustment": 0,
+      "macroRatio": {"protein": 35, "carbs": 40, "fats": 25},
+      "cardioMinutes": 120,
+      "strengthSessions": 4,
+      "restDays": 2,
+      "supplementsRecommended": ["protein", "creatine"],
+      "progressCheckFrequency": "monthly"
+    },
+    "athletic_performance": {
+      "targetWeeklyChange": "maintenance",
+      "calorieAdjustment": 0,
+      "macroRatio": {"protein": 25, "carbs": 55, "fats": 20},
+      "cardioMinutes": 180,
+      "strengthSessions": 3,
+      "restDays": 1,
+      "supplementsRecommended": ["protein", "bcaa", "electrolytes"],
+      "progressCheckFrequency": "monthly"
+    },
+    "strength_focus": {
+      "targetWeeklyChange": "0-0.25 kg gain",
+      "calorieAdjustment": 200,
+      "macroRatio": {"protein": 30, "carbs": 45, "fats": 25},
+      "cardioMinutes": 60,
+      "strengthSessions": 5,
+      "restDays": 2,
+      "supplementsRecommended": ["protein", "creatine"],
+      "progressCheckFrequency": "weekly"
+    },
+    "endurance_focus": {
+      "targetWeeklyChange": "maintenance",
+      "calorieAdjustment": 0,
+      "macroRatio": {"protein": 20, "carbs": 60, "fats": 20},
+      "cardioMinutes": 300,
+      "strengthSessions": 2,
+      "restDays": 1,
+      "supplementsRecommended": ["electrolytes", "bcaa"],
+      "progressCheckFrequency": "monthly"
+    },
+    "rehabilitation": {
+      "targetWeeklyChange": "maintenance",
+      "calorieAdjustment": 0,
+      "macroRatio": {"protein": 30, "carbs": 40, "fats": 30},
+      "cardioMinutes": 90,
+      "strengthSessions": 3,
+      "restDays": 3,
+      "supplementsRecommended": ["multivitamin", "omega3", "collagen"],
+      "progressCheckFrequency": "weekly"
+    },
+    "senior_fitness": {
+      "targetWeeklyChange": "maintenance",
+      "calorieAdjustment": 0,
+      "macroRatio": {"protein": 30, "carbs": 40, "fats": 30},
+      "cardioMinutes": 150,
+      "strengthSessions": 2,
+      "restDays": 3,
+      "supplementsRecommended": ["multivitamin", "vitamin_d", "calcium", "omega3"],
+      "progressCheckFrequency": "monthly"
+    }
+  },
+  
+  "exampleProfiles": [
+    {
+      "profileName": "Severely Underweight - Muscle Building",
+      "personalInfo": {
+        "age": 22,
+        "gender": "male",
+        "height": 175,
+        "weight": 48,
+        "targetWeight": 65
+      },
+      "bodyComposition": {
+        "currentBMI": 15.7,
+        "bmiCategory": "underweight_severe",
+        "bodyFatPercentage": 8
+      },
+      "fitnessGoals": {
+        "primary": "muscle_gain",
+        "secondary": ["strength", "healthy_weight_gain"],
+        "weeklyWeightChangeTarget": 0.5
+      },
+      "recommendedProgram": "muscle_gain_aggressive",
+      "specialConsiderations": ["high_calorie_diet", "frequent_meals", "medical_clearance_required"]
+    },
+    {
+      "profileName": "Overweight - Fat Loss Focus",
+      "personalInfo": {
+        "age": 35,
+        "gender": "female",
+        "height": 165,
+        "weight": 78,
+        "targetWeight": 65
+      },
+      "bodyComposition": {
+        "currentBMI": 28.7,
+        "bmiCategory": "overweight",
+        "bodyFatPercentage": 35
+      },
+      "fitnessGoals": {
+        "primary": "weight_loss",
+        "secondary": ["toning", "cardiovascular_health"],
+        "weeklyWeightChangeTarget": -0.5
+      },
+      "recommendedProgram": "moderate_weight_loss",
+      "specialConsiderations": ["joint_friendly_exercises", "gradual_progression"]
+    },
+    {
+      "profileName": "Obese Class II - Health Recovery",
+      "personalInfo": {
+        "age": 45,
+        "gender": "male",
+        "height": 180,
+        "weight": 125,
+        "targetWeight": 90
+      },
+      "bodyComposition": {
+        "currentBMI": 38.6,
+        "bmiCategory": "obese_class2",
+        "bodyFatPercentage": 42
+      },
+      "healthConditions": {
+        "chronic": ["diabetes_type2", "hypertension"],
+        "limitations": ["limited_mobility", "chronic_pain"]
+      },
+      "fitnessGoals": {
+        "primary": "weight_loss",
+        "secondary": ["health_improvement", "mobility"],
+        "weeklyWeightChangeTarget": -0.75
+      },
+      "recommendedProgram": "extreme_weight_loss",
+      "specialConsiderations": ["medical_supervision_required", "low_impact_only", "frequent_monitoring"]
+    },
+    {
+      "profileName": "Athletic Performance - Marathon Runner",
+      "personalInfo": {
+        "age": 28,
+        "gender": "female",
+        "height": 168,
+        "weight": 58,
+        "targetWeight": 58
+      },
+      "bodyComposition": {
+        "currentBMI": 20.5,
+        "bmiCategory": "normal_weight",
+        "bodyFatPercentage": 18,
+        "muscleMass": 45
+      },
+      "fitnessGoals": {
+        "primary": "athletic_performance",
+        "secondary": ["endurance", "speed"],
+        "specificTargets": {
+          "runDistance": 42.2,
+          "runTime": "03:30:00"
+        }
+      },
+      "activityLevel": {
+        "current": "very_active",
+        "dailySteps": 15000,
+        "sleepHours": 8
+      },
+      "workoutPreferences": {
+        "experienceLevel": {"overall": "advanced", "cardio": "advanced"},
+        "frequency": 6,
+        "duration": 90,
+        "location": "outdoor"
+      },
+      "recommendedProgram": "athletic_performance",
+      "specialConsiderations": ["high_carb_diet", "proper_recovery", "injury_prevention"]
+    },
+    {
+      "profileName": "Senior Fitness - Active Aging",
+      "personalInfo": {
+        "age": 68,
+        "gender": "male",
+        "height": 175,
+        "weight": 78,
+        "targetWeight": 75
+      },
+      "bodyComposition": {
+        "currentBMI": 25.5,
+        "bmiCategory": "overweight",
+        "bodyFatPercentage": 28,
+        "boneDensity": "low"
+      },
+      "healthConditions": {
+        "chronic": ["hypertension", "arthritis", "osteoporosis"],
+        "limitations": ["balance_issues", "joint_pain"],
+        "medications": ["beta_blockers"]
+      },
+      "fitnessGoals": {
+        "primary": "maintenance",
+        "secondary": ["mobility", "balance", "independence"],
+        "weeklyWeightChangeTarget": -0.25
+      },
+      "activityLevel": {
+        "current": "lightly_active",
+        "dailySteps": 5000,
+        "sleepHours": 7
+      },
+      "workoutPreferences": {
+        "experienceLevel": {"overall": "beginner"},
+        "frequency": 3,
+        "duration": 30,
+        "location": "home"
+      },
+      "recommendedProgram": "senior_fitness",
+      "specialConsiderations": ["fall_prevention", "bone_health", "gentle_progression", "medical_clearance"]
+    },
+    {
+      "profileName": "Postpartum Recovery",
+      "personalInfo": {
+        "age": 32,
+        "gender": "female",
+        "height": 165,
+        "weight": 72,
+        "targetWeight": 62
+      },
+      "bodyComposition": {
+        "currentBMI": 26.4,
+        "bmiCategory": "overweight",
+        "bodyFatPercentage": 32
+      },
+      "healthConditions": {
+        "pregnancy": {
+          "isPregnant": false,
+          "postpartum": true,
+          "weeksPostpartum": 12
+        }
+      },
+      "fitnessGoals": {
+        "primary": "weight_loss",
+        "secondary": ["core_strength", "energy", "body_confidence"],
+        "weeklyWeightChangeTarget": -0.5
+      },
+      "activityLevel": {
+        "current": "lightly_active",
+        "sleepHours": 6,
+        "sleepQuality": "poor",
+        "stressLevel": "high"
+      },
+      "workoutPreferences": {
+        "experienceLevel": {"overall": "beginner"},
+        "frequency": 4,
+        "duration": 30,
+        "timeOfDay": "morning",
+        "location": "home"
+      },
+      "recommendedProgram": "postpartum_recovery",
+      "specialConsiderations": ["pelvic_floor_exercises", "gradual_progression", "core_rehabilitation", "sleep_priority"]
+    },
+    {
+      "profileName": "Teen Athlete - Basketball Player",
+      "personalInfo": {
+        "age": 16,
+        "gender": "male",
+        "height": 185,
+        "weight": 75,
+        "targetWeight": 80
+      },
+      "bodyComposition": {
+        "currentBMI": 21.9,
+        "bmiCategory": "normal_weight",
+        "bodyFatPercentage": 12,
+        "muscleMass": 60
+      },
+      "fitnessGoals": {
+        "primary": "athletic_performance",
+        "secondary": ["strength", "power", "vertical_jump"],
+        "specificTargets": {
+          "benchPress": 80,
+          "squat": 120,
+          "verticalJump": 80
+        }
+      },
+      "activityLevel": {
+        "current": "extremely_active",
+        "occupation": "athlete",
+        "dailySteps": 12000,
+        "sleepHours": 9
+      },
+      "workoutPreferences": {
+        "experienceLevel": {"overall": "intermediate", "strength": "intermediate"},
+        "frequency": 6,
+        "duration": 90,
+        "preferredExerciseTypes": ["strength", "plyometric", "sports_specific"]
+      },
+      "recommendedProgram": "teen_athlete_development",
+      "specialConsiderations": ["growth_plate_safety", "proper_form_emphasis", "adequate_nutrition", "recovery_priority"]
+    },
+    {
+      "profileName": "Body Recomposition - Office Worker",
+      "personalInfo": {
+        "age": 30,
+        "gender": "male",
+        "height": 178,
+        "weight": 82,
+        "targetWeight": 82
+      },
+      "bodyComposition": {
+        "currentBMI": 25.9,
+        "bmiCategory": "overweight",
+        "bodyFatPercentage": 22,
+        "muscleMass": 58,
+        "targetBodyFat": 15,
+        "targetMuscleMass": 65
+      },
+      "fitnessGoals": {
+        "primary": "body_recomposition",
+        "secondary": ["muscle_gain", "fat_loss", "strength"],
+        "weeklyWeightChangeTarget": 0
+      },
+      "activityLevel": {
+        "current": "sedentary",
+        "occupation": "desk_job",
+        "dailySteps": 4000,
+        "sleepHours": 7,
+        "stressLevel": "moderate"
+      },
+      "workoutPreferences": {
+        "experienceLevel": {"overall": "intermediate", "strength": "intermediate"},
+        "frequency": 5,
+        "duration": 60,
+        "timeOfDay": "evening",
+        "location": "gym"
+      },
+      "dietaryProfile": {
+        "preferences": ["high_protein"],
+        "mealFrequency": 4,
+        "supplementation": ["protein_powder", "creatine"]
+      },
+      "recommendedProgram": "body_recomposition",
+      "specialConsiderations": ["progressive_overload", "adequate_protein", "patience_required", "track_body_composition"]
+    },
+    {
+      "profileName": "Diabetes Management - Type 2",
+      "personalInfo": {
+        "age": 52,
+        "gender": "female",
+        "height": 160,
+        "weight": 85,
+        "targetWeight": 70
+      },
+      "bodyComposition": {
+        "currentBMI": 33.2,
+        "bmiCategory": "obese_class1",
+        "bodyFatPercentage": 40,
+        "visceralFat": 15
+      },
+      "healthConditions": {
+        "chronic": ["diabetes_type2", "hypertension"],
+        "medications": ["insulin", "beta_blockers"]
+      },
+      "fitnessGoals": {
+        "primary": "weight_loss",
+        "secondary": ["blood_sugar_control", "health_improvement"],
+        "weeklyWeightChangeTarget": -0.75
+      },
+      "activityLevel": {
+        "current": "sedentary",
+        "dailySteps": 3500,
+        "sleepHours": 6
+      },
+      "workoutPreferences": {
+        "experienceLevel": {"overall": "beginner"},
+        "frequency": 5,
+        "duration": 30,
+        "timeOfDay": "morning"
+      },
+      "dietaryProfile": {
+        "preferences": ["low_carb", "high_fiber"],
+        "mealFrequency": 5,
+        "supplementation": ["multivitamin", "omega3"]
+      },
+      "recommendedProgram": "diabetes_management",
+      "specialConsiderations": ["blood_glucose_monitoring", "post_meal_walks", "medical_supervision", "low_gi_foods"]
+    }
+  ]
+}

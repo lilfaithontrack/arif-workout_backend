@@ -1,0 +1,326 @@
+{
+  "exercises": {
+    "ex_001": {
+      "filename": "pushups",
+      "path": "/images/exercises/pushups.jpg",
+      "thumbnail": "/images/thumbnails/exercises/pushups_thumb.jpg",
+      "alt": "Pushups"
+    },
+    "ex_002": {
+      "filename": "squats",
+      "path": "/images/exercises/squats.jpg",
+      "thumbnail": "/images/thumbnails/exercises/squats_thumb.jpg",
+      "alt": "Squats"
+    },
+    "ex_003": {
+      "filename": "plank",
+      "path": "/images/exercises/plank.jpg",
+      "thumbnail": "/images/thumbnails/exercises/plank_thumb.jpg",
+      "alt": "Plank"
+    },
+    "ex_004": {
+      "filename": "lunges",
+      "path": "/images/exercises/lunges.jpg",
+      "thumbnail": "/images/thumbnails/exercises/lunges_thumb.jpg",
+      "alt": "Lunges"
+    },
+    "ex_005": {
+      "filename": "burpees",
+      "path": "/images/exercises/burpees.jpg",
+      "thumbnail": "/images/thumbnails/exercises/burpees_thumb.jpg",
+      "alt": "Burpees"
+    },
+    "ex_006": {
+      "filename": "mountain-climbers",
+      "path": "/images/exercises/mountain-climbers.jpg",
+      "thumbnail": "/images/thumbnails/exercises/mountain-climbers_thumb.jpg",
+      "alt": "Mountain Climbers"
+    },
+    "ex_007": {
+      "filename": "dumbbell-bench-press",
+      "path": "/images/exercises/dumbbell-bench-press.jpg",
+      "thumbnail": "/images/thumbnails/exercises/dumbbell-bench-press_thumb.jpg",
+      "alt": "Dumbbell Bench Press"
+    },
+    "ex_008": {
+      "filename": "deadlifts",
+      "path": "/images/exercises/deadlifts.jpg",
+      "thumbnail": "/images/thumbnails/exercises/deadlifts_thumb.jpg",
+      "alt": "Deadlifts"
+    },
+    "ex_009": {
+      "filename": "pullups",
+      "path": "/images/exercises/pullups.jpg",
+      "thumbnail": "/images/thumbnails/exercises/pullups_thumb.jpg",
+      "alt": "Pullups"
+    },
+    "ex_010": {
+      "filename": "bicycle-crunches",
+      "path": "/images/exercises/bicycle-crunches.jpg",
+      "thumbnail": "/images/thumbnails/exercises/bicycle-crunches_thumb.jpg",
+      "alt": "Bicycle Crunches"
+    },
+    "ex_011": {
+      "filename": "jumping-jacks",
+      "path": "/images/exercises/jumping-jacks.jpg",
+      "thumbnail": "/images/thumbnails/exercises/jumping-jacks_thumb.jpg",
+      "alt": "Jumping Jacks"
+    },
+    "ex_012": {
+      "filename": "dumbbell-rows",
+      "path": "/images/exercises/dumbbell-rows.jpg",
+      "thumbnail": "/images/thumbnails/exercises/dumbbell-rows_thumb.jpg",
+      "alt": "Dumbbell Rows"
+    },
+    "ex_013": {
+      "filename": "leg-raises",
+      "path": "/images/exercises/leg-raises.jpg",
+      "thumbnail": "/images/thumbnails/exercises/leg-raises_thumb.jpg",
+      "alt": "Leg Raises"
+    },
+    "ex_014": {
+      "filename": "shoulder-press",
+      "path": "/images/exercises/shoulder-press.jpg",
+      "thumbnail": "/images/thumbnails/exercises/shoulder-press_thumb.jpg",
+      "alt": "Shoulder Press"
+    },
+    "ex_015": {
+      "filename": "russian-twists",
+      "path": "/images/exercises/russian-twists.jpg",
+      "thumbnail": "/images/thumbnails/exercises/russian-twists_thumb.jpg",
+      "alt": "Russian Twists"
+    },
+    "ex_016": {
+      "filename": "high-knees",
+      "path": "/images/exercises/high-knees.jpg",
+      "thumbnail": "/images/thumbnails/exercises/high-knees_thumb.jpg",
+      "alt": "High Knees"
+    },
+    "ex_017": {
+      "filename": "tricep-dips",
+      "path": "/images/exercises/tricep-dips.jpg",
+      "thumbnail": "/images/thumbnails/exercises/tricep-dips_thumb.jpg",
+      "alt": "Tricep Dips"
+    },
+    "ex_018": {
+      "filename": "glute-bridges",
+      "path": "/images/exercises/glute-bridges.jpg",
+      "thumbnail": "/images/thumbnails/exercises/glute-bridges_thumb.jpg",
+      "alt": "Glute Bridges"
+    },
+    "ex_019": {
+      "filename": "box-jumps",
+      "path": "/images/exercises/box-jumps.jpg",
+      "thumbnail": "/images/thumbnails/exercises/box-jumps_thumb.jpg",
+      "alt": "Box Jumps"
+    },
+    "ex_020": {
+      "filename": "superman-hold",
+      "path": "/images/exercises/superman-hold.jpg",
+      "thumbnail": "/images/thumbnails/exercises/superman-hold_thumb.jpg",
+      "alt": "Superman Hold"
+    },
+    "ex_021": {
+      "filename": "bicep-curls",
+      "path": "/images/exercises/bicep-curls.jpg",
+      "thumbnail": "/images/thumbnails/exercises/bicep-curls_thumb.jpg",
+      "alt": "Dumbbell Bicep Curls"
+    },
+    "ex_022": {
+      "filename": "lat-pulldown",
+      "path": "/images/exercises/lat-pulldown.jpg",
+      "thumbnail": "/images/thumbnails/exercises/lat-pulldown_thumb.jpg",
+      "alt": "Lat Pulldown"
+    },
+    "ex_023": {
+      "filename": "leg-press",
+      "path": "/images/exercises/leg-press.jpg",
+      "thumbnail": "/images/thumbnails/exercises/leg-press_thumb.jpg",
+      "alt": "Leg Press"
+    },
+    "ex_024": {
+      "filename": "bench-dips",
+      "path": "/images/exercises/bench-dips.jpg",
+      "thumbnail": "/images/thumbnails/exercises/bench-dips_thumb.jpg",
+      "alt": "Bench Dips"
+    },
+    "ex_025": {
+      "filename": "rowing-machine",
+      "path": "/images/exercises/rowing-machine.jpg",
+      "thumbnail": "/images/thumbnails/exercises/rowing-machine_thumb.jpg",
+      "alt": "Rowing Machine"
+    }
+  },
+  "nutrition": {
+    "food_001": {
+      "filename": "grilled-chicken-breast",
+      "path": "/images/nutrition/grilled-chicken-breast.jpg",
+      "thumbnail": "/images/thumbnails/nutrition/grilled-chicken-breast_thumb.jpg",
+      "alt": "Grilled Chicken Breast"
+    },
+    "food_002": {
+      "filename": "brown-rice",
+      "path": "/images/nutrition/brown-rice.jpg",
+      "thumbnail": "/images/thumbnails/nutrition/brown-rice_thumb.jpg",
+      "alt": "Brown Rice"
+    },
+    "food_003": {
+      "filename": "salmon-fillet",
+      "path": "/images/nutrition/salmon-fillet.jpg",
+      "thumbnail": "/images/thumbnails/nutrition/salmon-fillet_thumb.jpg",
+      "alt": "Salmon Fillet"
+    },
+    "food_004": {
+      "filename": "greek-yogurt",
+      "path": "/images/nutrition/greek-yogurt.jpg",
+      "thumbnail": "/images/thumbnails/nutrition/greek-yogurt_thumb.jpg",
+      "alt": "Greek Yogurt"
+    },
+    "food_005": {
+      "filename": "oatmeal",
+      "path": "/images/nutrition/oatmeal.jpg",
+      "thumbnail": "/images/thumbnails/nutrition/oatmeal_thumb.jpg",
+      "alt": "Oatmeal"
+    },
+    "food_006": {
+      "filename": "avocado",
+      "path": "/images/nutrition/avocado.jpg",
+      "thumbnail": "/images/thumbnails/nutrition/avocado_thumb.jpg",
+      "alt": "Avocado"
+    },
+    "food_007": {
+      "filename": "eggs",
+      "path": "/images/nutrition/eggs.jpg",
+      "thumbnail": "/images/thumbnails/nutrition/eggs_thumb.jpg",
+      "alt": "Eggs"
+    },
+    "food_008": {
+      "filename": "sweet-potato",
+      "path": "/images/nutrition/sweet-potato.jpg",
+      "thumbnail": "/images/thumbnails/nutrition/sweet-potato_thumb.jpg",
+      "alt": "Sweet Potato"
+    },
+    "food_009": {
+      "filename": "almonds",
+      "path": "/images/nutrition/almonds.jpg",
+      "thumbnail": "/images/thumbnails/nutrition/almonds_thumb.jpg",
+      "alt": "Almonds"
+    },
+    "food_010": {
+      "filename": "broccoli",
+      "path": "/images/nutrition/broccoli.jpg",
+      "thumbnail": "/images/thumbnails/nutrition/broccoli_thumb.jpg",
+      "alt": "Broccoli"
+    },
+    "food_011": {
+      "filename": "banana",
+      "path": "/images/nutrition/banana.jpg",
+      "thumbnail": "/images/thumbnails/nutrition/banana_thumb.jpg",
+      "alt": "Banana"
+    },
+    "food_012": {
+      "filename": "quinoa",
+      "path": "/images/nutrition/quinoa.jpg",
+      "thumbnail": "/images/thumbnails/nutrition/quinoa_thumb.jpg",
+      "alt": "Quinoa"
+    },
+    "food_013": {
+      "filename": "spinach",
+      "path": "/images/nutrition/spinach.jpg",
+      "thumbnail": "/images/thumbnails/nutrition/spinach_thumb.jpg",
+      "alt": "Spinach"
+    },
+    "food_014": {
+      "filename": "whey-protein-shake",
+      "path": "/images/nutrition/whey-protein-shake.jpg",
+      "thumbnail": "/images/thumbnails/nutrition/whey-protein-shake_thumb.jpg",
+      "alt": "Whey Protein Shake"
+    },
+    "food_015": {
+      "filename": "peanut-butter",
+      "path": "/images/nutrition/peanut-butter.jpg",
+      "thumbnail": "/images/thumbnails/nutrition/peanut-butter_thumb.jpg",
+      "alt": "Peanut Butter"
+    },
+    "food_051": {
+      "filename": "ground-beef",
+      "path": "/images/nutrition/ground-beef.jpg",
+      "thumbnail": "/images/thumbnails/nutrition/ground-beef_thumb.jpg",
+      "alt": "Lean Ground Beef"
+    },
+    "food_052": {
+      "filename": "cottage-cheese",
+      "path": "/images/nutrition/cottage-cheese.jpg",
+      "thumbnail": "/images/thumbnails/nutrition/cottage-cheese_thumb.jpg",
+      "alt": "Cottage Cheese"
+    },
+    "food_053": {
+      "filename": "lentils",
+      "path": "/images/nutrition/lentils.jpg",
+      "thumbnail": "/images/thumbnails/nutrition/lentils_thumb.jpg",
+      "alt": "Lentils"
+    },
+    "food_054": {
+      "filename": "tuna",
+      "path": "/images/nutrition/tuna.jpg",
+      "thumbnail": "/images/thumbnails/nutrition/tuna_thumb.jpg",
+      "alt": "Tuna"
+    },
+    "food_055": {
+      "filename": "blueberries",
+      "path": "/images/nutrition/blueberries.jpg",
+      "thumbnail": "/images/thumbnails/nutrition/blueberries_thumb.jpg",
+      "alt": "Blueberries"
+    }
+  },
+  "workoutPlans": {
+    "plan_001": {
+      "filename": "beginner-full-body",
+      "path": "/images/workout-plans/beginner-full-body.jpg",
+      "thumbnail": "/images/thumbnails/workout-plans/beginner-full-body_thumb.jpg",
+      "alt": "Beginner Full Body"
+    },
+    "plan_002": {
+      "filename": "intermediate-strength",
+      "path": "/images/workout-plans/intermediate-strength.jpg",
+      "thumbnail": "/images/thumbnails/workout-plans/intermediate-strength_thumb.jpg",
+      "alt": "Intermediate Strength"
+    },
+    "plan_003": {
+      "filename": "advanced-hiit",
+      "path": "/images/workout-plans/advanced-hiit.jpg",
+      "thumbnail": "/images/thumbnails/workout-plans/advanced-hiit_thumb.jpg",
+      "alt": "Advanced Hiit"
+    },
+    "plan_004": {
+      "filename": "weight-loss-cardio",
+      "path": "/images/workout-plans/weight-loss-cardio.jpg",
+      "thumbnail": "/images/thumbnails/workout-plans/weight-loss-cardio_thumb.jpg",
+      "alt": "Weight Loss Cardio"
+    },
+    "plan_005": {
+      "filename": "muscle-gain-split",
+      "path": "/images/workout-plans/muscle-gain-split.jpg",
+      "thumbnail": "/images/thumbnails/workout-plans/muscle-gain-split_thumb.jpg",
+      "alt": "Muscle Gain Split"
+    },
+    "plan_006": {
+      "filename": "home-workout-no-equipment",
+      "path": "/images/workout-plans/home-workout-no-equipment.jpg",
+      "thumbnail": "/images/thumbnails/workout-plans/home-workout-no-equipment_thumb.jpg",
+      "alt": "Home Workout No Equipment"
+    },
+    "plan_007": {
+      "filename": "gym-based-program",
+      "path": "/images/workout-plans/gym-based-program.jpg",
+      "thumbnail": "/images/thumbnails/workout-plans/gym-based-program_thumb.jpg",
+      "alt": "Gym Based Program"
+    },
+    "plan_008": {
+      "filename": "flexibility-yoga",
+      "path": "/images/workout-plans/flexibility-yoga.jpg",
+      "thumbnail": "/images/thumbnails/workout-plans/flexibility-yoga_thumb.jpg",
+      "alt": "Flexibility Yoga"
+    }
+  }
+}

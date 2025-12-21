@@ -1,0 +1,854 @@
+{
+  "version": "2.0.0",
+  "description": "Advanced nutrition database with detailed meal plans for all BMI categories and goals",
+  "lastUpdated": "2024-12-02T23:45:00Z",
+  "totalFoods": 8,
+  "totalMealPlans": 3,
+  
+  "nutritionPrinciples": {
+    "proteinRequirements": {
+      "sedentary": "0.8 g/kg bodyweight",
+      "active": "1.2-1.6 g/kg bodyweight",
+      "athlete": "1.6-2.2 g/kg bodyweight",
+      "muscle_building": "1.8-2.4 g/kg bodyweight",
+      "fat_loss": "2.0-2.5 g/kg bodyweight (preserve muscle)",
+      "underweight": "2.0-2.5 g/kg bodyweight (build muscle)"
+    },
+    "hydrationGuidelines": {
+      "base": "30-35 ml/kg bodyweight",
+      "exercise_addition": "+500-1000 ml per hour of exercise",
+      "hot_climate": "+20% of base",
+      "high_altitude": "+15% of base"
+    },
+    "mealTiming": {
+      "pre_workout": "1-3 hours before, focus on carbs and moderate protein",
+      "post_workout": "Within 2 hours, protein and carbs for recovery",
+      "before_bed": "Casein protein or slow-digesting foods",
+      "intermittent_fasting": "Eating window typically 8-10 hours"
+    }
+  },
+  
+  "foods": [
+    {
+      "id": "food_001",
+      "name": "Grilled Chicken Breast (Skinless)",
+      "category": "protein",
+      "subcategory": "lean_meat",
+      "servingSize": "100g",
+      "servingSizeOptions": ["100g", "150g", "200g", "1 breast (174g)"],
+      "macros": {
+        "calories": 165,
+        "protein": 31,
+        "carbs": 0,
+        "fats": 3.6,
+        "fiber": 0,
+        "sugar": 0,
+        "saturatedFat": 1.0,
+        "unsaturatedFat": 2.6,
+        "cholesterol": 85
+      },
+      "micronutrients": {
+        "vitamins": {
+          "B3_niacin": {"amount": 14, "unit": "mg", "dv": 70},
+          "B6": {"amount": 0.5, "unit": "mg", "dv": 25},
+          "B12": {"amount": 0.3, "unit": "mcg", "dv": 5}
+        },
+        "minerals": {
+          "iron": {"amount": 1, "unit": "mg", "dv": 6},
+          "zinc": {"amount": 1.5, "unit": "mg", "dv": 14},
+          "selenium": {"amount": 27, "unit": "mcg", "dv": 49},
+          "phosphorus": {"amount": 220, "unit": "mg", "dv": 18}
+        }
+      },
+      "aminoAcidProfile": {
+        "leucine": 2.5,
+        "isoleucine": 1.4,
+        "valine": 1.5,
+        "lysine": 2.8,
+        "complete_protein": true
+      },
+      "dietaryInfo": {
+        "isVegetarian": false,
+        "isVegan": false,
+        "isGlutenFree": true,
+        "isDairyFree": true,
+        "isKeto": true,
+        "isPaleo": true,
+        "isHalal": true,
+        "isKosher": true,
+        "allergens": [],
+        "certifications": ["organic_available", "free_range_available"]
+      },
+      "mealTypes": ["lunch", "dinner", "post_workout"],
+      "goals": ["muscle_gain", "weight_loss", "maintenance", "athletic_performance"],
+      "preparationTime": 15,
+      "cookingMethods": ["grilled", "baked", "pan_seared", "poached"],
+      "cost": "medium",
+      "shelfLife": "3-4 days refrigerated",
+      "tags": ["high_protein", "low_carb", "lean", "versatile"],
+      "popularityScore": 92,
+      "satietyScore": 85,
+      "digestibility": "high",
+      "glycemicIndex": 0,
+      "glycemicLoad": 0,
+      "inflammatoryScore": "anti_inflammatory",
+      "suitableFor": {
+        "bmiCategories": ["all"],
+        "goals": ["all"],
+        "healthConditions": ["diabetes", "heart_disease", "hypertension"]
+      },
+      "imageUrl": "/images/nutrition/grilled-chicken-breast.jpg",
+      "thumbnailUrl": "/images/thumbnails/nutrition/grilled-chicken-breast_thumb.jpg"
+    },
+    {
+      "id": "food_002",
+      "name": "Brown Rice (Cooked)",
+      "category": "carbs",
+      "subcategory": "whole_grains",
+      "servingSize": "1 cup cooked (195g)",
+      "servingSizeOptions": ["0.5 cup (98g)", "1 cup (195g)", "1.5 cups (293g)"],
+      "macros": {
+        "calories": 218,
+        "protein": 5,
+        "carbs": 45,
+        "fats": 1.6,
+        "fiber": 3.5,
+        "sugar": 0.7,
+        "saturatedFat": 0.4,
+        "unsaturatedFat": 1.2
+      },
+      "micronutrients": {
+        "vitamins": {
+          "B1_thiamin": {"amount": 0.2, "unit": "mg", "dv": 17},
+          "B3_niacin": {"amount": 2.6, "unit": "mg", "dv": 16},
+          "B6": {"amount": 0.3, "unit": "mg", "dv": 18}
+        },
+        "minerals": {
+          "magnesium": {"amount": 86, "unit": "mg", "dv": 20},
+          "phosphorus": {"amount": 150, "unit": "mg", "dv": 12},
+          "manganese": {"amount": 1.8, "unit": "mg", "dv": 78},
+          "selenium": {"amount": 19, "unit": "mcg", "dv": 35}
+        }
+      },
+      "dietaryInfo": {
+        "isVegetarian": true,
+        "isVegan": true,
+        "isGlutenFree": true,
+        "isDairyFree": true,
+        "isKeto": false,
+        "isPaleo": false,
+        "isHalal": true,
+        "isKosher": true,
+        "allergens": []
+      },
+      "mealTypes": ["lunch", "dinner", "pre_workout"],
+      "goals": ["muscle_gain", "endurance", "maintenance", "energy"],
+      "preparationTime": 45,
+      "cookingMethods": ["boiled", "steamed", "rice_cooker"],
+      "cost": "low",
+      "shelfLife": "5-7 days refrigerated",
+      "tags": ["whole_grain", "complex_carbs", "fiber", "budget_friendly"],
+      "popularityScore": 88,
+      "satietyScore": 75,
+      "digestibility": "moderate",
+      "glycemicIndex": 50,
+      "glycemicLoad": 16,
+      "inflammatoryScore": "neutral",
+      "suitableFor": {
+        "bmiCategories": ["underweight", "normal_weight", "overweight_active"],
+        "goals": ["muscle_gain", "endurance", "maintenance"],
+        "healthConditions": ["general_health"]
+      },
+      "imageUrl": "/images/nutrition/brown-rice.jpg",
+      "thumbnailUrl": "/images/thumbnails/nutrition/brown-rice_thumb.jpg"
+    },
+    {
+      "id": "food_050",
+      "name": "Protein Smoothie Bowl (High Calorie)",
+      "category": "meal",
+      "subcategory": "smoothie",
+      "servingSize": "1 bowl (400g)",
+      "macros": {
+        "calories": 520,
+        "protein": 35,
+        "carbs": 65,
+        "fats": 15,
+        "fiber": 8,
+        "sugar": 28
+      },
+      "ingredients": [
+        {"food": "banana", "amount": "2 medium"},
+        {"food": "whey_protein", "amount": "2 scoops"},
+        {"food": "peanut_butter", "amount": "2 tbsp"},
+        {"food": "oats", "amount": "0.5 cup"},
+        {"food": "almond_milk", "amount": "1 cup"},
+        {"food": "honey", "amount": "1 tbsp"}
+      ],
+      "dietaryInfo": {
+        "isVegetarian": true,
+        "isVegan": false,
+        "isGlutenFree": true,
+        "isDairyFree": false,
+        "isKeto": false,
+        "allergens": ["dairy", "peanuts"]
+      },
+      "mealTypes": ["breakfast", "post_workout", "snack"],
+      "goals": ["muscle_gain", "weight_gain", "recovery"],
+      "preparationTime": 5,
+      "cost": "medium",
+      "tags": ["high_calorie", "high_protein", "quick", "convenient"],
+      "popularityScore": 85,
+      "satietyScore": 80,
+      "suitableFor": {
+        "bmiCategories": ["underweight", "normal_weight_bulking"],
+        "goals": ["muscle_gain", "weight_gain"],
+        "healthConditions": ["general_health"]
+      },
+      "imageUrl": "/images/nutrition/protein-smoothie-bowl.jpg",
+      "thumbnailUrl": "/images/thumbnails/nutrition/protein-smoothie-bowl_thumb.jpg"
+    },
+    {
+      "id": "food_051",
+      "name": "Lean Ground Beef (90/10)",
+      "category": "protein",
+      "subcategory": "red_meat",
+      "servingSize": "100g",
+      "servingSizeOptions": ["100g", "150g", "200g"],
+      "macros": {
+        "calories": 176,
+        "protein": 20,
+        "carbs": 0,
+        "fats": 10,
+        "fiber": 0,
+        "sugar": 0,
+        "saturatedFat": 4.5,
+        "unsaturatedFat": 5.5,
+        "cholesterol": 70
+      },
+      "micronutrients": {
+        "vitamins": {
+          "B12": {"amount": 2.4, "unit": "mcg", "dv": 100},
+          "B6": {"amount": 0.4, "unit": "mg", "dv": 20},
+          "niacin": {"amount": 5.4, "unit": "mg", "dv": 34}
+        },
+        "minerals": {
+          "iron": {"amount": 2.5, "unit": "mg", "dv": 14},
+          "zinc": {"amount": 5.3, "unit": "mg", "dv": 48},
+          "selenium": {"amount": 18, "unit": "mcg", "dv": 33}
+        }
+      },
+      "aminoAcidProfile": {
+        "leucine": 1.6,
+        "isoleucine": 0.9,
+        "valine": 1.0,
+        "complete_protein": true
+      },
+      "dietaryInfo": {
+        "isVegetarian": false,
+        "isVegan": false,
+        "isGlutenFree": true,
+        "isDairyFree": true,
+        "isKeto": true,
+        "isPaleo": true,
+        "isHalal": true,
+        "allergens": []
+      },
+      "mealTypes": ["lunch", "dinner"],
+      "goals": ["muscle_gain", "strength", "iron_boost"],
+      "preparationTime": 10,
+      "cookingMethods": ["pan_fried", "grilled", "baked"],
+      "cost": "medium",
+      "tags": ["high_protein", "iron_rich", "versatile"],
+      "popularityScore": 88,
+      "satietyScore": 90,
+      "digestibility": "moderate",
+      "glycemicIndex": 0,
+      "suitableFor": {
+        "bmiCategories": ["underweight", "normal_weight", "overweight"],
+        "goals": ["muscle_gain", "strength"],
+        "healthConditions": ["anemia"]
+      },
+      "imageUrl": "/images/nutrition/ground-beef.jpg",
+      "thumbnailUrl": "/images/thumbnails/nutrition/ground-beef_thumb.jpg"
+    },
+    {
+      "id": "food_052",
+      "name": "Cottage Cheese (Low-Fat)",
+      "category": "protein",
+      "subcategory": "dairy",
+      "servingSize": "1 cup (226g)",
+      "macros": {
+        "calories": 163,
+        "protein": 28,
+        "carbs": 6,
+        "fats": 2.3,
+        "fiber": 0,
+        "sugar": 6,
+        "saturatedFat": 1.4,
+        "cholesterol": 9
+      },
+      "micronutrients": {
+        "vitamins": {
+          "B12": {"amount": 1.4, "unit": "mcg", "dv": 59},
+          "riboflavin": {"amount": 0.4, "unit": "mg", "dv": 37}
+        },
+        "minerals": {
+          "calcium": {"amount": 138, "unit": "mg", "dv": 11},
+          "phosphorus": {"amount": 303, "unit": "mg", "dv": 24},
+          "selenium": {"amount": 20, "unit": "mcg", "dv": 37}
+        }
+      },
+      "aminoAcidProfile": {
+        "casein_protein": true,
+        "slow_digesting": true,
+        "complete_protein": true
+      },
+      "dietaryInfo": {
+        "isVegetarian": true,
+        "isVegan": false,
+        "isGlutenFree": true,
+        "isDairyFree": false,
+        "isKeto": true,
+        "allergens": ["dairy"]
+      },
+      "mealTypes": ["breakfast", "snack", "before_bed"],
+      "goals": ["muscle_gain", "weight_loss", "recovery"],
+      "preparationTime": 0,
+      "cost": "low",
+      "tags": ["high_protein", "low_fat", "slow_digesting", "budget_friendly"],
+      "popularityScore": 82,
+      "satietyScore": 88,
+      "digestibility": "slow",
+      "glycemicIndex": 10,
+      "suitableFor": {
+        "bmiCategories": ["all"],
+        "goals": ["all"],
+        "healthConditions": ["general_health"]
+      },
+      "imageUrl": "/images/nutrition/cottage-cheese.jpg",
+      "thumbnailUrl": "/images/thumbnails/nutrition/cottage-cheese_thumb.jpg"
+    },
+    {
+      "id": "food_053",
+      "name": "Lentils (Cooked)",
+      "category": "protein",
+      "subcategory": "legumes",
+      "servingSize": "1 cup (198g)",
+      "macros": {
+        "calories": 230,
+        "protein": 18,
+        "carbs": 40,
+        "fats": 0.8,
+        "fiber": 16,
+        "sugar": 4
+      },
+      "micronutrients": {
+        "vitamins": {
+          "folate": {"amount": 358, "unit": "mcg", "dv": 90},
+          "B6": {"amount": 0.4, "unit": "mg", "dv": 18}
+        },
+        "minerals": {
+          "iron": {"amount": 6.6, "unit": "mg", "dv": 37},
+          "magnesium": {"amount": 71, "unit": "mg", "dv": 17},
+          "potassium": {"amount": 731, "unit": "mg", "dv": 16}
+        }
+      },
+      "dietaryInfo": {
+        "isVegetarian": true,
+        "isVegan": true,
+        "isGlutenFree": true,
+        "isDairyFree": true,
+        "isKeto": false,
+        "isPaleo": false,
+        "allergens": []
+      },
+      "mealTypes": ["lunch", "dinner"],
+      "goals": ["vegetarian_protein", "fiber", "iron_boost"],
+      "preparationTime": 30,
+      "cost": "very_low",
+      "tags": ["plant_protein", "high_fiber", "budget_friendly", "vegan"],
+      "popularityScore": 75,
+      "satietyScore": 92,
+      "digestibility": "moderate",
+      "glycemicIndex": 32,
+      "suitableFor": {
+        "bmiCategories": ["all"],
+        "goals": ["weight_loss", "maintenance", "vegetarian"],
+        "healthConditions": ["diabetes", "heart_disease"]
+      },
+      "imageUrl": "/images/nutrition/lentils.jpg",
+      "thumbnailUrl": "/images/thumbnails/nutrition/lentils_thumb.jpg"
+    },
+    {
+      "id": "food_054",
+      "name": "Tuna (Canned in Water)",
+      "category": "protein",
+      "subcategory": "fish",
+      "servingSize": "1 can (142g)",
+      "macros": {
+        "calories": 191,
+        "protein": 42,
+        "carbs": 0,
+        "fats": 1.4,
+        "fiber": 0,
+        "sugar": 0
+      },
+      "micronutrients": {
+        "vitamins": {
+          "B12": {"amount": 2.5, "unit": "mcg", "dv": 104},
+          "niacin": {"amount": 18.5, "unit": "mg", "dv": 116},
+          "B6": {"amount": 0.9, "unit": "mg", "dv": 43}
+        },
+        "minerals": {
+          "selenium": {"amount": 108, "unit": "mcg", "dv": 196},
+          "phosphorus": {"amount": 268, "unit": "mg", "dv": 21}
+        }
+      },
+      "dietaryInfo": {
+        "isVegetarian": false,
+        "isVegan": false,
+        "isGlutenFree": true,
+        "isDairyFree": true,
+        "isKeto": true,
+        "isPaleo": true,
+        "allergens": ["fish"]
+      },
+      "mealTypes": ["lunch", "snack"],
+      "goals": ["muscle_gain", "weight_loss", "convenience"],
+      "preparationTime": 0,
+      "cost": "low",
+      "tags": ["very_high_protein", "low_fat", "convenient", "shelf_stable"],
+      "popularityScore": 85,
+      "satietyScore": 85,
+      "digestibility": "high",
+      "glycemicIndex": 0,
+      "suitableFor": {
+        "bmiCategories": ["all"],
+        "goals": ["all"],
+        "healthConditions": ["general_health"]
+      },
+      "imageUrl": "/images/nutrition/tuna.jpg",
+      "thumbnailUrl": "/images/thumbnails/nutrition/tuna_thumb.jpg"
+    },
+    {
+      "id": "food_055",
+      "name": "Blueberries (Fresh)",
+      "category": "fruits",
+      "subcategory": "berries",
+      "servingSize": "1 cup (148g)",
+      "macros": {
+        "calories": 84,
+        "protein": 1.1,
+        "carbs": 21,
+        "fats": 0.5,
+        "fiber": 3.6,
+        "sugar": 15
+      },
+      "micronutrients": {
+        "vitamins": {
+          "C": {"amount": 14, "unit": "mg", "dv": 16},
+          "K": {"amount": 29, "unit": "mcg", "dv": 24}
+        },
+        "minerals": {
+          "manganese": {"amount": 0.5, "unit": "mg", "dv": 25}
+        }
+      },
+      "antioxidants": {
+        "anthocyanins": "high",
+        "orac_score": 4669
+      },
+      "dietaryInfo": {
+        "isVegetarian": true,
+        "isVegan": true,
+        "isGlutenFree": true,
+        "isDairyFree": true,
+        "isKeto": false,
+        "isPaleo": true,
+        "allergens": []
+      },
+      "mealTypes": ["breakfast", "snack"],
+      "goals": ["antioxidants", "brain_health", "recovery"],
+      "preparationTime": 0,
+      "cost": "medium",
+      "tags": ["antioxidant_rich", "low_calorie", "brain_food"],
+      "popularityScore": 90,
+      "satietyScore": 60,
+      "digestibility": "high",
+      "glycemicIndex": 53,
+      "suitableFor": {
+        "bmiCategories": ["all"],
+        "goals": ["all"],
+        "healthConditions": ["all"]
+      },
+      "imageUrl": "/images/nutrition/blueberries.jpg",
+      "thumbnailUrl": "/images/thumbnails/nutrition/blueberries_thumb.jpg"
+    }
+  ],
+  
+  "mealPlans": {
+    "underweight_weight_gain": {
+      "id": "plan_001",
+      "name": "Underweight Weight Gain (3000 kcal)",
+      "description": "High-calorie, nutrient-dense meal plan for healthy weight gain",
+      "targetCalories": 3000,
+      "macroRatio": {"protein": 25, "carbs": 50, "fats": 25},
+      "macroGrams": {"protein": 188, "carbs": 375, "fats": 83},
+      "mealFrequency": 6,
+      "suitableFor": {
+        "bmiCategory": ["underweight_severe", "underweight_moderate", "underweight_mild"],
+        "goal": "weight_gain"
+      },
+      "meals": [
+        {
+          "mealNumber": 1,
+          "type": "breakfast",
+          "time": "07:00",
+          "name": "High-Calorie Breakfast",
+          "foods": [
+            {"foodId": "food_050", "servings": 1},
+            {"foodId": "food_007", "servings": 1, "note": "3 whole eggs scrambled"},
+            {"foodId": "food_006", "servings": 0.5, "note": "Half avocado"}
+          ],
+          "totalCalories": 750,
+          "totalProtein": 45,
+          "totalCarbs": 70,
+          "totalFats": 28
+        },
+        {
+          "mealNumber": 2,
+          "type": "mid_morning_snack",
+          "time": "10:00",
+          "name": "Protein Snack",
+          "foods": [
+            {"foodId": "food_004", "servings": 1, "note": "Greek yogurt"},
+            {"foodId": "food_009", "servings": 1, "note": "Almonds"},
+            {"foodId": "food_011", "servings": 1, "note": "Banana"}
+          ],
+          "totalCalories": 450,
+          "totalProtein": 23,
+          "totalCarbs": 45,
+          "totalFats": 20
+        },
+        {
+          "mealNumber": 3,
+          "type": "lunch",
+          "time": "13:00",
+          "name": "Power Lunch",
+          "foods": [
+            {"foodId": "food_001", "servings": 2, "note": "200g chicken"},
+            {"foodId": "food_002", "servings": 1.5, "note": "1.5 cups brown rice"},
+            {"foodId": "food_010", "servings": 1, "note": "Broccoli"},
+            {"foodId": "food_006", "servings": 0.5, "note": "Avocado"}
+          ],
+          "totalCalories": 750,
+          "totalProtein": 68,
+          "totalCarbs": 75,
+          "totalFats": 18
+        },
+        {
+          "mealNumber": 4,
+          "type": "afternoon_snack",
+          "time": "16:00",
+          "name": "Pre-Workout Fuel",
+          "foods": [
+            {"foodId": "food_015", "servings": 1, "note": "Peanut butter"},
+            {"foodId": "food_011", "servings": 1, "note": "Banana"},
+            {"foodId": "food_005", "servings": 0.5, "note": "Oatmeal"}
+          ],
+          "totalCalories": 450,
+          "totalProtein": 15,
+          "totalCarbs": 55,
+          "totalFats": 20
+        },
+        {
+          "mealNumber": 5,
+          "type": "dinner",
+          "time": "19:00",
+          "name": "Recovery Dinner",
+          "foods": [
+            {"foodId": "food_003", "servings": 1.5, "note": "150g salmon"},
+            {"foodId": "food_008", "servings": 2, "note": "2 sweet potatoes"},
+            {"foodId": "food_013", "servings": 2, "note": "Spinach salad"}
+          ],
+          "totalCalories": 550,
+          "totalProtein": 40,
+          "totalCarbs": 60,
+          "totalFats": 22
+        },
+        {
+          "mealNumber": 6,
+          "type": "before_bed",
+          "time": "22:00",
+          "name": "Bedtime Protein",
+          "foods": [
+            {"foodId": "food_004", "servings": 1, "note": "Greek yogurt"},
+            {"foodId": "food_009", "servings": 0.5, "note": "Almonds"}
+          ],
+          "totalCalories": 250,
+          "totalProtein": 20,
+          "totalCarbs": 15,
+          "totalFats": 12
+        }
+      ],
+      "hydration": {
+        "dailyWaterGoal": 3000,
+        "unit": "ml",
+        "timing": ["upon_waking", "between_meals", "during_workout", "before_bed"]
+      },
+      "supplementation": [
+        {"supplement": "protein_powder", "timing": "post_workout", "dosage": "1-2 scoops"},
+        {"supplement": "creatine", "timing": "daily", "dosage": "5g"},
+        {"supplement": "multivitamin", "timing": "with_breakfast", "dosage": "1 tablet"}
+      ],
+      "tips": [
+        "Eat every 2-3 hours to maintain calorie surplus",
+        "Focus on calorie-dense foods",
+        "Don't skip meals even if not hungry",
+        "Add healthy fats to increase calories",
+        "Track weight weekly, adjust calories if not gaining"
+      ]
+    },
+    
+    "obese_weight_loss": {
+      "id": "plan_002",
+      "name": "Obesity Weight Loss (1800 kcal)",
+      "description": "Sustainable calorie deficit with high protein to preserve muscle",
+      "targetCalories": 1800,
+      "macroRatio": {"protein": 40, "carbs": 30, "fats": 30},
+      "macroGrams": {"protein": 180, "carbs": 135, "fats": 60},
+      "mealFrequency": 4,
+      "suitableFor": {
+        "bmiCategory": ["obese_class1", "obese_class2", "obese_class3"],
+        "goal": "weight_loss"
+      },
+      "meals": [
+        {
+          "mealNumber": 1,
+          "type": "breakfast",
+          "time": "08:00",
+          "name": "Protein-Rich Breakfast",
+          "foods": [
+            {"foodId": "food_007", "servings": 1, "note": "3 eggs, 2 whole + 1 white"},
+            {"foodId": "food_013", "servings": 1, "note": "Spinach"},
+            {"foodId": "food_005", "servings": 0.5, "note": "Oatmeal"}
+          ],
+          "totalCalories": 400,
+          "totalProtein": 30,
+          "totalCarbs": 35,
+          "totalFats": 15
+        },
+        {
+          "mealNumber": 2,
+          "type": "lunch",
+          "time": "13:00",
+          "name": "Lean Protein Lunch",
+          "foods": [
+            {"foodId": "food_001", "servings": 1.5, "note": "150g chicken"},
+            {"foodId": "food_012", "servings": 0.75, "note": "Quinoa"},
+            {"foodId": "food_010", "servings": 2, "note": "Large serving vegetables"}
+          ],
+          "totalCalories": 550,
+          "totalProtein": 55,
+          "totalCarbs": 45,
+          "totalFats": 12
+        },
+        {
+          "mealNumber": 3,
+          "type": "snack",
+          "time": "16:00",
+          "name": "Afternoon Protein",
+          "foods": [
+            {"foodId": "food_004", "servings": 1, "note": "Greek yogurt"},
+            {"foodId": "food_011", "servings": 0.5, "note": "Half banana"}
+          ],
+          "totalCalories": 200,
+          "totalProtein": 20,
+          "totalCarbs": 20,
+          "totalFats": 5
+        },
+        {
+          "mealNumber": 4,
+          "type": "dinner",
+          "time": "19:00",
+          "name": "Light Dinner",
+          "foods": [
+            {"foodId": "food_003", "servings": 1, "note": "100g salmon"},
+            {"foodId": "food_008", "servings": 1, "note": "Sweet potato"},
+            {"foodId": "food_010", "servings": 2, "note": "Broccoli"}
+          ],
+          "totalCalories": 450,
+          "totalProtein": 35,
+          "totalCarbs": 35,
+          "totalFats": 18
+        }
+      ],
+      "hydration": {
+        "dailyWaterGoal": 3500,
+        "unit": "ml",
+        "timing": ["before_meals", "between_meals", "during_activity"],
+        "note": "Drink water before meals to increase satiety"
+      },
+      "supplementation": [
+        {"supplement": "multivitamin", "timing": "with_breakfast", "dosage": "1 tablet"},
+        {"supplement": "omega3", "timing": "with_dinner", "dosage": "1000mg"},
+        {"supplement": "vitamin_d", "timing": "daily", "dosage": "2000 IU"}
+      ],
+      "tips": [
+        "Eat slowly and mindfully",
+        "Fill half your plate with vegetables",
+        "Drink water before meals",
+        "Avoid liquid calories",
+        "Track food intake daily",
+        "Weigh yourself weekly, same time",
+        "Focus on non-scale victories (energy, clothes fit, etc.)"
+      ],
+      "restrictions": [
+        "Limit processed foods",
+        "Avoid sugary drinks",
+        "Minimize refined carbs",
+        "Reduce sodium intake",
+        "Limit alcohol"
+      ]
+    },
+    
+    "athletic_performance": {
+      "id": "plan_003",
+      "name": "Athletic Performance (2800 kcal)",
+      "description": "Optimized nutrition for athletic performance and recovery",
+      "targetCalories": 2800,
+      "macroRatio": {"protein": 25, "carbs": 55, "fats": 20},
+      "macroGrams": {"protein": 175, "carbs": 385, "fats": 62},
+      "mealFrequency": 5,
+      "suitableFor": {
+        "bmiCategory": ["normal_weight", "athletic"],
+        "goal": "athletic_performance"
+      },
+      "mealTiming": {
+        "pre_workout": "2-3 hours before training",
+        "during_workout": "Carbs + electrolytes for sessions >90 min",
+        "post_workout": "Within 30-60 minutes",
+        "before_bed": "Slow-digesting protein"
+      },
+      "meals": [
+        {
+          "mealNumber": 1,
+          "type": "breakfast",
+          "time": "07:00",
+          "name": "Performance Breakfast",
+          "foods": [
+            {"foodId": "food_005", "servings": 1, "note": "Oatmeal"},
+            {"foodId": "food_011", "servings": 1, "note": "Banana"},
+            {"foodId": "food_007", "servings": 1, "note": "2 whole eggs"},
+            {"foodId": "food_009", "servings": 0.5, "note": "Almonds"}
+          ],
+          "totalCalories": 600,
+          "totalProtein": 25,
+          "totalCarbs": 75,
+          "totalFats": 20
+        },
+        {
+          "mealNumber": 2,
+          "type": "pre_workout",
+          "time": "11:00",
+          "name": "Pre-Training Fuel",
+          "foods": [
+            {"foodId": "food_011", "servings": 2, "note": "2 bananas"},
+            {"foodId": "food_015", "servings": 1, "note": "Peanut butter"},
+            {"foodId": "food_014", "servings": 0.5, "note": "Half scoop protein"}
+          ],
+          "totalCalories": 500,
+          "totalProtein": 20,
+          "totalCarbs": 80,
+          "totalFats": 15
+        },
+        {
+          "mealNumber": 3,
+          "type": "post_workout",
+          "time": "14:30",
+          "name": "Recovery Meal",
+          "foods": [
+            {"foodId": "food_001", "servings": 2, "note": "200g chicken"},
+            {"foodId": "food_002", "servings": 2, "note": "2 cups rice"},
+            {"foodId": "food_010", "servings": 1, "note": "Vegetables"}
+          ],
+          "totalCalories": 800,
+          "totalProtein": 70,
+          "totalCarbs": 100,
+          "totalFats": 12
+        },
+        {
+          "mealNumber": 4,
+          "type": "snack",
+          "time": "17:00",
+          "name": "Afternoon Snack",
+          "foods": [
+            {"foodId": "food_004", "servings": 1, "note": "Greek yogurt"},
+            {"foodId": "food_011", "servings": 1, "note": "Banana"}
+          ],
+          "totalCalories": 300,
+          "totalProtein": 20,
+          "totalCarbs": 40,
+          "totalFats": 5
+        },
+        {
+          "mealNumber": 5,
+          "type": "dinner",
+          "time": "20:00",
+          "name": "Evening Meal",
+          "foods": [
+            {"foodId": "food_003", "servings": 1.5, "note": "150g salmon"},
+            {"foodId": "food_012", "servings": 1, "note": "Quinoa"},
+            {"foodId": "food_013", "servings": 2, "note": "Spinach salad"},
+            {"foodId": "food_006", "servings": 0.5, "note": "Avocado"}
+          ],
+          "totalCalories": 600,
+          "totalProtein": 40,
+          "totalCarbs": 50,
+          "totalFats": 25
+        }
+      ],
+      "hydration": {
+        "dailyWaterGoal": 4000,
+        "unit": "ml",
+        "electrolyteSupplementation": "During training sessions >60 min"
+      },
+      "supplementation": [
+        {"supplement": "protein_powder", "timing": "post_workout", "dosage": "1 scoop"},
+        {"supplement": "creatine", "timing": "daily", "dosage": "5g"},
+        {"supplement": "bcaa", "timing": "during_workout", "dosage": "5-10g"},
+        {"supplement": "electrolytes", "timing": "during_workout", "dosage": "as_needed"}
+      ],
+      "tips": [
+        "Time carbs around training",
+        "Prioritize recovery nutrition",
+        "Stay hydrated throughout day",
+        "Adjust calories based on training volume",
+        "Monitor performance and recovery"
+      ]
+    }
+  },
+  
+  "nutritionRules": {
+    "underweight": {
+      "calorieTarget": "TDEE + 500-800",
+      "proteinTarget": "2.0-2.5 g/kg",
+      "mealFrequency": "5-6 meals",
+      "focus": ["calorie_dense_foods", "frequent_eating", "liquid_calories"],
+      "avoid": ["excessive_cardio", "skipping_meals", "low_calorie_foods"]
+    },
+    "obese": {
+      "calorieTarget": "TDEE - 500-750",
+      "proteinTarget": "2.0-2.5 g/kg (lean body mass)",
+      "mealFrequency": "3-4 meals",
+      "focus": ["high_protein", "high_fiber", "low_calorie_density", "satiety"],
+      "avoid": ["processed_foods", "liquid_calories", "refined_carbs", "excessive_fats"]
+    },
+    "athletic": {
+      "calorieTarget": "TDEE + 0-300",
+      "proteinTarget": "1.6-2.2 g/kg",
+      "mealFrequency": "4-5 meals",
+      "focus": ["nutrient_timing", "recovery", "performance", "carb_cycling"],
+      "avoid": ["training_fasted", "inadequate_carbs", "poor_recovery_nutrition"]
+    }
+  }
+}

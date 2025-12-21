@@ -1,0 +1,26 @@
+PLACEHOLDER: spinach
+
+This is a placeholder for the nutrition image: spinach
+
+To add the actual image:
+1. Download/create the image for "spinach"
+2. Save it as: spinach.jpg or spinach.png
+3. Replace this placeholder file
+
+Recommended image specifications:
+- Format: JPG or PNG
+- Size: 800x600px (landscape) or 600x800px (portrait)
+- Max file size: 500KB
+- Quality: High resolution, clear, well-lit
+
+Free image sources:
+- Unsplash: https://unsplash.com/s/photos/spinach
+- Pexels: https://www.pexels.com/search/spinach
+- Pixabay: https://pixabay.com/images/search/spinach
+
+For nutrition:
+
+- High-quality food photography
+- Well-plated and appealing
+- Natural lighting
+

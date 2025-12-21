@@ -1,0 +1,753 @@
+{
+  "version": "2.0.0",
+  "description": "Advanced AI recommendation rules and algorithms for personalized fitness plans",
+  "lastUpdated": "2024-12-02T23:30:00Z",
+  
+  "algorithmWeights": {
+    "bmiCategory": 0.30,
+    "fitnessGoal": 0.25,
+    "healthConditions": 0.20,
+    "experienceLevel": 0.15,
+    "equipment": 0.10
+  },
+  
+  "bmiBasedRecommendations": {
+    "underweight_severe": {
+      "priority": "medical_consultation_required",
+      "exerciseIntensity": "low_to_moderate",
+      "exerciseTypes": ["strength_training", "bodyweight", "low_impact_cardio"],
+      "avoidExercises": ["high_intensity", "excessive_cardio", "fasted_training"],
+      "workoutFrequency": "3-4 days/week",
+      "workoutDuration": "30-45 minutes",
+      "restDays": "3-4 days/week",
+      "nutritionFocus": {
+        "calorieTarget": "TDEE + 700-1000",
+        "proteinMultiplier": 2.5,
+        "mealFrequency": 6,
+        "supplementation": ["protein_powder", "creatine", "multivitamin", "weight_gainer"],
+        "avoidFasting": true
+      },
+      "progressionRate": "slow_and_steady",
+      "monitoringFrequency": "weekly",
+      "redFlags": ["dizziness", "extreme_fatigue", "no_weight_gain_after_4_weeks"],
+      "specialConsiderations": [
+        "Focus on compound movements",
+        "Minimize cardio to preserve calories",
+        "Emphasize rest and recovery",
+        "Consider medical evaluation for underlying conditions"
+      ]
+    },
+    
+    "underweight_moderate": {
+      "priority": "weight_gain_with_muscle_building",
+      "exerciseIntensity": "moderate",
+      "exerciseTypes": ["strength_training", "compound_movements", "moderate_cardio"],
+      "avoidExercises": ["excessive_hiit", "long_distance_running"],
+      "workoutFrequency": "4 days/week",
+      "workoutDuration": "45-60 minutes",
+      "restDays": "3 days/week",
+      "nutritionFocus": {
+        "calorieTarget": "TDEE + 500-700",
+        "proteinMultiplier": 2.2,
+        "mealFrequency": 5,
+        "supplementation": ["protein_powder", "creatine", "multivitamin"],
+        "avoidFasting": true
+      },
+      "progressionRate": "moderate",
+      "monitoringFrequency": "weekly",
+      "targetWeightGain": "0.5-0.75 kg/week",
+      "specialConsiderations": [
+        "Progressive overload essential",
+        "Track strength gains",
+        "Adequate protein at each meal",
+        "Consider mass gainer shakes"
+      ]
+    },
+    
+    "normal_weight": {
+      "priority": "goal_specific_optimization",
+      "exerciseIntensity": "moderate_to_high",
+      "exerciseTypes": ["all_types_available"],
+      "workoutFrequency": "4-6 days/week",
+      "workoutDuration": "45-75 minutes",
+      "restDays": "1-3 days/week",
+      "nutritionFocus": {
+        "calorieTarget": "TDEE +/- 200 (goal dependent)",
+        "proteinMultiplier": 1.8,
+        "mealFrequency": 4,
+        "supplementation": ["protein_powder", "creatine_optional"],
+        "flexibleApproach": true
+      },
+      "progressionRate": "goal_dependent",
+      "monitoringFrequency": "bi-weekly",
+      "specialConsiderations": [
+        "Most flexible category",
+        "Can pursue any fitness goal",
+        "Focus on performance metrics",
+        "Body recomposition possible"
+      ]
+    },
+    
+    "overweight": {
+      "priority": "fat_loss_with_muscle_preservation",
+      "exerciseIntensity": "moderate",
+      "exerciseTypes": ["cardio", "strength_training", "hiit_modified", "low_impact"],
+      "avoidExercises": ["high_impact_plyometrics", "heavy_overhead_pressing"],
+      "workoutFrequency": "5-6 days/week",
+      "workoutDuration": "45-60 minutes",
+      "restDays": "1-2 days/week",
+      "nutritionFocus": {
+        "calorieTarget": "TDEE - 500",
+        "proteinMultiplier": 2.2,
+        "mealFrequency": 4,
+        "supplementation": ["protein_powder", "multivitamin", "omega3"],
+        "intermittentFastingOption": true
+      },
+      "progressionRate": "moderate",
+      "monitoringFrequency": "weekly",
+      "targetWeightLoss": "0.5-0.75 kg/week",
+      "specialConsiderations": [
+        "Preserve lean muscle mass",
+        "Gradual calorie reduction",
+        "Mix cardio and strength",
+        "Monitor body composition, not just weight"
+      ]
+    },
+    
+    "obese_class1": {
+      "priority": "sustainable_weight_loss",
+      "exerciseIntensity": "low_to_moderate",
+      "exerciseTypes": ["walking", "swimming", "cycling", "strength_training_modified", "chair_exercises"],
+      "avoidExercises": ["running", "jumping", "high_impact", "heavy_squats"],
+      "workoutFrequency": "5-6 days/week",
+      "workoutDuration": "30-45 minutes",
+      "restDays": "1-2 days/week",
+      "nutritionFocus": {
+        "calorieTarget": "TDEE - 500-750",
+        "proteinMultiplier": 2.4,
+        "mealFrequency": 4,
+        "supplementation": ["multivitamin", "omega3", "vitamin_d"],
+        "avoidCrashDiets": true
+      },
+      "progressionRate": "slow_and_sustainable",
+      "monitoringFrequency": "weekly",
+      "targetWeightLoss": "0.5-1.0 kg/week",
+      "medicalConsultation": "strongly_recommended",
+      "specialConsiderations": [
+        "Joint-friendly exercises only",
+        "Start with walking program",
+        "Gradual progression essential",
+        "Focus on habit building",
+        "Consider working with dietitian"
+      ]
+    },
+    
+    "obese_class2": {
+      "priority": "health_improvement_and_weight_loss",
+      "exerciseIntensity": "very_low_to_low",
+      "exerciseTypes": ["walking", "water_aerobics", "chair_exercises", "seated_strength", "gentle_yoga"],
+      "avoidExercises": ["any_high_impact", "standing_for_long_periods", "complex_movements"],
+      "workoutFrequency": "5-7 days/week (short sessions)",
+      "workoutDuration": "15-30 minutes",
+      "restDays": "as_needed",
+      "nutritionFocus": {
+        "calorieTarget": "TDEE - 750-1000",
+        "proteinMultiplier": 2.5,
+        "mealFrequency": 4,
+        "supplementation": ["multivitamin", "omega3", "vitamin_d", "calcium"],
+        "medicalSupervision": "required"
+      },
+      "progressionRate": "very_slow",
+      "monitoringFrequency": "weekly",
+      "targetWeightLoss": "0.75-1.0 kg/week",
+      "medicalConsultation": "required",
+      "specialConsiderations": [
+        "Medical clearance mandatory",
+        "Start with 5-10 minute sessions",
+        "Water exercises preferred",
+        "Monitor blood pressure and heart rate",
+        "Consider bariatric consultation",
+        "Focus on daily movement increase"
+      ]
+    },
+    
+    "obese_class3": {
+      "priority": "medical_weight_loss_program",
+      "exerciseIntensity": "very_low",
+      "exerciseTypes": ["chair_exercises", "water_therapy", "physical_therapy", "breathing_exercises"],
+      "avoidExercises": ["standing_exercises", "any_impact", "unsupervised_training"],
+      "workoutFrequency": "daily (very short sessions)",
+      "workoutDuration": "5-15 minutes",
+      "restDays": "as_needed",
+      "nutritionFocus": {
+        "calorieTarget": "medically_supervised (1200-1800)",
+        "proteinMultiplier": 2.5,
+        "mealFrequency": 4,
+        "supplementation": ["comprehensive_multivitamin", "prescribed_supplements"],
+        "medicalSupervision": "mandatory"
+      },
+      "progressionRate": "medically_supervised",
+      "monitoringFrequency": "weekly_with_medical_team",
+      "targetWeightLoss": "1.0+ kg/week (medically supervised)",
+      "medicalConsultation": "mandatory",
+      "specialConsiderations": [
+        "Requires medical team supervision",
+        "Consider bariatric surgery evaluation",
+        "Physical therapy recommended",
+        "Focus on basic mobility",
+        "Address comorbidities first",
+        "Psychological support essential",
+        "May need home-based program"
+      ]
+    }
+  },
+  
+  "goalBasedAlgorithms": {
+    "extreme_weight_loss": {
+      "targetUsers": ["obese_class1", "obese_class2", "obese_class3"],
+      "weeklyDeficit": 750,
+      "exerciseSplit": {
+        "cardio": 60,
+        "strength": 30,
+        "flexibility": 10
+      },
+      "cardioType": "low_impact_steady_state",
+      "strengthFocus": "full_body_circuits",
+      "progressionMarkers": ["weight_loss", "endurance_improvement", "mobility_increase"],
+      "adjustmentTriggers": {
+        "plateau": "increase_activity_or_reduce_calories_by_100",
+        "too_fast": "increase_calories_by_100-200",
+        "fatigue": "add_rest_day_or_reduce_intensity"
+      }
+    },
+    
+    "muscle_gain_underweight": {
+      "targetUsers": ["underweight_severe", "underweight_moderate", "underweight_mild"],
+      "weeklySurplus": 500,
+      "exerciseSplit": {
+        "strength": 80,
+        "cardio": 10,
+        "flexibility": 10
+      },
+      "strengthProtocol": "progressive_overload_compound_focus",
+      "repRanges": {
+        "compound": "6-10 reps",
+        "isolation": "10-15 reps"
+      },
+      "progressionMarkers": ["weight_gain", "strength_increase", "muscle_size"],
+      "adjustmentTriggers": {
+        "no_weight_gain": "increase_calories_by_200-300",
+        "too_fast": "reduce_surplus_slightly",
+        "strength_plateau": "deload_week_or_change_program"
+      }
+    },
+    
+    "body_recomposition": {
+      "targetUsers": ["normal_weight", "overweight"],
+      "calorieAdjustment": 0,
+      "exerciseSplit": {
+        "strength": 60,
+        "cardio": 30,
+        "flexibility": 10
+      },
+      "strengthProtocol": "hypertrophy_with_progressive_overload",
+      "cardioType": "hiit_and_liss_mix",
+      "nutritionTiming": "carb_cycling_optional",
+      "progressionMarkers": ["body_composition", "strength", "visual_changes"],
+      "adjustmentTriggers": {
+        "no_progress": "adjust_macros_or_training_volume",
+        "losing_strength": "increase_calories_slightly",
+        "gaining_fat": "reduce_calories_slightly"
+      }
+    },
+    
+    "athletic_performance": {
+      "targetUsers": ["normal_weight", "athletic"],
+      "calorieAdjustment": "maintenance_to_slight_surplus",
+      "exerciseSplit": {
+        "sport_specific": 50,
+        "strength": 30,
+        "conditioning": 20
+      },
+      "periodization": "required",
+      "recoveryFocus": "high_priority",
+      "progressionMarkers": ["performance_metrics", "power_output", "sport_specific_skills"],
+      "adjustmentTriggers": {
+        "overtraining": "reduce_volume_increase_recovery",
+        "underperforming": "check_nutrition_and_sleep",
+        "injury_risk": "reduce_intensity_focus_mobility"
+      }
+    }
+  },
+  
+  "healthConditionModifications": {
+    "diabetes_type2": {
+      "exerciseRecommendations": [
+        "Regular moderate cardio",
+        "Resistance training 2-3x/week",
+        "Post-meal walks"
+      ],
+      "exerciseAvoid": ["fasted_training", "extreme_intensity"],
+      "nutritionModifications": {
+        "carb_timing": "around_workouts",
+        "fiber_focus": "high",
+        "glycemic_index": "low_to_moderate",
+        "meal_frequency": "regular_consistent"
+      },
+      "monitoring": ["blood_glucose_before_after_exercise", "A1C_quarterly"],
+      "specialConsiderations": [
+        "Check blood sugar before/after exercise",
+        "Carry fast-acting carbs",
+        "Adjust insulin if applicable",
+        "Avoid exercise if glucose >250 mg/dL"
+      ]
+    },
+    
+    "hypertension": {
+      "exerciseRecommendations": [
+        "Moderate aerobic exercise",
+        "Light to moderate resistance training",
+        "Avoid valsalva maneuver"
+      ],
+      "exerciseAvoid": ["heavy_lifting", "isometric_holds", "high_intensity_without_clearance"],
+      "nutritionModifications": {
+        "sodium": "reduced (<2300mg/day)",
+        "potassium": "increased",
+        "dash_diet": "recommended",
+        "alcohol": "limited"
+      },
+      "monitoring": ["blood_pressure_before_exercise", "resting_heart_rate"],
+      "specialConsiderations": [
+        "Avoid breath holding during lifts",
+        "Gradual warm-up and cool-down",
+        "Monitor for dizziness",
+        "Medication timing consideration"
+      ]
+    },
+    
+    "pregnancy": {
+      "trimester1": {
+        "exerciseRecommendations": ["moderate_cardio", "strength_training_modified", "yoga"],
+        "exerciseAvoid": ["contact_sports", "high_fall_risk", "supine_exercises_after_12_weeks"],
+        "intensity": "moderate (can_talk_comfortably)",
+        "duration": "20-30 minutes",
+        "frequency": "most_days"
+      },
+      "trimester2": {
+        "exerciseRecommendations": ["walking", "swimming", "prenatal_yoga", "light_strength"],
+        "exerciseAvoid": ["jumping", "twisting", "lying_flat_on_back", "core_crunches"],
+        "intensity": "low_to_moderate",
+        "duration": "20-30 minutes",
+        "frequency": "most_days"
+      },
+      "trimester3": {
+        "exerciseRecommendations": ["walking", "water_aerobics", "gentle_stretching"],
+        "exerciseAvoid": ["high_impact", "balance_risk", "overheating"],
+        "intensity": "low",
+        "duration": "15-20 minutes",
+        "frequency": "as_comfortable"
+      },
+      "nutritionModifications": {
+        "calories": "+300-500 (2nd/3rd trimester)",
+        "protein": "increased",
+        "folate": "essential",
+        "iron": "increased",
+        "hydration": "increased"
+      },
+      "redFlags": ["vaginal_bleeding", "dizziness", "chest_pain", "contractions", "decreased_fetal_movement"]
+    },
+    
+    "knee_injury": {
+      "exerciseRecommendations": [
+        "Swimming",
+        "Cycling (if pain-free)",
+        "Upper body strength",
+        "Core work",
+        "Physical therapy exercises"
+      ],
+      "exerciseAvoid": ["running", "jumping", "deep_squats", "lunges", "high_impact"],
+      "modifications": {
+        "squats": "limited_range_or_box_squats",
+        "cardio": "swimming_or_elliptical",
+        "strength": "focus_upper_body_and_core"
+      },
+      "progressionPath": [
+        "Pain-free range of motion",
+        "Isometric exercises",
+        "Partial range movements",
+        "Full range movements",
+        "Gradual load increase"
+      ],
+      "specialConsiderations": [
+        "Ice after exercise",
+        "Avoid pain during exercise",
+        "Consider physical therapy",
+        "Strengthen surrounding muscles"
+      ]
+    }
+  },
+  
+  "experienceLevelProgression": {
+    "absolute_beginner": {
+      "phase": "adaptation",
+      "duration": "4-8 weeks",
+      "focus": ["movement_patterns", "form", "consistency", "habit_building"],
+      "workoutStructure": {
+        "frequency": "3 days/week",
+        "duration": "20-30 minutes",
+        "exercises": "6-8 per session",
+        "sets": "2-3",
+        "reps": "10-15",
+        "rest": "60-90 seconds"
+      },
+      "progression": "increase_reps_then_sets",
+      "nextPhase": "beginner"
+    },
+    
+    "beginner": {
+      "phase": "foundation",
+      "duration": "3-6 months",
+      "focus": ["strength_base", "endurance", "technique_refinement"],
+      "workoutStructure": {
+        "frequency": "3-4 days/week",
+        "duration": "30-45 minutes",
+        "exercises": "8-10 per session",
+        "sets": "3-4",
+        "reps": "8-12",
+        "rest": "60-90 seconds"
+      },
+      "progression": "linear_progression",
+      "nextPhase": "intermediate"
+    },
+    
+    "intermediate": {
+      "phase": "development",
+      "duration": "6-12 months",
+      "focus": ["progressive_overload", "volume_increase", "specialization"],
+      "workoutStructure": {
+        "frequency": "4-5 days/week",
+        "duration": "45-60 minutes",
+        "exercises": "10-12 per session",
+        "sets": "3-5",
+        "reps": "6-15 (varied)",
+        "rest": "45-120 seconds"
+      },
+      "progression": "periodization_introduction",
+      "nextPhase": "advanced"
+    },
+    
+    "advanced": {
+      "phase": "optimization",
+      "duration": "ongoing",
+      "focus": ["peak_performance", "specialization", "periodization"],
+      "workoutStructure": {
+        "frequency": "5-6 days/week",
+        "duration": "60-90 minutes",
+        "exercises": "12-15 per session",
+        "sets": "4-6",
+        "reps": "varied_by_phase",
+        "rest": "30-180 seconds"
+      },
+      "progression": "advanced_periodization",
+      "nextPhase": "elite"
+    }
+  },
+  
+  "adaptiveAlgorithm": {
+    "feedbackLoop": {
+      "checkFrequency": "weekly",
+      "metrics": [
+        "workout_completion_rate",
+        "exercise_difficulty_rating",
+        "soreness_level",
+        "energy_level",
+        "sleep_quality",
+        "nutrition_adherence",
+        "weight_change",
+        "body_measurements"
+      ],
+      "adjustmentThresholds": {
+        "completion_rate_low": {
+          "threshold": "<70%",
+          "action": "reduce_volume_or_difficulty"
+        },
+        "too_easy": {
+          "threshold": "difficulty_rating < 5/10",
+          "action": "increase_intensity_or_volume"
+        },
+        "excessive_soreness": {
+          "threshold": "soreness > 7/10 for 3+ days",
+          "action": "add_rest_day_or_deload"
+        },
+        "no_progress": {
+          "threshold": "no_change_for_4_weeks",
+          "action": "change_program_or_adjust_nutrition"
+        }
+      }
+    },
+    
+    "autoAdjustments": {
+      "progressive_overload": {
+        "when": "user_completes_all_reps_for_2_consecutive_weeks",
+        "action": "increase_weight_by_2.5-5% or increase_reps_by_2"
+      },
+      "deload": {
+        "when": "every_4-6_weeks or fatigue_indicators",
+        "action": "reduce_volume_by_40-50% for_1_week"
+      },
+      "plateau_break": {
+        "when": "no_progress_for_3-4_weeks",
+        "action": "change_exercise_selection or rep_ranges or training_split"
+      }
+    }
+  },
+  
+  "safetyProtocols": {
+    "redFlags": {
+      "immediate_stop": [
+        "chest_pain",
+        "severe_shortness_of_breath",
+        "dizziness_or_lightheadedness",
+        "sharp_pain",
+        "numbness_or_tingling"
+      ],
+      "medical_consultation": [
+        "persistent_pain",
+        "unusual_fatigue",
+        "irregular_heartbeat",
+        "joint_swelling",
+        "no_progress_with_weight_loss_despite_adherence"
+      ]
+    },
+    
+    "injuryPrevention": {
+      "warmup": "5-10 minutes dynamic movement",
+      "cooldown": "5-10 minutes stretching",
+      "form_priority": "always_over_weight_or_reps",
+      "rest_days": "minimum_1_per_week",
+      "sleep": "7-9_hours_per_night",
+      "hydration": "adequate_throughout_day",
+      "nutrition": "sufficient_calories_and_protein"
+    }
+  },
+  
+  "specialPopulationGuidelines": {
+    "teenagers": {
+      "ageRange": "13-17",
+      "exerciseGuidelines": {
+        "focus": ["proper_form", "bodyweight_mastery", "sport_skills"],
+        "avoid": ["maximal_lifts", "excessive_volume", "growth_plate_stress"],
+        "frequency": "3-5 days/week",
+        "duration": "45-75 minutes",
+        "intensity": "moderate_with_technique_focus"
+      },
+      "nutritionGuidelines": {
+        "calorieAdjustment": "growth_needs + activity",
+        "proteinTarget": "1.6-2.0 g/kg",
+        "emphasize": ["whole_foods", "adequate_calories", "calcium", "iron"],
+        "avoid": ["extreme_diets", "supplements_without_medical_approval"]
+      },
+      "specialConsiderations": [
+        "Growth plates still developing",
+        "Hormonal changes affecting recovery",
+        "Parental involvement recommended",
+        "Focus on long-term development",
+        "Avoid early specialization"
+      ]
+    },
+    
+    "seniors": {
+      "ageRange": "65+",
+      "exerciseGuidelines": {
+        "focus": ["balance", "functional_strength", "flexibility", "fall_prevention"],
+        "avoid": ["high_impact", "heavy_overhead", "complex_movements_initially"],
+        "frequency": "3-5 days/week",
+        "duration": "20-45 minutes",
+        "intensity": "low_to_moderate"
+      },
+      "nutritionGuidelines": {
+        "calorieAdjustment": "lower_metabolism",
+        "proteinTarget": "1.2-1.5 g/kg (higher for muscle preservation)",
+        "emphasize": ["protein_at_each_meal", "vitamin_d", "calcium", "b12", "fiber"],
+        "hydration": "increased_focus (thirst_mechanism_reduced)"
+      },
+      "specialConsiderations": [
+        "Medical clearance recommended",
+        "Slower recovery times",
+        "Bone density concerns",
+        "Medication interactions",
+        "Social aspect important",
+        "Cognitive benefits emphasized"
+      ]
+    },
+    
+    "pregnant_women": {
+      "trimester1": {
+        "weeks": "1-13",
+        "exerciseGuidelines": {
+          "allowed": ["walking", "swimming", "prenatal_yoga", "light_strength"],
+          "avoid": ["contact_sports", "high_fall_risk", "overheating", "lying_flat_after_12_weeks"],
+          "intensity": "moderate (talk_test)",
+          "duration": "20-30 minutes",
+          "frequency": "most_days"
+        },
+        "nutritionGuidelines": {
+          "calorieAdjustment": "+0 (no increase needed)",
+          "proteinTarget": "1.2 g/kg",
+          "emphasize": ["folate", "iron", "calcium", "dha"],
+          "avoid": ["raw_fish", "unpasteurized_dairy", "excessive_caffeine"]
+        }
+      },
+      "trimester2": {
+        "weeks": "14-27",
+        "exerciseGuidelines": {
+          "allowed": ["walking", "swimming", "prenatal_classes", "modified_strength"],
+          "avoid": ["jumping", "twisting", "lying_flat", "core_crunches"],
+          "intensity": "low_to_moderate",
+          "duration": "20-30 minutes",
+          "modifications": "increase as belly grows"
+        },
+        "nutritionGuidelines": {
+          "calorieAdjustment": "+300-350",
+          "proteinTarget": "1.2-1.5 g/kg",
+          "emphasize": ["iron", "calcium", "protein", "healthy_fats"]
+        }
+      },
+      "trimester3": {
+        "weeks": "28-40",
+        "exerciseGuidelines": {
+          "allowed": ["walking", "water_aerobics", "gentle_stretching", "pelvic_floor"],
+          "avoid": ["high_impact", "balance_risk", "overheating", "lying_flat"],
+          "intensity": "low",
+          "duration": "15-20 minutes",
+          "focus": "comfort_and_preparation_for_birth"
+        },
+        "nutritionGuidelines": {
+          "calorieAdjustment": "+450-500",
+          "proteinTarget": "1.5 g/kg",
+          "emphasize": ["frequent_small_meals", "hydration", "fiber"]
+        }
+      },
+      "redFlags": [
+        "vaginal_bleeding",
+        "dizziness_or_faintness",
+        "chest_pain",
+        "muscle_weakness",
+        "calf_pain_or_swelling",
+        "preterm_labor_signs",
+        "decreased_fetal_movement",
+        "amniotic_fluid_leakage"
+      ]
+    },
+    
+    "postpartum": {
+      "weeks_0_6": {
+        "exerciseGuidelines": {
+          "focus": ["rest", "gentle_walking", "pelvic_floor_exercises"],
+          "avoid": ["high_impact", "heavy_lifting", "core_crunches"],
+          "clearance": "medical_approval_required"
+        },
+        "nutritionGuidelines": {
+          "calorieAdjustment": "+500 if breastfeeding",
+          "proteinTarget": "1.5 g/kg",
+          "hydration": "increased (breastfeeding)"
+        }
+      },
+      "weeks_6_12": {
+        "exerciseGuidelines": {
+          "allowed": ["walking", "swimming", "light_strength", "core_rehabilitation"],
+          "progression": "gradual_return_to_pre_pregnancy_activity",
+          "clearance": "6_week_checkup_approval"
+        }
+      },
+      "weeks_12_plus": {
+        "exerciseGuidelines": {
+          "progression": "return_to_normal_training",
+          "considerations": ["pelvic_floor_health", "diastasis_recti_check", "energy_levels"]
+        }
+      }
+    }
+  },
+  
+  "advancedMetrics": {
+    "bodyCompositionTargets": {
+      "male": {
+        "essential_fat": "2-5%",
+        "athletes": "6-13%",
+        "fitness": "14-17%",
+        "average": "18-24%",
+        "obese": "25%+"
+      },
+      "female": {
+        "essential_fat": "10-13%",
+        "athletes": "14-20%",
+        "fitness": "21-24%",
+        "average": "25-31%",
+        "obese": "32%+"
+      }
+    },
+    
+    "strengthStandards": {
+      "male": {
+        "beginner": {
+          "benchPress": "0.5x bodyweight",
+          "squat": "0.75x bodyweight",
+          "deadlift": "1.0x bodyweight"
+        },
+        "intermediate": {
+          "benchPress": "1.0x bodyweight",
+          "squat": "1.5x bodyweight",
+          "deadlift": "1.75x bodyweight"
+        },
+        "advanced": {
+          "benchPress": "1.5x bodyweight",
+          "squat": "2.0x bodyweight",
+          "deadlift": "2.5x bodyweight"
+        }
+      },
+      "female": {
+        "beginner": {
+          "benchPress": "0.3x bodyweight",
+          "squat": "0.5x bodyweight",
+          "deadlift": "0.75x bodyweight"
+        },
+        "intermediate": {
+          "benchPress": "0.65x bodyweight",
+          "squat": "1.0x bodyweight",
+          "deadlift": "1.25x bodyweight"
+        },
+        "advanced": {
+          "benchPress": "1.0x bodyweight",
+          "squat": "1.5x bodyweight",
+          "deadlift": "2.0x bodyweight"
+        }
+      }
+    },
+    
+    "cardioStandards": {
+      "vo2max": {
+        "male": {
+          "poor": "<35",
+          "fair": "35-38",
+          "average": "39-43",
+          "good": "44-51",
+          "excellent": "52+"
+        },
+        "female": {
+          "poor": "<27",
+          "fair": "27-31",
+          "average": "32-36",
+          "good": "37-41",
+          "excellent": "42+"
+        }
+      },
+      "resting_heart_rate": {
+        "athlete": "40-60 bpm",
+        "excellent": "61-65 bpm",
+        "good": "66-70 bpm",
+        "average": "71-80 bpm",
+        "below_average": "81+ bpm"
+      }
+    }
+  }
+}

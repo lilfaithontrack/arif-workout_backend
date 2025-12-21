@@ -1,0 +1,26 @@
+PLACEHOLDER: grilled-chicken-breast
+
+This is a placeholder for the nutrition image: grilled-chicken-breast
+
+To add the actual image:
+1. Download/create the image for "grilled-chicken-breast"
+2. Save it as: grilled-chicken-breast.jpg or grilled-chicken-breast.png
+3. Replace this placeholder file
+
+Recommended image specifications:
+- Format: JPG or PNG
+- Size: 800x600px (landscape) or 600x800px (portrait)
+- Max file size: 500KB
+- Quality: High resolution, clear, well-lit
+
+Free image sources:
+- Unsplash: https://unsplash.com/s/photos/grilled-chicken-breast
+- Pexels: https://www.pexels.com/search/grilled%20chicken%20breast
+- Pixabay: https://pixabay.com/images/search/grilled%20chicken%20breast
+
+For nutrition:
+
+- High-quality food photography
+- Well-plated and appealing
+- Natural lighting
+

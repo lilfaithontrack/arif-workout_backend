@@ -1,0 +1,813 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2024-12-02T20:00:00Z",
+  "totalFoods": 15,
+  "foods": [
+    {
+      "id": "food_001",
+      "name": "Grilled Chicken Breast",
+      "category": "protein",
+      "servingSize": "100g",
+      "macros": {
+        "calories": 165,
+        "protein": 31,
+        "carbs": 0,
+        "fats": 3.6,
+        "fiber": 0,
+        "sugar": 0
+      },
+      "micronutrients": {
+        "vitamins": {
+          "B6": 0.5,
+          "B12": 0.3,
+          "niacin": 14
+        },
+        "minerals": {
+          "iron": 1,
+          "zinc": 1.5,
+          "selenium": 27
+        }
+      },
+      "dietaryInfo": {
+        "isVegetarian": false,
+        "isVegan": false,
+        "isGlutenFree": true,
+        "isDairyFree": true,
+        "isKeto": true,
+        "allergens": []
+      },
+      "mealTypes": [
+        "lunch",
+        "dinner",
+        "post_workout"
+      ],
+      "goals": [
+        "muscle_gain",
+        "weight_loss",
+        "maintenance"
+      ],
+      "preparationTime": 15,
+      "cost": "medium",
+      "tags": [
+        "high_protein",
+        "low_carb",
+        "lean"
+      ],
+      "popularityScore": 92,
+      "imageUrl": "/images/nutrition/grilled-chicken-breast.jpg",
+      "thumbnailUrl": "/images/thumbnails/nutrition/grilled-chicken-breast_thumb.jpg"
+    },
+    {
+      "id": "food_002",
+      "name": "Brown Rice",
+      "category": "carbs",
+      "servingSize": "1 cup cooked (195g)",
+      "macros": {
+        "calories": 218,
+        "protein": 5,
+        "carbs": 45,
+        "fats": 1.6,
+        "fiber": 3.5,
+        "sugar": 0.7
+      },
+      "micronutrients": {
+        "vitamins": {
+          "B1": 0.2,
+          "B3": 2.6,
+          "B6": 0.3
+        },
+        "minerals": {
+          "magnesium": 86,
+          "phosphorus": 150,
+          "manganese": 1.8
+        }
+      },
+      "dietaryInfo": {
+        "isVegetarian": true,
+        "isVegan": true,
+        "isGlutenFree": true,
+        "isDairyFree": true,
+        "isKeto": false,
+        "allergens": []
+      },
+      "mealTypes": [
+        "lunch",
+        "dinner"
+      ],
+      "goals": [
+        "muscle_gain",
+        "endurance",
+        "maintenance"
+      ],
+      "preparationTime": 45,
+      "cost": "low",
+      "tags": [
+        "whole_grain",
+        "complex_carbs",
+        "fiber"
+      ],
+      "popularityScore": 88,
+      "imageUrl": "/images/nutrition/brown-rice.jpg",
+      "thumbnailUrl": "/images/thumbnails/nutrition/brown-rice_thumb.jpg"
+    },
+    {
+      "id": "food_003",
+      "name": "Salmon Fillet",
+      "category": "protein",
+      "servingSize": "100g",
+      "macros": {
+        "calories": 206,
+        "protein": 22,
+        "carbs": 0,
+        "fats": 13,
+        "fiber": 0,
+        "sugar": 0
+      },
+      "micronutrients": {
+        "vitamins": {
+          "D": 11,
+          "B12": 3.2,
+          "B6": 0.6
+        },
+        "minerals": {
+          "selenium": 41,
+          "potassium": 363,
+          "phosphorus": 200
+        }
+      },
+      "dietaryInfo": {
+        "isVegetarian": false,
+        "isVegan": false,
+        "isGlutenFree": true,
+        "isDairyFree": true,
+        "isKeto": true,
+        "allergens": [
+          "fish"
+        ]
+      },
+      "mealTypes": [
+        "lunch",
+        "dinner"
+      ],
+      "goals": [
+        "muscle_gain",
+        "heart_health",
+        "brain_health"
+      ],
+      "preparationTime": 20,
+      "cost": "high",
+      "tags": [
+        "omega3",
+        "high_protein",
+        "healthy_fats"
+      ],
+      "popularityScore": 90,
+      "imageUrl": "/images/nutrition/salmon-fillet.jpg",
+      "thumbnailUrl": "/images/thumbnails/nutrition/salmon-fillet_thumb.jpg"
+    },
+    {
+      "id": "food_004",
+      "name": "Greek Yogurt",
+      "category": "protein",
+      "servingSize": "170g",
+      "macros": {
+        "calories": 100,
+        "protein": 17,
+        "carbs": 6,
+        "fats": 0.7,
+        "fiber": 0,
+        "sugar": 6
+      },
+      "micronutrients": {
+        "vitamins": {
+          "B12": 1.3,
+          "riboflavin": 0.3
+        },
+        "minerals": {
+          "calcium": 187,
+          "phosphorus": 173,
+          "potassium": 220
+        }
+      },
+      "dietaryInfo": {
+        "isVegetarian": true,
+        "isVegan": false,
+        "isGlutenFree": true,
+        "isDairyFree": false,
+        "isKeto": false,
+        "allergens": [
+          "dairy"
+        ]
+      },
+      "mealTypes": [
+        "breakfast",
+        "snack",
+        "post_workout"
+      ],
+      "goals": [
+        "muscle_gain",
+        "weight_loss",
+        "gut_health"
+      ],
+      "preparationTime": 0,
+      "cost": "medium",
+      "tags": [
+        "high_protein",
+        "probiotic",
+        "low_fat"
+      ],
+      "popularityScore": 87,
+      "imageUrl": "/images/nutrition/greek-yogurt.jpg",
+      "thumbnailUrl": "/images/thumbnails/nutrition/greek-yogurt_thumb.jpg"
+    },
+    {
+      "id": "food_005",
+      "name": "Oatmeal",
+      "category": "carbs",
+      "servingSize": "1 cup cooked (234g)",
+      "macros": {
+        "calories": 166,
+        "protein": 6,
+        "carbs": 28,
+        "fats": 3.6,
+        "fiber": 4,
+        "sugar": 0.6
+      },
+      "micronutrients": {
+        "vitamins": {
+          "B1": 0.2,
+          "folate": 14
+        },
+        "minerals": {
+          "iron": 2.1,
+          "magnesium": 61,
+          "zinc": 1.4
+        }
+      },
+      "dietaryInfo": {
+        "isVegetarian": true,
+        "isVegan": true,
+        "isGlutenFree": false,
+        "isDairyFree": true,
+        "isKeto": false,
+        "allergens": [
+          "gluten"
+        ]
+      },
+      "mealTypes": [
+        "breakfast",
+        "pre_workout"
+      ],
+      "goals": [
+        "endurance",
+        "heart_health",
+        "weight_loss"
+      ],
+      "preparationTime": 5,
+      "cost": "low",
+      "tags": [
+        "whole_grain",
+        "fiber",
+        "slow_release"
+      ],
+      "popularityScore": 85,
+      "imageUrl": "/images/nutrition/oatmeal.jpg",
+      "thumbnailUrl": "/images/thumbnails/nutrition/oatmeal_thumb.jpg"
+    },
+    {
+      "id": "food_006",
+      "name": "Avocado",
+      "category": "fats",
+      "servingSize": "1/2 avocado (100g)",
+      "macros": {
+        "calories": 160,
+        "protein": 2,
+        "carbs": 9,
+        "fats": 15,
+        "fiber": 7,
+        "sugar": 0.7
+      },
+      "micronutrients": {
+        "vitamins": {
+          "K": 21,
+          "folate": 81,
+          "C": 10
+        },
+        "minerals": {
+          "potassium": 485,
+          "magnesium": 29
+        }
+      },
+      "dietaryInfo": {
+        "isVegetarian": true,
+        "isVegan": true,
+        "isGlutenFree": true,
+        "isDairyFree": true,
+        "isKeto": true,
+        "allergens": []
+      },
+      "mealTypes": [
+        "breakfast",
+        "lunch",
+        "snack"
+      ],
+      "goals": [
+        "heart_health",
+        "brain_health",
+        "maintenance"
+      ],
+      "preparationTime": 2,
+      "cost": "medium",
+      "tags": [
+        "healthy_fats",
+        "fiber",
+        "nutrient_dense"
+      ],
+      "popularityScore": 91,
+      "imageUrl": "/images/nutrition/avocado.jpg",
+      "thumbnailUrl": "/images/thumbnails/nutrition/avocado_thumb.jpg"
+    },
+    {
+      "id": "food_007",
+      "name": "Eggs",
+      "category": "protein",
+      "servingSize": "2 large eggs (100g)",
+      "macros": {
+        "calories": 143,
+        "protein": 13,
+        "carbs": 1,
+        "fats": 10,
+        "fiber": 0,
+        "sugar": 0.4
+      },
+      "micronutrients": {
+        "vitamins": {
+          "A": 540,
+          "D": 82,
+          "B12": 1.1
+        },
+        "minerals": {
+          "selenium": 30,
+          "phosphorus": 198,
+          "iron": 1.8
+        }
+      },
+      "dietaryInfo": {
+        "isVegetarian": true,
+        "isVegan": false,
+        "isGlutenFree": true,
+        "isDairyFree": true,
+        "isKeto": true,
+        "allergens": [
+          "eggs"
+        ]
+      },
+      "mealTypes": [
+        "breakfast",
+        "lunch"
+      ],
+      "goals": [
+        "muscle_gain",
+        "weight_loss",
+        "brain_health"
+      ],
+      "preparationTime": 10,
+      "cost": "low",
+      "tags": [
+        "high_protein",
+        "complete_protein",
+        "versatile"
+      ],
+      "popularityScore": 94,
+      "imageUrl": "/images/nutrition/eggs.jpg",
+      "thumbnailUrl": "/images/thumbnails/nutrition/eggs_thumb.jpg"
+    },
+    {
+      "id": "food_008",
+      "name": "Sweet Potato",
+      "category": "carbs",
+      "servingSize": "1 medium (130g)",
+      "macros": {
+        "calories": 112,
+        "protein": 2,
+        "carbs": 26,
+        "fats": 0.1,
+        "fiber": 4,
+        "sugar": 5
+      },
+      "micronutrients": {
+        "vitamins": {
+          "A": 1836,
+          "C": 22,
+          "B6": 0.3
+        },
+        "minerals": {
+          "potassium": 542,
+          "manganese": 0.5
+        }
+      },
+      "dietaryInfo": {
+        "isVegetarian": true,
+        "isVegan": true,
+        "isGlutenFree": true,
+        "isDairyFree": true,
+        "isKeto": false,
+        "allergens": []
+      },
+      "mealTypes": [
+        "lunch",
+        "dinner",
+        "pre_workout"
+      ],
+      "goals": [
+        "endurance",
+        "muscle_gain",
+        "immune_health"
+      ],
+      "preparationTime": 45,
+      "cost": "low",
+      "tags": [
+        "complex_carbs",
+        "fiber",
+        "nutrient_dense"
+      ],
+      "popularityScore": 86,
+      "imageUrl": "/images/nutrition/sweet-potato.jpg",
+      "thumbnailUrl": "/images/thumbnails/nutrition/sweet-potato_thumb.jpg"
+    },
+    {
+      "id": "food_009",
+      "name": "Almonds",
+      "category": "fats",
+      "servingSize": "28g (about 23 almonds)",
+      "macros": {
+        "calories": 164,
+        "protein": 6,
+        "carbs": 6,
+        "fats": 14,
+        "fiber": 3.5,
+        "sugar": 1
+      },
+      "micronutrients": {
+        "vitamins": {
+          "E": 7.3,
+          "riboflavin": 0.3
+        },
+        "minerals": {
+          "magnesium": 76,
+          "calcium": 76,
+          "iron": 1
+        }
+      },
+      "dietaryInfo": {
+        "isVegetarian": true,
+        "isVegan": true,
+        "isGlutenFree": true,
+        "isDairyFree": true,
+        "isKeto": true,
+        "allergens": [
+          "nuts"
+        ]
+      },
+      "mealTypes": [
+        "snack",
+        "breakfast"
+      ],
+      "goals": [
+        "heart_health",
+        "brain_health",
+        "weight_loss"
+      ],
+      "preparationTime": 0,
+      "cost": "medium",
+      "tags": [
+        "healthy_fats",
+        "protein",
+        "portable"
+      ],
+      "popularityScore": 89,
+      "imageUrl": "/images/nutrition/almonds.jpg",
+      "thumbnailUrl": "/images/thumbnails/nutrition/almonds_thumb.jpg"
+    },
+    {
+      "id": "food_010",
+      "name": "Broccoli",
+      "category": "vegetables",
+      "servingSize": "1 cup chopped (91g)",
+      "macros": {
+        "calories": 31,
+        "protein": 2.6,
+        "carbs": 6,
+        "fats": 0.3,
+        "fiber": 2.4,
+        "sugar": 1.5
+      },
+      "micronutrients": {
+        "vitamins": {
+          "C": 81,
+          "K": 92,
+          "folate": 57
+        },
+        "minerals": {
+          "potassium": 288,
+          "calcium": 43
+        }
+      },
+      "dietaryInfo": {
+        "isVegetarian": true,
+        "isVegan": true,
+        "isGlutenFree": true,
+        "isDairyFree": true,
+        "isKeto": true,
+        "allergens": []
+      },
+      "mealTypes": [
+        "lunch",
+        "dinner"
+      ],
+      "goals": [
+        "weight_loss",
+        "health",
+        "immune_support"
+      ],
+      "preparationTime": 10,
+      "cost": "low",
+      "tags": [
+        "low_calorie",
+        "fiber",
+        "nutrient_dense"
+      ],
+      "popularityScore": 82,
+      "imageUrl": "/images/nutrition/broccoli.jpg",
+      "thumbnailUrl": "/images/thumbnails/nutrition/broccoli_thumb.jpg"
+    },
+    {
+      "id": "food_011",
+      "name": "Banana",
+      "category": "fruits",
+      "servingSize": "1 medium (118g)",
+      "macros": {
+        "calories": 105,
+        "protein": 1.3,
+        "carbs": 27,
+        "fats": 0.4,
+        "fiber": 3.1,
+        "sugar": 14
+      },
+      "micronutrients": {
+        "vitamins": {
+          "B6": 0.4,
+          "C": 10
+        },
+        "minerals": {
+          "potassium": 422,
+          "magnesium": 32
+        }
+      },
+      "dietaryInfo": {
+        "isVegetarian": true,
+        "isVegan": true,
+        "isGlutenFree": true,
+        "isDairyFree": true,
+        "isKeto": false,
+        "allergens": []
+      },
+      "mealTypes": [
+        "breakfast",
+        "snack",
+        "pre_workout",
+        "post_workout"
+      ],
+      "goals": [
+        "endurance",
+        "energy",
+        "recovery"
+      ],
+      "preparationTime": 0,
+      "cost": "low",
+      "tags": [
+        "quick_energy",
+        "potassium",
+        "portable"
+      ],
+      "popularityScore": 93,
+      "imageUrl": "/images/nutrition/banana.jpg",
+      "thumbnailUrl": "/images/thumbnails/nutrition/banana_thumb.jpg"
+    },
+    {
+      "id": "food_012",
+      "name": "Quinoa",
+      "category": "carbs",
+      "servingSize": "1 cup cooked (185g)",
+      "macros": {
+        "calories": 222,
+        "protein": 8,
+        "carbs": 39,
+        "fats": 3.6,
+        "fiber": 5,
+        "sugar": 1.6
+      },
+      "micronutrients": {
+        "vitamins": {
+          "folate": 78,
+          "B6": 0.2
+        },
+        "minerals": {
+          "magnesium": 118,
+          "iron": 2.8,
+          "zinc": 2
+        }
+      },
+      "dietaryInfo": {
+        "isVegetarian": true,
+        "isVegan": true,
+        "isGlutenFree": true,
+        "isDairyFree": true,
+        "isKeto": false,
+        "allergens": []
+      },
+      "mealTypes": [
+        "lunch",
+        "dinner"
+      ],
+      "goals": [
+        "muscle_gain",
+        "endurance",
+        "vegetarian_protein"
+      ],
+      "preparationTime": 20,
+      "cost": "medium",
+      "tags": [
+        "complete_protein",
+        "fiber",
+        "gluten_free"
+      ],
+      "popularityScore": 84,
+      "imageUrl": "/images/nutrition/quinoa.jpg",
+      "thumbnailUrl": "/images/thumbnails/nutrition/quinoa_thumb.jpg"
+    },
+    {
+      "id": "food_013",
+      "name": "Spinach",
+      "category": "vegetables",
+      "servingSize": "1 cup raw (30g)",
+      "macros": {
+        "calories": 7,
+        "protein": 0.9,
+        "carbs": 1.1,
+        "fats": 0.1,
+        "fiber": 0.7,
+        "sugar": 0.1
+      },
+      "micronutrients": {
+        "vitamins": {
+          "K": 145,
+          "A": 141,
+          "folate": 58
+        },
+        "minerals": {
+          "iron": 0.8,
+          "calcium": 30,
+          "magnesium": 24
+        }
+      },
+      "dietaryInfo": {
+        "isVegetarian": true,
+        "isVegan": true,
+        "isGlutenFree": true,
+        "isDairyFree": true,
+        "isKeto": true,
+        "allergens": []
+      },
+      "mealTypes": [
+        "breakfast",
+        "lunch",
+        "dinner"
+      ],
+      "goals": [
+        "weight_loss",
+        "health",
+        "nutrient_density"
+      ],
+      "preparationTime": 2,
+      "cost": "low",
+      "tags": [
+        "low_calorie",
+        "iron",
+        "versatile"
+      ],
+      "popularityScore": 80,
+      "imageUrl": "/images/nutrition/spinach.jpg",
+      "thumbnailUrl": "/images/thumbnails/nutrition/spinach_thumb.jpg"
+    },
+    {
+      "id": "food_014",
+      "name": "Whey Protein Shake",
+      "category": "protein",
+      "servingSize": "1 scoop (30g)",
+      "macros": {
+        "calories": 120,
+        "protein": 24,
+        "carbs": 3,
+        "fats": 1.5,
+        "fiber": 0,
+        "sugar": 2
+      },
+      "micronutrients": {
+        "vitamins": {
+          "B12": 0.6,
+          "D": 2
+        },
+        "minerals": {
+          "calcium": 150,
+          "sodium": 50
+        }
+      },
+      "dietaryInfo": {
+        "isVegetarian": true,
+        "isVegan": false,
+        "isGlutenFree": true,
+        "isDairyFree": false,
+        "isKeto": true,
+        "allergens": [
+          "dairy"
+        ]
+      },
+      "mealTypes": [
+        "post_workout",
+        "snack",
+        "breakfast"
+      ],
+      "goals": [
+        "muscle_gain",
+        "recovery",
+        "convenience"
+      ],
+      "preparationTime": 2,
+      "cost": "medium",
+      "tags": [
+        "high_protein",
+        "fast_absorbing",
+        "convenient"
+      ],
+      "popularityScore": 88,
+      "imageUrl": "/images/nutrition/whey-protein-shake.jpg",
+      "thumbnailUrl": "/images/thumbnails/nutrition/whey-protein-shake_thumb.jpg"
+    },
+    {
+      "id": "food_015",
+      "name": "Peanut Butter",
+      "category": "fats",
+      "servingSize": "2 tablespoons (32g)",
+      "macros": {
+        "calories": 188,
+        "protein": 8,
+        "carbs": 7,
+        "fats": 16,
+        "fiber": 2,
+        "sugar": 3
+      },
+      "micronutrients": {
+        "vitamins": {
+          "E": 2.9,
+          "B3": 4.3
+        },
+        "minerals": {
+          "magnesium": 49,
+          "phosphorus": 107,
+          "potassium": 189
+        }
+      },
+      "dietaryInfo": {
+        "isVegetarian": true,
+        "isVegan": true,
+        "isGlutenFree": true,
+        "isDairyFree": true,
+        "isKeto": false,
+        "allergens": [
+          "peanuts"
+        ]
+      },
+      "mealTypes": [
+        "breakfast",
+        "snack",
+        "pre_workout"
+      ],
+      "goals": [
+        "muscle_gain",
+        "energy",
+        "convenience"
+      ],
+      "preparationTime": 0,
+      "cost": "low",
+      "tags": [
+        "protein",
+        "healthy_fats",
+        "versatile"
+      ],
+      "popularityScore": 90,
+      "imageUrl": "/images/nutrition/peanut-butter.jpg",
+      "thumbnailUrl": "/images/thumbnails/nutrition/peanut-butter_thumb.jpg"
+    }
+  ]
+}

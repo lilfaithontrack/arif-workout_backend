@@ -1,0 +1,26 @@
+PLACEHOLDER: quinoa
+
+This is a placeholder for the nutrition image: quinoa
+
+To add the actual image:
+1. Download/create the image for "quinoa"
+2. Save it as: quinoa.jpg or quinoa.png
+3. Replace this placeholder file
+
+Recommended image specifications:
+- Format: JPG or PNG
+- Size: 800x600px (landscape) or 600x800px (portrait)
+- Max file size: 500KB
+- Quality: High resolution, clear, well-lit
+
+Free image sources:
+- Unsplash: https://unsplash.com/s/photos/quinoa
+- Pexels: https://www.pexels.com/search/quinoa
+- Pixabay: https://pixabay.com/images/search/quinoa
+
+For nutrition:
+
+- High-quality food photography
+- Well-plated and appealing
+- Natural lighting
+

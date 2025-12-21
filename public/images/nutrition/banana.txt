@@ -1,0 +1,26 @@
+PLACEHOLDER: banana
+
+This is a placeholder for the nutrition image: banana
+
+To add the actual image:
+1. Download/create the image for "banana"
+2. Save it as: banana.jpg or banana.png
+3. Replace this placeholder file
+
+Recommended image specifications:
+- Format: JPG or PNG
+- Size: 800x600px (landscape) or 600x800px (portrait)
+- Max file size: 500KB
+- Quality: High resolution, clear, well-lit
+
+Free image sources:
+- Unsplash: https://unsplash.com/s/photos/banana
+- Pexels: https://www.pexels.com/search/banana
+- Pixabay: https://pixabay.com/images/search/banana
+
+For nutrition:
+
+- High-quality food photography
+- Well-plated and appealing
+- Natural lighting
+

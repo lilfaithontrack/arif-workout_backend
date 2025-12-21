@@ -1,0 +1,544 @@
+### Arif Workout API Examples
+### Use with REST Client extension in VS Code
+
+@baseUrl = http://localhost:5000/api
+@token = YOUR_TOKEN_HERE
+
+### Health Check
+GET http://localhost:5000/health
+
+### ============================================
+### AUTHENTICATION
+### ============================================
+
+### Send OTP (Email)
+POST {{baseUrl}}/auth/send-otp
+Content-Type: application/json
+
+{
+  "email": "admin@arifworkout.com",
+  "type": "login"
+}
+
+### Send OTP (Phone)
+POST {{baseUrl}}/auth/send-otp
+Content-Type: application/json
+
+{
+  "phone": "+251911111111",
+  "type": "login"
+}
+
+### Verify OTP
+POST {{baseUrl}}/auth/verify-otp
+Content-Type: application/json
+
+{
+  "email": "admin@arifworkout.com",
+  "code": "123456",
+  "name": "Admin User"
+}
+
+### Google Login
+POST {{baseUrl}}/auth/google
+Content-Type: application/json
+
+{
+  "idToken": "google-id-token-here"
+}
+
+### Get Profile
+GET {{baseUrl}}/auth/profile
+Authorization: Bearer {{token}}
+
+### Update Profile
+PUT {{baseUrl}}/auth/profile
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Updated Name",
+  "gender": "male",
+  "personalInfo": {
+    "bio": "Fitness enthusiast",
+    "heightCm": 175,
+    "weightKg": 70
+  }
+}
+
+### ============================================
+### COURSES
+### ============================================
+
+### Get All Courses
+GET {{baseUrl}}/courses?status=approved&page=1&limit=10
+
+### Get Single Course
+GET {{baseUrl}}/courses/COURSE_ID_OR_SLUG
+
+### Create Course (Instructor)
+POST {{baseUrl}}/courses
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "30-Day HIIT Challenge",
+  "categoryId": "CATEGORY_ID",
+  "price": 29.99,
+  "currency": "USD",
+  "description": "High-intensity interval training program",
+  "level": "intermediate",
+  "durationWeeks": 4
+}
+
+### Update Course
+PUT {{baseUrl}}/courses/COURSE_ID
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "description": "Updated description",
+  "price": 24.99
+}
+
+### Submit Course for Review
+POST {{baseUrl}}/courses/COURSE_ID/submit
+Authorization: Bearer {{token}}
+
+### Get My Courses (Instructor)
+GET {{baseUrl}}/courses/instructor/my-courses?status=pending
+Authorization: Bearer {{token}}
+
+### Delete Course
+DELETE {{baseUrl}}/courses/COURSE_ID
+Authorization: Bearer {{token}}
+
+### ============================================
+### PACKAGES
+### ============================================
+
+### Get All Packages
+GET {{baseUrl}}/packages?status=active&billingCycle=monthly
+
+### Get Single Package
+GET {{baseUrl}}/packages/PACKAGE_ID_OR_SLUG
+
+### ============================================
+### WORKOUTS
+### ============================================
+
+### Get All Workouts
+GET {{baseUrl}}/workouts?level=beginner&page=1&limit=10
+
+### Get Single Workout
+GET {{baseUrl}}/workouts/WORKOUT_ID
+
+### Create Workout (Instructor)
+POST {{baseUrl}}/workouts
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Full Body Strength",
+  "description": "Complete strength training workout",
+  "durationMinutes": 45,
+  "level": "intermediate",
+  "exercises": [
+    {
+      "name": "Push-ups",
+      "sets": 3,
+      "reps": 15,
+      "restSeconds": 60
+    },
+    {
+      "name": "Squats",
+      "sets": 3,
+      "reps": 20,
+      "restSeconds": 60
+    }
+  ],
+  "caloriesBurnEstimate": 300
+}
+
+### Update Workout
+PUT {{baseUrl}}/workouts/WORKOUT_ID
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "durationMinutes": 50,
+  "caloriesBurnEstimate": 350
+}
+
+### Delete Workout
+DELETE {{baseUrl}}/workouts/WORKOUT_ID
+Authorization: Bearer {{token}}
+
+### ============================================
+### ADMIN
+### ============================================
+
+### Approve Course
+PATCH {{baseUrl}}/admin/courses/COURSE_ID/approve
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "notes": "Excellent content, approved!"
+}
+
+### Reject Course
+PATCH {{baseUrl}}/admin/courses/COURSE_ID/reject
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "notes": "Please improve video quality"
+}
+
+### Approve Instructor
+PATCH {{baseUrl}}/admin/instructors/INSTRUCTOR_ID/approve
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "notes": "Verified credentials"
+}
+
+### Create Category
+POST {{baseUrl}}/admin/categories
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Yoga",
+  "description": "Flexibility and mindfulness practices"
+}
+
+### Get Categories
+GET {{baseUrl}}/admin/categories
+Authorization: Bearer {{token}}
+
+### Update Category
+PUT {{baseUrl}}/admin/categories/CATEGORY_ID
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Yoga & Meditation",
+  "description": "Updated description"
+}
+
+### Delete Category
+DELETE {{baseUrl}}/admin/categories/CATEGORY_ID
+Authorization: Bearer {{token}}
+
+### Create Subcategory
+POST {{baseUrl}}/admin/subcategories
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Hatha Yoga",
+  "categoryId": "CATEGORY_ID",
+  "description": "Traditional yoga practice"
+}
+
+### Create Package
+POST {{baseUrl}}/admin/packages
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "Premium All-Access Monthly",
+  "price": 19.99,
+  "currency": "USD",
+  "billingCycle": "monthly",
+  "trialDays": 7,
+  "genderRestriction": "any",
+  "levelRestriction": "any",
+  "status": "active",
+  "description": "Full access to all courses",
+  "features": ["All courses", "7-day trial", "Priority support"]
+}
+
+### Get Packages (Admin)
+GET {{baseUrl}}/admin/packages?status=active
+Authorization: Bearer {{token}}
+
+### Update Package
+PUT {{baseUrl}}/admin/packages/PACKAGE_ID
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "price": 17.99,
+  "status": "active"
+}
+
+### Get All Users
+GET {{baseUrl}}/admin/users?role=student&page=1&limit=20
+Authorization: Bearer {{token}}
+
+### Update User Roles
+PATCH {{baseUrl}}/admin/users/USER_ID/roles
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "roles": ["student", "instructor"]
+}
+
+### ============================================
+### INSTRUCTOR
+### ============================================
+
+### Create Instructor Profile
+POST {{baseUrl}}/instructors/profile
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "bio": "Certified personal trainer with 10 years experience",
+  "experienceYears": 10,
+  "specialties": ["HIIT", "Strength Training", "Weight Loss"],
+  "languages": ["English", "Amharic"]
+}
+
+### Get My Profile
+GET {{baseUrl}}/instructors/profile/me
+Authorization: Bearer {{token}}
+
+### Update Profile
+PUT {{baseUrl}}/instructors/profile
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "bio": "Updated bio",
+  "experienceYears": 12
+}
+
+### Get All Instructors (Public)
+GET {{baseUrl}}/instructors?approved=true&specialty=HIIT
+
+### Get Instructor by ID (Public)
+GET {{baseUrl}}/instructors/INSTRUCTOR_ID
+
+### ============================================
+### PAYMENTS
+### ============================================
+
+### Create Order (Buy Course)
+POST {{baseUrl}}/payments/orders
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "courseId": "COURSE_ID",
+  "paymentProvider": "stripe"
+}
+
+### Get My Orders
+GET {{baseUrl}}/payments/orders?status=paid
+Authorization: Bearer {{token}}
+
+### Create Subscription
+POST {{baseUrl}}/payments/subscriptions
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "packageId": "PACKAGE_ID",
+  "paymentProvider": "stripe"
+}
+
+### Get My Subscriptions
+GET {{baseUrl}}/payments/subscriptions?status=active
+Authorization: Bearer {{token}}
+
+### Cancel Subscription
+POST {{baseUrl}}/payments/subscriptions/SUBSCRIPTION_ID/cancel
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "reason": "Too expensive"
+}
+
+### Pause Subscription
+POST {{baseUrl}}/payments/subscriptions/SUBSCRIPTION_ID/pause
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "reason": "Taking a break"
+}
+
+### Resume Subscription
+POST {{baseUrl}}/payments/subscriptions/SUBSCRIPTION_ID/resume
+Authorization: Bearer {{token}}
+
+### ============================================
+### TRACKERS
+### ============================================
+
+### Create Food Log
+POST {{baseUrl}}/tracker/food-logs
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "date": "2025-11-25",
+  "mealType": "breakfast",
+  "items": [
+    {
+      "name": "Oatmeal with berries",
+      "servingSize": "1 cup",
+      "calories": 300,
+      "proteinGrams": 10,
+      "carbsGrams": 50,
+      "fatGrams": 5
+    },
+    {
+      "name": "Banana",
+      "servingSize": "1 medium",
+      "calories": 105,
+      "proteinGrams": 1,
+      "carbsGrams": 27,
+      "fatGrams": 0.4
+    }
+  ],
+  "notes": "Feeling energized"
+}
+
+### Get Food Logs
+GET {{baseUrl}}/tracker/food-logs?startDate=2025-11-01&endDate=2025-11-30
+Authorization: Bearer {{token}}
+
+### Update Food Log
+PUT {{baseUrl}}/tracker/food-logs/LOG_ID
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "notes": "Updated notes"
+}
+
+### Delete Food Log
+DELETE {{baseUrl}}/tracker/food-logs/LOG_ID
+Authorization: Bearer {{token}}
+
+### Create Activity Log
+POST {{baseUrl}}/tracker/activity-logs
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "type": "running",
+  "distanceMeters": 5000,
+  "durationSeconds": 1800,
+  "steps": 6500,
+  "startTime": "2025-11-25T06:00:00Z",
+  "endTime": "2025-11-25T06:30:00Z",
+  "caloriesBurned": 400,
+  "averageHeartRate": 145,
+  "notes": "Morning run, felt great"
+}
+
+### Get Activity Logs
+GET {{baseUrl}}/tracker/activity-logs?type=running&startDate=2025-11-01
+Authorization: Bearer {{token}}
+
+### Update Activity Log
+PUT {{baseUrl}}/tracker/activity-logs/LOG_ID
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "notes": "Updated notes"
+}
+
+### Delete Activity Log
+DELETE {{baseUrl}}/tracker/activity-logs/LOG_ID
+Authorization: Bearer {{token}}
+
+### Create Workout Progress
+POST {{baseUrl}}/tracker/workout-progress
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "workoutId": "WORKOUT_ID",
+  "courseId": "COURSE_ID",
+  "completed": true,
+  "durationSeconds": 2700,
+  "performanceScore": 85,
+  "level": "intermediate",
+  "notes": "Great workout, pushed hard",
+  "caloriesBurned": 350
+}
+
+### Get Workout Progress
+GET {{baseUrl}}/tracker/workout-progress?courseId=COURSE_ID&completed=true
+Authorization: Bearer {{token}}
+
+### Update Workout Progress
+PUT {{baseUrl}}/tracker/workout-progress/PROGRESS_ID
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "performanceScore": 90,
+  "notes": "Improved performance"
+}
+
+### Get Analytics
+GET {{baseUrl}}/tracker/analytics?startDate=2025-11-01&endDate=2025-11-30
+Authorization: Bearer {{token}}
+
+### ============================================
+### MANAGER
+### ============================================
+
+### Get Dashboard Stats
+GET {{baseUrl}}/manager/dashboard
+Authorization: Bearer {{token}}
+
+### Get All Users
+GET {{baseUrl}}/manager/users?search=john&page=1&limit=20
+Authorization: Bearer {{token}}
+
+### Get User Details
+GET {{baseUrl}}/manager/users/USER_ID
+Authorization: Bearer {{token}}
+
+### Get All Orders
+GET {{baseUrl}}/manager/orders?status=paid&page=1&limit=20
+Authorization: Bearer {{token}}
+
+### Get Order Details
+GET {{baseUrl}}/manager/orders/ORDER_ID
+Authorization: Bearer {{token}}
+
+### Update Order Status
+PATCH {{baseUrl}}/manager/orders/ORDER_ID/status
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "status": "refunded",
+  "notes": "Customer requested refund"
+}
+
+### Get All Subscriptions
+GET {{baseUrl}}/manager/subscriptions?status=active
+Authorization: Bearer {{token}}
+
+### Get Subscription Details
+GET {{baseUrl}}/manager/subscriptions/SUBSCRIPTION_ID
+Authorization: Bearer {{token}}
+
+### Get All Payments
+GET {{baseUrl}}/manager/payments?provider=stripe&status=succeeded
+Authorization: Bearer {{token}}

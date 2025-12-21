@@ -1,0 +1,1325 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2024-12-02T20:00:00Z",
+  "totalExercises": 20,
+  "exercises": [
+    {
+      "id": "ex_001",
+      "name": "Push-ups",
+      "slug": "push-ups",
+      "category": "strength",
+      "subcategory": "bodyweight",
+      "muscleGroups": {
+        "primary": [
+          "chest",
+          "triceps"
+        ],
+        "secondary": [
+          "shoulders",
+          "core"
+        ]
+      },
+      "equipment": [
+        "none"
+      ],
+      "difficulty": "beginner",
+      "caloriesBurnedPerMinute": 7.5,
+      "duration": 300,
+      "sets": 3,
+      "reps": 12,
+      "restTime": 60,
+      "instructions": [
+        "Start in plank position with hands shoulder-width apart",
+        "Lower body until chest nearly touches floor",
+        "Push back up to starting position",
+        "Keep core tight throughout movement"
+      ],
+      "videoUrl": "/videos/exercises/pushups.mp4",
+      "imageUrl": "/images/exercises/pushups.jpg",
+      "tips": [
+        "Keep core engaged throughout",
+        "Don't let hips sag",
+        "Breathe out as you push up"
+      ],
+      "variations": [
+        {
+          "name": "Knee Push-ups",
+          "difficulty": "easier"
+        },
+        {
+          "name": "Diamond Push-ups",
+          "difficulty": "harder"
+        },
+        {
+          "name": "Wide-grip Push-ups",
+          "difficulty": "same"
+        }
+      ],
+      "goals": [
+        "muscle_gain",
+        "strength",
+        "endurance"
+      ],
+      "contraindications": [
+        "shoulder_injury",
+        "wrist_pain"
+      ],
+      "tags": [
+        "upper_body",
+        "no_equipment",
+        "home_workout"
+      ],
+      "popularityScore": 95,
+      "effectivenessScore": 88,
+      "thumbnailUrl": "/images/thumbnails/exercises/pushups_thumb.jpg"
+    },
+    {
+      "id": "ex_002",
+      "name": "Squats",
+      "slug": "squats",
+      "category": "strength",
+      "subcategory": "bodyweight",
+      "muscleGroups": {
+        "primary": [
+          "legs",
+          "glutes"
+        ],
+        "secondary": [
+          "core",
+          "back"
+        ]
+      },
+      "equipment": [
+        "none"
+      ],
+      "difficulty": "beginner",
+      "caloriesBurnedPerMinute": 8,
+      "duration": 300,
+      "sets": 3,
+      "reps": 15,
+      "restTime": 60,
+      "instructions": [
+        "Stand with feet shoulder-width apart",
+        "Lower body by bending knees and hips",
+        "Keep chest up and back straight",
+        "Push through heels to return to standing"
+      ],
+      "videoUrl": "/videos/exercises/squats.mp4",
+      "imageUrl": "/images/exercises/squats.jpg",
+      "tips": [
+        "Keep knees aligned with toes",
+        "Don't let knees cave inward",
+        "Go as low as comfortable"
+      ],
+      "variations": [
+        {
+          "name": "Jump Squats",
+          "difficulty": "harder"
+        },
+        {
+          "name": "Goblet Squats",
+          "difficulty": "same"
+        },
+        {
+          "name": "Wall Sits",
+          "difficulty": "easier"
+        }
+      ],
+      "goals": [
+        "muscle_gain",
+        "strength",
+        "weight_loss"
+      ],
+      "contraindications": [
+        "knee_injury",
+        "hip_pain"
+      ],
+      "tags": [
+        "lower_body",
+        "no_equipment",
+        "compound"
+      ],
+      "popularityScore": 98,
+      "effectivenessScore": 95,
+      "thumbnailUrl": "/images/thumbnails/exercises/squats_thumb.jpg"
+    },
+    {
+      "id": "ex_003",
+      "name": "Plank",
+      "slug": "plank",
+      "category": "strength",
+      "subcategory": "bodyweight",
+      "muscleGroups": {
+        "primary": [
+          "core"
+        ],
+        "secondary": [
+          "shoulders",
+          "back"
+        ]
+      },
+      "equipment": [
+        "none"
+      ],
+      "difficulty": "beginner",
+      "caloriesBurnedPerMinute": 5,
+      "duration": 60,
+      "sets": 3,
+      "reps": 1,
+      "restTime": 45,
+      "instructions": [
+        "Start in forearm plank position",
+        "Keep body in straight line from head to heels",
+        "Engage core and hold position",
+        "Breathe normally throughout"
+      ],
+      "videoUrl": "/videos/exercises/plank.mp4",
+      "imageUrl": "/images/exercises/plank.jpg",
+      "tips": [
+        "Don't let hips sag or pike up",
+        "Keep neck neutral",
+        "Focus on quality over duration"
+      ],
+      "variations": [
+        {
+          "name": "Side Plank",
+          "difficulty": "same"
+        },
+        {
+          "name": "Plank to Downward Dog",
+          "difficulty": "harder"
+        }
+      ],
+      "goals": [
+        "strength",
+        "core_stability",
+        "injury_prevention"
+      ],
+      "contraindications": [
+        "lower_back_pain",
+        "shoulder_injury"
+      ],
+      "tags": [
+        "core",
+        "no_equipment",
+        "isometric"
+      ],
+      "popularityScore": 90,
+      "effectivenessScore": 92,
+      "thumbnailUrl": "/images/thumbnails/exercises/plank_thumb.jpg"
+    },
+    {
+      "id": "ex_004",
+      "name": "Lunges",
+      "slug": "lunges",
+      "category": "strength",
+      "subcategory": "bodyweight",
+      "muscleGroups": {
+        "primary": [
+          "legs",
+          "glutes"
+        ],
+        "secondary": [
+          "core"
+        ]
+      },
+      "equipment": [
+        "none"
+      ],
+      "difficulty": "beginner",
+      "caloriesBurnedPerMinute": 7,
+      "duration": 300,
+      "sets": 3,
+      "reps": 10,
+      "restTime": 60,
+      "instructions": [
+        "Step forward with one leg",
+        "Lower hips until both knees bent at 90 degrees",
+        "Push back to starting position",
+        "Alternate legs"
+      ],
+      "videoUrl": "/videos/exercises/lunges.mp4",
+      "imageUrl": "/images/exercises/lunges.jpg",
+      "tips": [
+        "Keep front knee over ankle",
+        "Don't let knee extend past toes",
+        "Maintain upright posture"
+      ],
+      "variations": [
+        {
+          "name": "Reverse Lunges",
+          "difficulty": "same"
+        },
+        {
+          "name": "Walking Lunges",
+          "difficulty": "harder"
+        },
+        {
+          "name": "Jump Lunges",
+          "difficulty": "advanced"
+        }
+      ],
+      "goals": [
+        "muscle_gain",
+        "strength",
+        "balance"
+      ],
+      "contraindications": [
+        "knee_injury",
+        "balance_issues"
+      ],
+      "tags": [
+        "lower_body",
+        "no_equipment",
+        "unilateral"
+      ],
+      "popularityScore": 85,
+      "effectivenessScore": 87,
+      "thumbnailUrl": "/images/thumbnails/exercises/lunges_thumb.jpg"
+    },
+    {
+      "id": "ex_005",
+      "name": "Burpees",
+      "slug": "burpees",
+      "category": "hiit",
+      "subcategory": "full_body",
+      "muscleGroups": {
+        "primary": [
+          "full_body"
+        ],
+        "secondary": [
+          "core",
+          "legs"
+        ]
+      },
+      "equipment": [
+        "none"
+      ],
+      "difficulty": "intermediate",
+      "caloriesBurnedPerMinute": 12,
+      "duration": 300,
+      "sets": 3,
+      "reps": 10,
+      "restTime": 90,
+      "instructions": [
+        "Start standing, drop into squat",
+        "Place hands on ground, jump feet back to plank",
+        "Do a push-up",
+        "Jump feet forward, explode up with jump"
+      ],
+      "videoUrl": "/videos/exercises/burpees.mp4",
+      "imageUrl": "/images/exercises/burpees.jpg",
+      "tips": [
+        "Maintain good form throughout",
+        "Modify by stepping instead of jumping",
+        "Breathe consistently"
+      ],
+      "variations": [
+        {
+          "name": "Half Burpees",
+          "difficulty": "easier"
+        },
+        {
+          "name": "Burpee Box Jumps",
+          "difficulty": "harder"
+        }
+      ],
+      "goals": [
+        "weight_loss",
+        "endurance",
+        "strength"
+      ],
+      "contraindications": [
+        "knee_injury",
+        "back_pain",
+        "high_blood_pressure"
+      ],
+      "tags": [
+        "full_body",
+        "no_equipment",
+        "cardio",
+        "high_intensity"
+      ],
+      "popularityScore": 75,
+      "effectivenessScore": 93,
+      "thumbnailUrl": "/images/thumbnails/exercises/burpees_thumb.jpg"
+    },
+    {
+      "id": "ex_006",
+      "name": "Mountain Climbers",
+      "slug": "mountain-climbers",
+      "category": "cardio",
+      "subcategory": "bodyweight",
+      "muscleGroups": {
+        "primary": [
+          "core",
+          "legs"
+        ],
+        "secondary": [
+          "shoulders",
+          "arms"
+        ]
+      },
+      "equipment": [
+        "none"
+      ],
+      "difficulty": "intermediate",
+      "caloriesBurnedPerMinute": 10,
+      "duration": 180,
+      "sets": 3,
+      "reps": 20,
+      "restTime": 60,
+      "instructions": [
+        "Start in plank position",
+        "Drive one knee toward chest",
+        "Quickly switch legs",
+        "Continue alternating at a fast pace"
+      ],
+      "videoUrl": "/videos/exercises/mountain-climbers.mp4",
+      "imageUrl": "/images/exercises/mountain-climbers.jpg",
+      "tips": [
+        "Keep hips level",
+        "Maintain plank position",
+        "Start slow and build speed"
+      ],
+      "variations": [
+        {
+          "name": "Slow Mountain Climbers",
+          "difficulty": "easier"
+        },
+        {
+          "name": "Cross-body Mountain Climbers",
+          "difficulty": "harder"
+        }
+      ],
+      "goals": [
+        "weight_loss",
+        "endurance",
+        "core_strength"
+      ],
+      "contraindications": [
+        "wrist_pain",
+        "shoulder_injury"
+      ],
+      "tags": [
+        "cardio",
+        "core",
+        "no_equipment"
+      ],
+      "popularityScore": 82,
+      "effectivenessScore": 85,
+      "thumbnailUrl": "/images/thumbnails/exercises/mountain-climbers_thumb.jpg"
+    },
+    {
+      "id": "ex_007",
+      "name": "Dumbbell Bench Press",
+      "slug": "dumbbell-bench-press",
+      "category": "strength",
+      "subcategory": "weights",
+      "muscleGroups": {
+        "primary": [
+          "chest"
+        ],
+        "secondary": [
+          "triceps",
+          "shoulders"
+        ]
+      },
+      "equipment": [
+        "dumbbells",
+        "bench"
+      ],
+      "difficulty": "intermediate",
+      "caloriesBurnedPerMinute": 6,
+      "duration": 300,
+      "sets": 4,
+      "reps": 10,
+      "restTime": 90,
+      "instructions": [
+        "Lie on bench with dumbbells at chest level",
+        "Press weights up until arms extended",
+        "Lower weights back to chest level",
+        "Repeat for desired reps"
+      ],
+      "videoUrl": "/videos/exercises/dumbbell-bench-press.mp4",
+      "imageUrl": "/images/exercises/dumbbell-bench-press.jpg",
+      "tips": [
+        "Keep feet flat on floor",
+        "Don't arch back excessively",
+        "Control the weight on descent"
+      ],
+      "variations": [
+        {
+          "name": "Incline Dumbbell Press",
+          "difficulty": "same"
+        },
+        {
+          "name": "Single-arm Dumbbell Press",
+          "difficulty": "harder"
+        }
+      ],
+      "goals": [
+        "muscle_gain",
+        "strength"
+      ],
+      "contraindications": [
+        "shoulder_injury",
+        "rotator_cuff_issues"
+      ],
+      "tags": [
+        "upper_body",
+        "chest",
+        "compound"
+      ],
+      "popularityScore": 88,
+      "effectivenessScore": 90,
+      "thumbnailUrl": "/images/thumbnails/exercises/dumbbell-bench-press_thumb.jpg"
+    },
+    {
+      "id": "ex_008",
+      "name": "Deadlifts",
+      "slug": "deadlifts",
+      "category": "strength",
+      "subcategory": "weights",
+      "muscleGroups": {
+        "primary": [
+          "back",
+          "legs",
+          "glutes"
+        ],
+        "secondary": [
+          "core",
+          "arms"
+        ]
+      },
+      "equipment": [
+        "barbell"
+      ],
+      "difficulty": "advanced",
+      "caloriesBurnedPerMinute": 8.5,
+      "duration": 300,
+      "sets": 4,
+      "reps": 8,
+      "restTime": 120,
+      "instructions": [
+        "Stand with feet hip-width apart, bar over mid-foot",
+        "Bend at hips and knees to grip bar",
+        "Keep back straight, lift bar by extending hips and knees",
+        "Lower bar back to ground with control"
+      ],
+      "videoUrl": "/videos/exercises/deadlifts.mp4",
+      "imageUrl": "/images/exercises/deadlifts.jpg",
+      "tips": [
+        "Keep bar close to body",
+        "Don't round back",
+        "Drive through heels"
+      ],
+      "variations": [
+        {
+          "name": "Romanian Deadlifts",
+          "difficulty": "same"
+        },
+        {
+          "name": "Sumo Deadlifts",
+          "difficulty": "same"
+        }
+      ],
+      "goals": [
+        "muscle_gain",
+        "strength",
+        "power"
+      ],
+      "contraindications": [
+        "back_injury",
+        "herniated_disc"
+      ],
+      "tags": [
+        "full_body",
+        "compound",
+        "power"
+      ],
+      "popularityScore": 92,
+      "effectivenessScore": 98,
+      "thumbnailUrl": "/images/thumbnails/exercises/deadlifts_thumb.jpg"
+    },
+    {
+      "id": "ex_009",
+      "name": "Pull-ups",
+      "slug": "pull-ups",
+      "category": "strength",
+      "subcategory": "bodyweight",
+      "muscleGroups": {
+        "primary": [
+          "back",
+          "biceps"
+        ],
+        "secondary": [
+          "shoulders",
+          "core"
+        ]
+      },
+      "equipment": [
+        "pull_up_bar"
+      ],
+      "difficulty": "intermediate",
+      "caloriesBurnedPerMinute": 7,
+      "duration": 240,
+      "sets": 3,
+      "reps": 8,
+      "restTime": 90,
+      "instructions": [
+        "Hang from bar with overhand grip",
+        "Pull body up until chin over bar",
+        "Lower back down with control",
+        "Repeat"
+      ],
+      "videoUrl": "/videos/exercises/pullups.mp4",
+      "imageUrl": "/images/exercises/pullups.jpg",
+      "tips": [
+        "Engage lats throughout movement",
+        "Avoid swinging",
+        "Full range of motion"
+      ],
+      "variations": [
+        {
+          "name": "Assisted Pull-ups",
+          "difficulty": "easier"
+        },
+        {
+          "name": "Weighted Pull-ups",
+          "difficulty": "harder"
+        },
+        {
+          "name": "Chin-ups",
+          "difficulty": "easier"
+        }
+      ],
+      "goals": [
+        "muscle_gain",
+        "strength",
+        "back_development"
+      ],
+      "contraindications": [
+        "shoulder_injury",
+        "elbow_pain"
+      ],
+      "tags": [
+        "upper_body",
+        "back",
+        "compound"
+      ],
+      "popularityScore": 87,
+      "effectivenessScore": 91,
+      "thumbnailUrl": "/images/thumbnails/exercises/pullups_thumb.jpg"
+    },
+    {
+      "id": "ex_010",
+      "name": "Bicycle Crunches",
+      "slug": "bicycle-crunches",
+      "category": "strength",
+      "subcategory": "bodyweight",
+      "muscleGroups": {
+        "primary": [
+          "core"
+        ],
+        "secondary": [
+          "obliques"
+        ]
+      },
+      "equipment": [
+        "none"
+      ],
+      "difficulty": "beginner",
+      "caloriesBurnedPerMinute": 6,
+      "duration": 180,
+      "sets": 3,
+      "reps": 20,
+      "restTime": 45,
+      "instructions": [
+        "Lie on back with hands behind head",
+        "Bring one knee toward chest while rotating opposite elbow to knee",
+        "Alternate sides in cycling motion",
+        "Keep core engaged throughout"
+      ],
+      "videoUrl": "/videos/exercises/bicycle-crunches.mp4",
+      "imageUrl": "/images/exercises/bicycle-crunches.jpg",
+      "tips": [
+        "Don't pull on neck",
+        "Focus on rotation",
+        "Controlled movement"
+      ],
+      "variations": [
+        {
+          "name": "Slow Bicycle Crunches",
+          "difficulty": "harder"
+        }
+      ],
+      "goals": [
+        "core_strength",
+        "muscle_definition"
+      ],
+      "contraindications": [
+        "neck_pain",
+        "lower_back_issues"
+      ],
+      "tags": [
+        "core",
+        "abs",
+        "no_equipment"
+      ],
+      "popularityScore": 80,
+      "effectivenessScore": 83,
+      "thumbnailUrl": "/images/thumbnails/exercises/bicycle-crunches_thumb.jpg"
+    },
+    {
+      "id": "ex_011",
+      "name": "Jumping Jacks",
+      "slug": "jumping-jacks",
+      "category": "cardio",
+      "subcategory": "warm_up",
+      "muscleGroups": {
+        "primary": [
+          "full_body"
+        ],
+        "secondary": [
+          "legs",
+          "shoulders"
+        ]
+      },
+      "equipment": [
+        "none"
+      ],
+      "difficulty": "beginner",
+      "caloriesBurnedPerMinute": 8,
+      "duration": 180,
+      "sets": 3,
+      "reps": 30,
+      "restTime": 30,
+      "instructions": [
+        "Start standing with feet together, arms at sides",
+        "Jump feet apart while raising arms overhead",
+        "Jump back to starting position",
+        "Repeat at steady pace"
+      ],
+      "videoUrl": "/videos/exercises/jumping-jacks.mp4",
+      "imageUrl": "/images/exercises/jumping-jacks.jpg",
+      "tips": [
+        "Land softly",
+        "Keep core engaged",
+        "Maintain steady rhythm"
+      ],
+      "variations": [
+        {
+          "name": "Step Jacks",
+          "difficulty": "easier"
+        },
+        {
+          "name": "Star Jumps",
+          "difficulty": "harder"
+        }
+      ],
+      "goals": [
+        "weight_loss",
+        "endurance",
+        "warm_up"
+      ],
+      "contraindications": [
+        "knee_injury",
+        "ankle_issues"
+      ],
+      "tags": [
+        "cardio",
+        "warm_up",
+        "no_equipment"
+      ],
+      "popularityScore": 85,
+      "effectivenessScore": 75,
+      "thumbnailUrl": "/images/thumbnails/exercises/jumping-jacks_thumb.jpg"
+    },
+    {
+      "id": "ex_012",
+      "name": "Dumbbell Rows",
+      "slug": "dumbbell-rows",
+      "category": "strength",
+      "subcategory": "weights",
+      "muscleGroups": {
+        "primary": [
+          "back"
+        ],
+        "secondary": [
+          "biceps",
+          "core"
+        ]
+      },
+      "equipment": [
+        "dumbbells",
+        "bench"
+      ],
+      "difficulty": "intermediate",
+      "caloriesBurnedPerMinute": 6.5,
+      "duration": 300,
+      "sets": 4,
+      "reps": 12,
+      "restTime": 75,
+      "instructions": [
+        "Place one knee and hand on bench",
+        "Hold dumbbell in opposite hand",
+        "Pull dumbbell to hip, keeping elbow close to body",
+        "Lower with control and repeat"
+      ],
+      "videoUrl": "/videos/exercises/dumbbell-rows.mp4",
+      "imageUrl": "/images/exercises/dumbbell-rows.jpg",
+      "tips": [
+        "Keep back flat",
+        "Pull with back, not arm",
+        "Squeeze shoulder blade at top"
+      ],
+      "variations": [
+        {
+          "name": "Bent-over Rows",
+          "difficulty": "same"
+        },
+        {
+          "name": "Renegade Rows",
+          "difficulty": "harder"
+        }
+      ],
+      "goals": [
+        "muscle_gain",
+        "strength",
+        "back_development"
+      ],
+      "contraindications": [
+        "lower_back_pain",
+        "shoulder_injury"
+      ],
+      "tags": [
+        "upper_body",
+        "back",
+        "unilateral"
+      ],
+      "popularityScore": 86,
+      "effectivenessScore": 88,
+      "thumbnailUrl": "/images/thumbnails/exercises/dumbbell-rows_thumb.jpg"
+    },
+    {
+      "id": "ex_013",
+      "name": "Leg Raises",
+      "slug": "leg-raises",
+      "category": "strength",
+      "subcategory": "bodyweight",
+      "muscleGroups": {
+        "primary": [
+          "core"
+        ],
+        "secondary": [
+          "hip_flexors"
+        ]
+      },
+      "equipment": [
+        "none"
+      ],
+      "difficulty": "intermediate",
+      "caloriesBurnedPerMinute": 5.5,
+      "duration": 180,
+      "sets": 3,
+      "reps": 12,
+      "restTime": 60,
+      "instructions": [
+        "Lie on back with legs extended",
+        "Keep lower back pressed to floor",
+        "Raise legs to 90 degrees",
+        "Lower slowly without touching floor"
+      ],
+      "videoUrl": "/videos/exercises/leg-raises.mp4",
+      "imageUrl": "/images/exercises/leg-raises.jpg",
+      "tips": [
+        "Don't arch lower back",
+        "Control the descent",
+        "Keep legs straight"
+      ],
+      "variations": [
+        {
+          "name": "Bent-knee Leg Raises",
+          "difficulty": "easier"
+        },
+        {
+          "name": "Hanging Leg Raises",
+          "difficulty": "harder"
+        }
+      ],
+      "goals": [
+        "core_strength",
+        "muscle_definition"
+      ],
+      "contraindications": [
+        "lower_back_pain",
+        "hip_issues"
+      ],
+      "tags": [
+        "core",
+        "abs",
+        "no_equipment"
+      ],
+      "popularityScore": 78,
+      "effectivenessScore": 82,
+      "thumbnailUrl": "/images/thumbnails/exercises/leg-raises_thumb.jpg"
+    },
+    {
+      "id": "ex_014",
+      "name": "Shoulder Press",
+      "slug": "shoulder-press",
+      "category": "strength",
+      "subcategory": "weights",
+      "muscleGroups": {
+        "primary": [
+          "shoulders"
+        ],
+        "secondary": [
+          "triceps",
+          "core"
+        ]
+      },
+      "equipment": [
+        "dumbbells"
+      ],
+      "difficulty": "intermediate",
+      "caloriesBurnedPerMinute": 6,
+      "duration": 300,
+      "sets": 4,
+      "reps": 10,
+      "restTime": 90,
+      "instructions": [
+        "Stand or sit with dumbbells at shoulder height",
+        "Press weights overhead until arms extended",
+        "Lower back to shoulder height",
+        "Repeat"
+      ],
+      "videoUrl": "/videos/exercises/shoulder-press.mp4",
+      "imageUrl": "/images/exercises/shoulder-press.jpg",
+      "tips": [
+        "Don't arch back",
+        "Keep core tight",
+        "Full range of motion"
+      ],
+      "variations": [
+        {
+          "name": "Arnold Press",
+          "difficulty": "same"
+        },
+        {
+          "name": "Single-arm Press",
+          "difficulty": "harder"
+        }
+      ],
+      "goals": [
+        "muscle_gain",
+        "strength",
+        "shoulder_development"
+      ],
+      "contraindications": [
+        "shoulder_injury",
+        "rotator_cuff_issues"
+      ],
+      "tags": [
+        "upper_body",
+        "shoulders",
+        "compound"
+      ],
+      "popularityScore": 84,
+      "effectivenessScore": 86,
+      "thumbnailUrl": "/images/thumbnails/exercises/shoulder-press_thumb.jpg"
+    },
+    {
+      "id": "ex_015",
+      "name": "Russian Twists",
+      "slug": "russian-twists",
+      "category": "strength",
+      "subcategory": "bodyweight",
+      "muscleGroups": {
+        "primary": [
+          "core",
+          "obliques"
+        ],
+        "secondary": [
+          "hip_flexors"
+        ]
+      },
+      "equipment": [
+        "none"
+      ],
+      "difficulty": "beginner",
+      "caloriesBurnedPerMinute": 6.5,
+      "duration": 180,
+      "sets": 3,
+      "reps": 20,
+      "restTime": 45,
+      "instructions": [
+        "Sit with knees bent, feet off floor",
+        "Lean back slightly, keeping back straight",
+        "Rotate torso side to side",
+        "Touch floor beside hips each rotation"
+      ],
+      "videoUrl": "/videos/exercises/russian-twists.mp4",
+      "imageUrl": "/images/exercises/russian-twists.jpg",
+      "tips": [
+        "Keep core engaged",
+        "Controlled rotation",
+        "Don't rush"
+      ],
+      "variations": [
+        {
+          "name": "Weighted Russian Twists",
+          "difficulty": "harder"
+        },
+        {
+          "name": "Feet-on-floor Russian Twists",
+          "difficulty": "easier"
+        }
+      ],
+      "goals": [
+        "core_strength",
+        "oblique_development"
+      ],
+      "contraindications": [
+        "lower_back_pain",
+        "hip_issues"
+      ],
+      "tags": [
+        "core",
+        "obliques",
+        "no_equipment"
+      ],
+      "popularityScore": 79,
+      "effectivenessScore": 81,
+      "thumbnailUrl": "/images/thumbnails/exercises/russian-twists_thumb.jpg"
+    },
+    {
+      "id": "ex_016",
+      "name": "High Knees",
+      "slug": "high-knees",
+      "category": "cardio",
+      "subcategory": "warm_up",
+      "muscleGroups": {
+        "primary": [
+          "legs"
+        ],
+        "secondary": [
+          "core",
+          "hip_flexors"
+        ]
+      },
+      "equipment": [
+        "none"
+      ],
+      "difficulty": "beginner",
+      "caloriesBurnedPerMinute": 9,
+      "duration": 180,
+      "sets": 3,
+      "reps": 30,
+      "restTime": 45,
+      "instructions": [
+        "Stand with feet hip-width apart",
+        "Run in place, bringing knees up to hip level",
+        "Pump arms in running motion",
+        "Maintain fast pace"
+      ],
+      "videoUrl": "/videos/exercises/high-knees.mp4",
+      "imageUrl": "/images/exercises/high-knees.jpg",
+      "tips": [
+        "Land on balls of feet",
+        "Keep core tight",
+        "Drive knees up high"
+      ],
+      "variations": [
+        {
+          "name": "Slow High Knees",
+          "difficulty": "easier"
+        },
+        {
+          "name": "High Knee Sprints",
+          "difficulty": "harder"
+        }
+      ],
+      "goals": [
+        "weight_loss",
+        "endurance",
+        "warm_up"
+      ],
+      "contraindications": [
+        "knee_injury",
+        "hip_pain"
+      ],
+      "tags": [
+        "cardio",
+        "warm_up",
+        "no_equipment"
+      ],
+      "popularityScore": 83,
+      "effectivenessScore": 78,
+      "thumbnailUrl": "/images/thumbnails/exercises/high-knees_thumb.jpg"
+    },
+    {
+      "id": "ex_017",
+      "name": "Tricep Dips",
+      "slug": "tricep-dips",
+      "category": "strength",
+      "subcategory": "bodyweight",
+      "muscleGroups": {
+        "primary": [
+          "triceps"
+        ],
+        "secondary": [
+          "chest",
+          "shoulders"
+        ]
+      },
+      "equipment": [
+        "bench"
+      ],
+      "difficulty": "intermediate",
+      "caloriesBurnedPerMinute": 6,
+      "duration": 240,
+      "sets": 3,
+      "reps": 12,
+      "restTime": 60,
+      "instructions": [
+        "Place hands on bench behind you",
+        "Extend legs forward, heels on ground",
+        "Lower body by bending elbows to 90 degrees",
+        "Push back up to starting position"
+      ],
+      "videoUrl": "/videos/exercises/tricep-dips.mp4",
+      "imageUrl": "/images/exercises/tricep-dips.jpg",
+      "tips": [
+        "Keep elbows pointing back",
+        "Don't shrug shoulders",
+        "Control the movement"
+      ],
+      "variations": [
+        {
+          "name": "Bent-knee Dips",
+          "difficulty": "easier"
+        },
+        {
+          "name": "Weighted Dips",
+          "difficulty": "harder"
+        }
+      ],
+      "goals": [
+        "muscle_gain",
+        "strength",
+        "arm_development"
+      ],
+      "contraindications": [
+        "shoulder_injury",
+        "elbow_pain"
+      ],
+      "tags": [
+        "upper_body",
+        "triceps",
+        "bodyweight"
+      ],
+      "popularityScore": 81,
+      "effectivenessScore": 84,
+      "thumbnailUrl": "/images/thumbnails/exercises/tricep-dips_thumb.jpg"
+    },
+    {
+      "id": "ex_018",
+      "name": "Glute Bridges",
+      "slug": "glute-bridges",
+      "category": "strength",
+      "subcategory": "bodyweight",
+      "muscleGroups": {
+        "primary": [
+          "glutes"
+        ],
+        "secondary": [
+          "hamstrings",
+          "core"
+        ]
+      },
+      "equipment": [
+        "none"
+      ],
+      "difficulty": "beginner",
+      "caloriesBurnedPerMinute": 5,
+      "duration": 240,
+      "sets": 3,
+      "reps": 15,
+      "restTime": 45,
+      "instructions": [
+        "Lie on back with knees bent, feet flat",
+        "Push through heels to lift hips",
+        "Squeeze glutes at top",
+        "Lower back down with control"
+      ],
+      "videoUrl": "/videos/exercises/glute-bridges.mp4",
+      "imageUrl": "/images/exercises/glute-bridges.jpg",
+      "tips": [
+        "Don't arch lower back",
+        "Squeeze glutes hard at top",
+        "Keep core engaged"
+      ],
+      "variations": [
+        {
+          "name": "Single-leg Glute Bridge",
+          "difficulty": "harder"
+        },
+        {
+          "name": "Weighted Glute Bridge",
+          "difficulty": "harder"
+        }
+      ],
+      "goals": [
+        "muscle_gain",
+        "glute_development",
+        "injury_prevention"
+      ],
+      "contraindications": [
+        "lower_back_pain",
+        "hip_issues"
+      ],
+      "tags": [
+        "lower_body",
+        "glutes",
+        "no_equipment"
+      ],
+      "popularityScore": 86,
+      "effectivenessScore": 89,
+      "thumbnailUrl": "/images/thumbnails/exercises/glute-bridges_thumb.jpg"
+    },
+    {
+      "id": "ex_019",
+      "name": "Box Jumps",
+      "slug": "box-jumps",
+      "category": "hiit",
+      "subcategory": "plyometric",
+      "muscleGroups": {
+        "primary": [
+          "legs",
+          "glutes"
+        ],
+        "secondary": [
+          "core",
+          "calves"
+        ]
+      },
+      "equipment": [
+        "box"
+      ],
+      "difficulty": "advanced",
+      "caloriesBurnedPerMinute": 11,
+      "duration": 240,
+      "sets": 3,
+      "reps": 10,
+      "restTime": 90,
+      "instructions": [
+        "Stand facing box at appropriate height",
+        "Swing arms and jump onto box",
+        "Land softly with both feet",
+        "Step down and repeat"
+      ],
+      "videoUrl": "/videos/exercises/box-jumps.mp4",
+      "imageUrl": "/images/exercises/box-jumps.jpg",
+      "tips": [
+        "Start with lower box height",
+        "Land softly",
+        "Full hip extension at top"
+      ],
+      "variations": [
+        {
+          "name": "Step-ups",
+          "difficulty": "easier"
+        },
+        {
+          "name": "Depth Jumps",
+          "difficulty": "harder"
+        }
+      ],
+      "goals": [
+        "power",
+        "explosiveness",
+        "athletic_performance"
+      ],
+      "contraindications": [
+        "knee_injury",
+        "ankle_issues",
+        "balance_problems"
+      ],
+      "tags": [
+        "lower_body",
+        "plyometric",
+        "power"
+      ],
+      "popularityScore": 77,
+      "effectivenessScore": 88,
+      "thumbnailUrl": "/images/thumbnails/exercises/box-jumps_thumb.jpg"
+    },
+    {
+      "id": "ex_020",
+      "name": "Superman Hold",
+      "slug": "superman-hold",
+      "category": "strength",
+      "subcategory": "bodyweight",
+      "muscleGroups": {
+        "primary": [
+          "back"
+        ],
+        "secondary": [
+          "glutes",
+          "shoulders"
+        ]
+      },
+      "equipment": [
+        "none"
+      ],
+      "difficulty": "beginner",
+      "caloriesBurnedPerMinute": 4,
+      "duration": 120,
+      "sets": 3,
+      "reps": 1,
+      "restTime": 45,
+      "instructions": [
+        "Lie face down with arms extended overhead",
+        "Simultaneously lift arms, chest, and legs off ground",
+        "Hold position",
+        "Lower back down with control"
+      ],
+      "videoUrl": "/videos/exercises/superman-hold.mp4",
+      "imageUrl": "/images/exercises/superman-hold.jpg",
+      "tips": [
+        "Keep neck neutral",
+        "Don't strain",
+        "Focus on back muscles"
+      ],
+      "variations": [
+        {
+          "name": "Alternating Superman",
+          "difficulty": "easier"
+        },
+        {
+          "name": "Swimming Superman",
+          "difficulty": "harder"
+        }
+      ],
+      "goals": [
+        "back_strength",
+        "posture",
+        "injury_prevention"
+      ],
+      "contraindications": [
+        "lower_back_pain",
+        "herniated_disc"
+      ],
+      "tags": [
+        "back",
+        "posture",
+        "no_equipment"
+      ],
+      "popularityScore": 74,
+      "effectivenessScore": 76,
+      "thumbnailUrl": "/images/thumbnails/exercises/superman-hold_thumb.jpg"
+    }
+  ]
+}

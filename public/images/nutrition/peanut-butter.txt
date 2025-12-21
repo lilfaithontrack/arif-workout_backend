@@ -1,0 +1,26 @@
+PLACEHOLDER: peanut-butter
+
+This is a placeholder for the nutrition image: peanut-butter
+
+To add the actual image:
+1. Download/create the image for "peanut-butter"
+2. Save it as: peanut-butter.jpg or peanut-butter.png
+3. Replace this placeholder file
+
+Recommended image specifications:
+- Format: JPG or PNG
+- Size: 800x600px (landscape) or 600x800px (portrait)
+- Max file size: 500KB
+- Quality: High resolution, clear, well-lit
+
+Free image sources:
+- Unsplash: https://unsplash.com/s/photos/peanut-butter
+- Pexels: https://www.pexels.com/search/peanut%20butter
+- Pixabay: https://pixabay.com/images/search/peanut%20butter
+
+For nutrition:
+
+- High-quality food photography
+- Well-plated and appealing
+- Natural lighting
+

@@ -1,0 +1,24 @@
+PLACEHOLDER: dumbbell-bench-press
+
+This is a placeholder for the exercise image: dumbbell-bench-press
+
+To add the actual image:
+1. Download/create the image for "dumbbell-bench-press"
+2. Save it as: dumbbell-bench-press.jpg or dumbbell-bench-press.png
+3. Replace this placeholder file
+
+Recommended image specifications:
+- Format: JPG or PNG
+- Size: 800x600px (landscape) or 600x800px (portrait)
+- Max file size: 500KB
+- Quality: High resolution, clear, well-lit
+
+Free image sources:
+- Unsplash: https://unsplash.com/s/photos/dumbbell bench press
+- Pexels: https://www.pexels.com/search/dumbbell bench press
+- Pixabay: https://pixabay.com/images/search/dumbbell bench press
+
+For exercise:
+- Show proper form and technique
+- Clear view of the movement
+- Professional quality
