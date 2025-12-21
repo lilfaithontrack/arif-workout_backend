@@ -6,24 +6,24 @@ const { Op } = require('sequelize');
  */
 exports.getAdvertisements = async (req, res, next) => {
   try {
-    const { 
-      status, 
-      type, 
-      category, 
-      isActive, 
+    const {
+      status,
+      type,
+      category,
+      isActive,
       placement,
       search,
-      page = 1, 
-      limit = 20 
+      page = 1,
+      limit = 20
     } = req.query;
-    
+
     const where = {};
 
     if (status) where.status = status;
     if (type) where.type = type;
     if (category) where.category = category;
     if (isActive !== undefined) where.isActive = isActive === 'true';
-    
+
     if (placement) {
       where.placement = {
         [Op.contains]: [placement]
@@ -77,7 +77,7 @@ exports.getAdvertisements = async (req, res, next) => {
 exports.getActiveAds = async (req, res, next) => {
   try {
     const { placement, type, category, deviceType = 'desktop' } = req.query;
-    
+
     const now = new Date();
     const where = {
       isActive: true,
@@ -239,6 +239,63 @@ exports.createAdvertisement = async (req, res, next) => {
       success: true,
       message: 'Advertisement created successfully',
       data: { advertisement }
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
+ * Upload media files for advertisement
+ */
+exports.uploadMedia = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const advertisement = await Advertisement.findByPk(id);
+    if (!advertisement) {
+      return res.status(404).json({
+        success: false,
+        message: 'Advertisement not found'
+      });
+    }
+
+    const updateData = {};
+
+    // Handle image upload
+    if (req.files && req.files.image) {
+      const imageFile = req.files.image[0];
+      updateData.imageUrl = `/images/advertisements/${imageFile.filename}`;
+    }
+
+    // Handle thumbnail upload
+    if (req.files && req.files.thumbnail) {
+      const thumbnailFile = req.files.thumbnail[0];
+      updateData.thumbnailUrl = `/images/advertisements/${thumbnailFile.filename}`;
+    }
+
+    // Handle video upload
+    if (req.files && req.files.video) {
+      const videoFile = req.files.video[0];
+      updateData.videoUrl = `/images/advertisements/${videoFile.filename}`;
+    }
+
+    if (Object.keys(updateData).length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: 'No files uploaded'
+      });
+    }
+
+    await advertisement.update(updateData);
+
+    res.status(200).json({
+      success: true,
+      message: 'Media uploaded successfully',
+      data: {
+        advertisement,
+        uploaded: updateData
+      }
     });
   } catch (error) {
     next(error);
@@ -445,8 +502,8 @@ exports.trackImpression = async (req, res, next) => {
       await advertisement.increment('totalSpent', { by: cost });
     }
 
-    if (advertisement.maxImpressions && 
-        advertisement.impressions >= advertisement.maxImpressions) {
+    if (advertisement.maxImpressions &&
+      advertisement.impressions >= advertisement.maxImpressions) {
       await advertisement.update({ status: 'completed', isActive: false });
     }
 
@@ -479,8 +536,8 @@ exports.trackClick = async (req, res, next) => {
       await advertisement.increment('totalSpent', { by: parseFloat(advertisement.costPerClick) });
     }
 
-    if (advertisement.maxClicks && 
-        advertisement.clicks >= advertisement.maxClicks) {
+    if (advertisement.maxClicks &&
+      advertisement.clicks >= advertisement.maxClicks) {
       await advertisement.update({ status: 'completed', isActive: false });
     }
 
@@ -533,7 +590,7 @@ exports.getAnalytics = async (req, res, next) => {
       });
     }
 
-    const ctr = advertisement.impressions > 0 
+    const ctr = advertisement.impressions > 0
       ? ((advertisement.clicks / advertisement.impressions) * 100).toFixed(2)
       : 0;
 
@@ -553,10 +610,10 @@ exports.getAnalytics = async (req, res, next) => {
       ctr: parseFloat(ctr),
       conversionRate: parseFloat(conversionRate),
       avgCostPerClick: parseFloat(avgCostPerClick),
-      remainingBudget: advertisement.totalBudget 
+      remainingBudget: advertisement.totalBudget
         ? (parseFloat(advertisement.totalBudget) - parseFloat(advertisement.totalSpent)).toFixed(2)
         : null,
-      daysActive: advertisement.startDate 
+      daysActive: advertisement.startDate
         ? Math.floor((new Date() - new Date(advertisement.startDate)) / (1000 * 60 * 60 * 24))
         : 0
     };
@@ -604,7 +661,7 @@ exports.getStatistics = async (req, res, next) => {
           totalClicks: totalClicks || 0,
           totalConversions: totalConversions || 0,
           totalSpent: parseFloat(totalSpent || 0),
-          averageCTR: totalImpressions > 0 
+          averageCTR: totalImpressions > 0
             ? ((totalClicks / totalImpressions) * 100).toFixed(2)
             : 0
         },

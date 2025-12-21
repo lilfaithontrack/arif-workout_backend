@@ -102,6 +102,20 @@ router.post(
 );
 
 /**
+ * @route   POST /api/advertisements/:id/upload
+ * @desc    Upload media files for advertisement (Admin only)
+ * @access  Private (Admin)
+ */
+const { uploadMultiple } = require('../middleware/advertisement-upload.middleware');
+router.post(
+  '/:id/upload',
+  authenticate,
+  requireRole('admin'),
+  uploadMultiple,
+  advertisementController.uploadMedia
+);
+
+/**
  * @route   PUT /api/advertisements/:id
  * @desc    Update advertisement (Admin only)
  * @access  Private (Admin)
