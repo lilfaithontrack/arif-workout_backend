@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const nutritionUploadController = require('../controllers/nutrition-upload.controller');
 const { authenticate, requireRole } = require('../middleware/auth');
-const { upload } = require('../middleware/upload.middleware');
+const { uploadMultiple } = require('../middleware/upload.middleware');
 
 // All routes require authentication
 router.use(authenticate);
@@ -26,7 +26,7 @@ router.post(
 router.post(
     '/images',
     requireRole('admin', 'instructor'),
-    upload.array('images', 10), // Allow up to 10 images at once
+    uploadMultiple, // Allow up to 10 images at once
     nutritionUploadController.uploadNutritionImage
 );
 
