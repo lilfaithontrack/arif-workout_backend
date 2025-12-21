@@ -141,6 +141,14 @@ ExerciseImage.belongsTo(User, { foreignKey: 'uploadedBy', as: 'uploader' });
 Exercise.hasMany(ExerciseImage, { foreignKey: 'exerciseId', as: 'images' });
 ExerciseImage.belongsTo(Exercise, { foreignKey: 'exerciseId', as: 'exercise' });
 
+// User <-> NutritionImage
+User.hasMany(NutritionImage, { foreignKey: 'uploadedBy', as: 'nutritionImages' });
+NutritionImage.belongsTo(User, { foreignKey: 'uploadedBy', as: 'uploader' });
+
+// NutritionItem <-> NutritionImage (via nutritionSlug)
+// Note: Using virtual relationship since we use slug instead of ID
+
+
 // User <-> MotivationalMessage
 User.hasMany(MotivationalMessage, { foreignKey: 'createdBy', as: 'motivationalMessages' });
 MotivationalMessage.belongsTo(User, { foreignKey: 'createdBy', as: 'creator' });
@@ -193,6 +201,7 @@ module.exports = {
   FitnessAssessment,
   Achievement,
   ExerciseImage,
+  NutritionImage,
   MotivationalMessage,
   Badge,
   UserSurvey,
