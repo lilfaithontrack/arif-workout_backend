@@ -70,6 +70,15 @@ const NutritionImage = sequelize.define('NutritionImage', {
         },
         comment: 'User who uploaded the file'
     },
+    nutritionItemId: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: {
+            model: 'nutrition_items',
+            key: 'id'
+        },
+        comment: 'Foreign key to nutrition_items table (optional, nutritionSlug is also available)'
+    },
     isPrimary: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
@@ -80,6 +89,7 @@ const NutritionImage = sequelize.define('NutritionImage', {
     timestamps: true,
     indexes: [
         { fields: ['nutritionSlug'] },
+        { fields: ['nutritionItemId'] },
         { fields: ['subfolder'] },
         { fields: ['mediaType'] },
         { fields: ['isPrimary'] },

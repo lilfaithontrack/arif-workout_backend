@@ -145,8 +145,9 @@ ExerciseImage.belongsTo(Exercise, { foreignKey: 'exerciseId', as: 'exercise' });
 User.hasMany(NutritionImage, { foreignKey: 'uploadedBy', as: 'nutritionImages' });
 NutritionImage.belongsTo(User, { foreignKey: 'uploadedBy', as: 'uploader' });
 
-// NutritionItem <-> NutritionImage (via nutritionSlug)
-// Note: Using virtual relationship since we use slug instead of ID
+// NutritionItem <-> NutritionImage
+NutritionItem.hasMany(NutritionImage, { foreignKey: 'nutritionItemId', as: 'images' });
+NutritionImage.belongsTo(NutritionItem, { foreignKey: 'nutritionItemId', as: 'nutritionItem' });
 
 
 // User <-> MotivationalMessage
