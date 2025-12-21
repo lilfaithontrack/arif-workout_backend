@@ -67,6 +67,8 @@ app.use(cors({
     'http://localhost:5173',
     'http://localhost:8081',
     'http://localhost:8080',
+    'https://admin.arifworkout.com',
+    'http://admin.arifworkout.com',
     process.env.CORS_ORIGIN
   ].filter(Boolean),
   credentials: true
