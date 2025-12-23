@@ -7,6 +7,7 @@ const { Op } = require('sequelize');
 exports.generateNutritionPlan = async (req, res, next) => {
   try {
     const userId = req.user.id;
+    const { goal, dietaryPreference, calories, mealsPerDay } = req.query;
     
     const survey = await UserSurvey.findOne({
       where: { userId, isActive: true },
@@ -20,7 +21,15 @@ exports.generateNutritionPlan = async (req, res, next) => {
       });
     }
 
-    const nutritionPlan = await buildNutritionPlan(survey);
+    const customizedSurvey = {
+      ...survey.toJSON(),
+      primaryGoal: goal || survey.primaryGoal,
+      dietaryPreference: dietaryPreference || survey.dietaryPreference,
+      dailyCalorieTarget: calories ? parseInt(calories) : survey.dailyCalorieTarget,
+      mealsPerDay: mealsPerDay ? parseInt(mealsPerDay) : survey.mealsPerDay
+    };
+
+    const nutritionPlan = await buildNutritionPlan(customizedSurvey);
 
     res.status(200).json({
       success: true,
@@ -28,10 +37,10 @@ exports.generateNutritionPlan = async (req, res, next) => {
       data: {
         plan: nutritionPlan,
         surveyData: {
-          primaryGoal: survey.primaryGoal,
-          dietaryPreference: survey.dietaryPreference,
-          dailyCalorieTarget: survey.dailyCalorieTarget,
-          mealsPerDay: survey.mealsPerDay
+          primaryGoal: customizedSurvey.primaryGoal,
+          dietaryPreference: customizedSurvey.dietaryPreference,
+          dailyCalorieTarget: customizedSurvey.dailyCalorieTarget,
+          mealsPerDay: customizedSurvey.mealsPerDay
         }
       }
     });
