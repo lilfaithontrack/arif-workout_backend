@@ -294,7 +294,11 @@ async function buildNutritionPlan(survey) {
 
   const nutritionItems = await NutritionItem.findAll({
     where,
-    limit: 100
+    limit: 100,
+    order: [
+      // Add random ordering to get different items each time
+      [NutritionItem.sequelize.fn('RAND')]
+    ]
   });
 
   const meals = mealsPerDay || 3;
@@ -303,8 +307,11 @@ async function buildNutritionPlan(survey) {
   const mealPlan = [];
   const mealTypes = getMealTypesForDay(meals);
 
+  // Shuffle items before building each meal for more variety
+  const shuffledItems = shuffleArray(nutritionItems);
+
   for (const mealType of mealTypes) {
-    const meal = buildMealPlan(nutritionItems, mealType, caloriesPerMeal);
+    const meal = buildMealPlan(shuffledItems, mealType, caloriesPerMeal);
     mealPlan.push({
       mealType,
       targetCalories: caloriesPerMeal,
@@ -324,22 +331,42 @@ async function buildNutritionPlan(survey) {
 }
 
 /**
- * Helper: Build single meal plan
+ * Helper: Shuffle array for randomization
+ */
+function shuffleArray(array) {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
+/**
+ * Helper: Build single meal plan with randomization
  */
 function buildMealPlan(nutritionItems, mealType, targetCalories) {
   const suitableItems = filterItemsByMealType(nutritionItems, mealType);
+  
+  // Shuffle items to add randomization
+  const shuffledItems = shuffleArray(suitableItems);
   
   const selectedItems = [];
   let currentCalories = 0;
   const tolerance = targetCalories * 0.15;
 
-  const sortedItems = suitableItems.sort((a, b) => {
+  // Sort by how close they are to remaining calories needed
+  const sortedItems = shuffledItems.sort((a, b) => {
     const aDiff = Math.abs(a.calories - (targetCalories - currentCalories));
     const bDiff = Math.abs(b.calories - (targetCalories - currentCalories));
     return aDiff - bDiff;
   });
 
-  for (const item of sortedItems) {
+  // Take a random subset to increase variety
+  const startIndex = Math.floor(Math.random() * Math.max(1, sortedItems.length / 4));
+  const itemsToConsider = sortedItems.slice(startIndex);
+
+  for (const item of itemsToConsider) {
     if (currentCalories >= targetCalories - tolerance) break;
     if (currentCalories + item.calories <= targetCalories + tolerance) {
       selectedItems.push({
@@ -369,16 +396,19 @@ function buildMealPlan(nutritionItems, mealType, targetCalories) {
 }
 
 /**
- * Helper: Build daily meal plan
+ * Helper: Build daily meal plan with randomization
  */
 function buildDailyMealPlan(nutritionItems, dailyCalories, mealsPerDay, goal) {
   const mealTypes = getMealTypesForDay(mealsPerDay);
   const mealCalories = distributeDailyCalories(dailyCalories, mealsPerDay, goal);
   
+  // Shuffle nutrition items for each day to add variety
+  const shuffledItems = shuffleArray(nutritionItems);
+  
   const meals = [];
   
   for (let i = 0; i < mealTypes.length; i++) {
-    const meal = buildMealPlan(nutritionItems, mealTypes[i], mealCalories[i]);
+    const meal = buildMealPlan(shuffledItems, mealTypes[i], mealCalories[i]);
     meals.push({
       mealType: mealTypes[i],
       targetCalories: mealCalories[i],
