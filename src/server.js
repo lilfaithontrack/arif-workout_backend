@@ -35,6 +35,7 @@ const workoutGeneratorRoutes = require('./routes/workout-generator.routes');
 const nutritionGeneratorRoutes = require('./routes/nutrition-generator.routes');
 const advertisementRoutes = require('./routes/advertisement.routes');
 const nutritionUploadRoutes = require('./routes/nutrition-upload.routes');
+const habitRoutes = require('./routes/habit.routes');
 
 
 // Initialize express app
@@ -129,6 +130,7 @@ app.use('/api/workout-generator', workoutGeneratorRoutes); // Workout generator 
 app.use('/api/nutrition-generator', nutritionGeneratorRoutes); // Nutrition generator based on survey
 app.use('/api/advertisements', advertisementRoutes); // Advertisement management
 app.use('/api/nutrition-upload', nutritionUploadRoutes); // Nutrition image upload
+app.use('/api/habits', habitRoutes); // Habit tracker
 
 
 // Root route

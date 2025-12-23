@@ -27,6 +27,8 @@ const Badge = require('./badge.model');
 const UserSurvey = require('./usersurvey.model');
 const AIWorkoutPlan = require('./aiworkoutplan.model');
 const Advertisement = require('./advertisement.model');
+const Habit = require('./habit.model');
+const HabitCompletion = require('./habitcompletion.model');
 
 
 // TODO: Convert these models to Sequelize
@@ -177,6 +179,18 @@ Advertisement.belongsTo(User, { foreignKey: 'createdBy', as: 'creator' });
 User.hasMany(Advertisement, { foreignKey: 'approvedBy', as: 'approvedAdvertisements' });
 Advertisement.belongsTo(User, { foreignKey: 'approvedBy', as: 'approver' });
 
+// User <-> Habit
+User.hasMany(Habit, { foreignKey: 'userId', as: 'habits' });
+Habit.belongsTo(User, { foreignKey: 'userId', as: 'user' });
+
+// Habit <-> HabitCompletion
+Habit.hasMany(HabitCompletion, { foreignKey: 'habitId', as: 'completions' });
+HabitCompletion.belongsTo(Habit, { foreignKey: 'habitId', as: 'habit' });
+
+// User <-> HabitCompletion
+User.hasMany(HabitCompletion, { foreignKey: 'userId', as: 'habitCompletions' });
+HabitCompletion.belongsTo(User, { foreignKey: 'userId', as: 'user' });
+
 // TODO: Add relationships for unconverted models once they're converted
 // User.hasMany(Course, { foreignKey: 'instructorId', as: 'courses' });
 // User.hasMany(Order, { foreignKey: 'userId', as: 'orders' });
@@ -208,7 +222,9 @@ module.exports = {
   Badge,
   UserSurvey,
   AIWorkoutPlan,
-  Advertisement
+  Advertisement,
+  Habit,
+  HabitCompletion
   // TODO: Export these once converted
   // Media,
   // Workout,
