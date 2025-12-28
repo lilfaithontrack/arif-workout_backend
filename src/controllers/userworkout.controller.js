@@ -114,6 +114,9 @@ exports.logWorkout = async (req, res, next) => {
       mood
     } = req.body;
 
+    // Allow status to be passed, default to 'completed' for backward compatibility
+    const workoutStatus = req.body.status || 'completed';
+    
     const workout = await UserWorkout.create({
       userId: req.user.id,
       workoutPlanId,
@@ -130,7 +133,7 @@ exports.logWorkout = async (req, res, next) => {
       heartRateAvg,
       heartRateMax,
       intensity,
-      status: 'completed',
+      status: workoutStatus, // Use provided status or default to 'completed'
       rating,
       notes,
       mood
