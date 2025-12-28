@@ -206,7 +206,6 @@ module.exports = {
   Package,
   Payment,
   Subscription,
-  // NEW: Fitness models
   WorkoutPlan,
   Exercise,
   UserWorkout,
@@ -225,9 +224,5 @@ module.exports = {
   Advertisement,
   Habit,
   HabitCompletion
-  // TODO: Export these once converted
-  // Media,
-  // Workout,
-  // Course,
-  // Order
+
 };

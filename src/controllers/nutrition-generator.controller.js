@@ -316,7 +316,8 @@ async function buildNutritionPlan(survey) {
     order: [
       // Add random ordering to get different items each time
       [NutritionItem.sequelize.fn('RAND')]
-    ]
+    ],
+    raw: false // Keep as Sequelize instances for now, we'll convert in buildMealPlanWithGoal
   });
 
   const meals = mealsPerDay || 3;
@@ -382,10 +383,21 @@ function shuffleArray(array) {
  * Helper: Build single meal plan with randomization
  */
 function buildMealPlan(nutritionItems, mealType, targetCalories) {
-  const suitableItems = filterItemsByMealType(nutritionItems, mealType);
+  // Convert Sequelize instances to plain objects if needed
+  const plainItems = nutritionItems.map(item => {
+    if (item && typeof item.toJSON === 'function') {
+      return item.toJSON();
+    }
+    return item;
+  });
+  
+  const suitableItems = filterItemsByMealType(plainItems, mealType);
+  
+  // If no suitable items found, use all items (fallback for flexibility)
+  const itemsToUse = suitableItems.length > 0 ? suitableItems : plainItems;
   
   // Shuffle items to add randomization
-  const shuffledItems = shuffleArray(suitableItems);
+  const shuffledItems = shuffleArray(itemsToUse);
   
   const selectedItems = [];
   let currentCalories = 0;
@@ -393,8 +405,10 @@ function buildMealPlan(nutritionItems, mealType, targetCalories) {
 
   // Sort by how close they are to remaining calories needed
   const sortedItems = shuffledItems.sort((a, b) => {
-    const aDiff = Math.abs(a.calories - (targetCalories - currentCalories));
-    const bDiff = Math.abs(b.calories - (targetCalories - currentCalories));
+    const aCal = parseInt(a.calories) || 0;
+    const bCal = parseInt(b.calories) || 0;
+    const aDiff = Math.abs(aCal - (targetCalories - currentCalories));
+    const bDiff = Math.abs(bCal - (targetCalories - currentCalories));
     return aDiff - bDiff;
   });
 
@@ -403,21 +417,22 @@ function buildMealPlan(nutritionItems, mealType, targetCalories) {
   const itemsToConsider = sortedItems.slice(startIndex);
 
   for (const item of itemsToConsider) {
+    const itemCalories = parseInt(item.calories) || 0;
     if (currentCalories >= targetCalories - tolerance) break;
-    if (currentCalories + item.calories <= targetCalories + tolerance) {
+    if (currentCalories + itemCalories <= targetCalories + tolerance) {
       selectedItems.push({
         id: item.id,
-        name: item.name,
+        name: item.name || item.foodId || 'Unknown',
         servingSize: item.servingSize,
-        calories: item.calories,
-        protein: item.protein,
-        carbs: item.carbs,
-        fats: item.fats,
-        fiber: item.fiber,
+        calories: itemCalories,
+        protein: parseFloat(item.protein) || 0,
+        carbs: parseFloat(item.carbs) || 0,
+        fats: parseFloat(item.fats) || 0,
+        fiber: parseFloat(item.fiber) || 0,
         category: item.category,
         preparationTime: item.preparationTime
       });
-      currentCalories += item.calories;
+      currentCalories += itemCalories;
     }
   }
 
@@ -622,10 +637,31 @@ function distributeDailyCalories(dailyCalories, mealsPerDay, goal) {
 
 function filterItemsByMealType(items, mealType) {
   return items.filter(item => {
-    if (!item.mealTypes || item.mealTypes.length === 0) {
+    // Handle JSON string or array
+    let mealTypes = item.mealTypes;
+    
+    // If it's a string, try to parse it
+    if (typeof mealTypes === 'string') {
+      try {
+        mealTypes = JSON.parse(mealTypes);
+      } catch (e) {
+        // If parsing fails, treat as empty
+        mealTypes = [];
+      }
+    }
+    
+    // If no mealTypes or empty array, include the item (fallback)
+    if (!mealTypes || (Array.isArray(mealTypes) && mealTypes.length === 0)) {
       return true;
     }
-    return item.mealTypes.includes(mealType);
+    
+    // Check if mealType is in the array
+    if (Array.isArray(mealTypes)) {
+      return mealTypes.includes(mealType);
+    }
+    
+    // Fallback: include item if we can't determine
+    return true;
   });
 }
 
@@ -792,27 +828,53 @@ function getGoalBasedFilters(goal) {
  * Enhanced meal building with goal-based prioritization
  */
 function buildMealPlanWithGoal(nutritionItems, mealType, targetCalories, goal) {
-  const suitableItems = filterItemsByMealType(nutritionItems, mealType);
+  // Convert Sequelize instances to plain objects if needed
+  const plainItems = nutritionItems.map(item => {
+    if (item && typeof item.toJSON === 'function') {
+      return item.toJSON();
+    }
+    return item;
+  });
+  
+  const suitableItems = filterItemsByMealType(plainItems, mealType);
+  
+  // If no suitable items found, use all items (fallback for flexibility)
+  const itemsToUse = suitableItems.length > 0 ? suitableItems : plainItems;
+  
+  if (itemsToUse.length === 0) {
+    console.log(`⚠️  No items available for ${mealType}`);
+    return {
+      items: [],
+      totalCalories: 0,
+      macros: { protein: 0, carbs: 0, fats: 0, fiber: 0 },
+      tips: getMealTypeTips(mealType)
+    };
+  }
   
   // Shuffle items to add randomization
-  const shuffledItems = shuffleArray(suitableItems);
+  const shuffledItems = shuffleArray(itemsToUse);
   
   // Score items based on goal
   const scoredItems = shuffledItems.map(item => {
+    // Ensure we have numeric values
+    const itemCalories = parseInt(item.calories) || 0;
+    const itemProtein = parseFloat(item.protein) || 0;
+    const itemCarbs = parseFloat(item.carbs) || 0;
+    
     let score = Math.random() * 100; // Base randomization
     
     // Goal-based scoring
     if (goal === 'weight_loss') {
       // Prefer lower calorie density, higher protein
-      const calorieDensity = item.calories / (parseFloat(item.protein || 1) + 1);
+      const calorieDensity = itemCalories / (itemProtein + 1);
       score += (100 - calorieDensity) * 0.3;
-      score += parseFloat(item.protein || 0) * 2;
+      score += itemProtein * 2;
     } else if (goal === 'muscle_gain' || goal === 'high_protein') {
       // Prefer higher protein
-      score += parseFloat(item.protein || 0) * 5;
+      score += itemProtein * 5;
     } else if (goal === 'low_carb') {
       // Prefer lower carbs
-      score += (100 - parseFloat(item.carbs || 0)) * 0.5;
+      score += (100 - itemCarbs) * 0.5;
     }
     
     return { ...item, score };
@@ -826,26 +888,35 @@ function buildMealPlanWithGoal(nutritionItems, mealType, targetCalories, goal) {
   const tolerance = targetCalories * 0.20; // Increased tolerance for more variety
 
   // Take a random subset from top 50% to increase variety
-  const topItems = scoredItems.slice(0, Math.floor(scoredItems.length * 0.5));
+  // But ensure we have at least some items to consider
+  const topPercent = Math.max(0.5, Math.min(1.0, scoredItems.length > 10 ? 0.5 : 1.0));
+  const topItems = scoredItems.slice(0, Math.max(1, Math.floor(scoredItems.length * topPercent)));
   const startIndex = Math.floor(Math.random() * Math.max(1, topItems.length / 3));
   const itemsToConsider = topItems.slice(startIndex);
+  
+  if (itemsToConsider.length === 0) {
+    // Fallback: use all scored items if slice resulted in empty array
+    itemsToConsider.push(...scoredItems.slice(0, Math.min(20, scoredItems.length)));
+  }
 
   for (const item of itemsToConsider) {
+    // Ensure we have numeric values
+    const itemCalories = parseInt(item.calories) || 0;
     if (currentCalories >= targetCalories - tolerance) break;
-    if (currentCalories + item.calories <= targetCalories + tolerance) {
+    if (currentCalories + itemCalories <= targetCalories + tolerance) {
       selectedItems.push({
         id: item.id,
-        name: item.name,
+        name: item.name || item.foodId || 'Unknown',
         servingSize: item.servingSize,
-        calories: item.calories,
-        protein: item.protein,
-        carbs: item.carbs,
-        fats: item.fats,
-        fiber: item.fiber,
+        calories: itemCalories,
+        protein: parseFloat(item.protein) || 0,
+        carbs: parseFloat(item.carbs) || 0,
+        fats: parseFloat(item.fats) || 0,
+        fiber: parseFloat(item.fiber) || 0,
         category: item.category,
         preparationTime: item.preparationTime
       });
-      currentCalories += item.calories;
+      currentCalories += itemCalories;
     }
   }
 
@@ -856,21 +927,22 @@ function buildMealPlanWithGoal(nutritionItems, mealType, targetCalories, goal) {
     );
     
     for (const item of remainingItems) {
+      const itemCalories = parseInt(item.calories) || 0;
       if (currentCalories >= targetCalories + tolerance) break;
-      if (currentCalories + item.calories <= targetCalories + tolerance) {
+      if (currentCalories + itemCalories <= targetCalories + tolerance) {
         selectedItems.push({
           id: item.id,
-          name: item.name,
+          name: item.name || item.foodId || 'Unknown',
           servingSize: item.servingSize,
-          calories: item.calories,
-          protein: item.protein,
-          carbs: item.carbs,
-          fats: item.fats,
-          fiber: item.fiber,
+          calories: itemCalories,
+          protein: parseFloat(item.protein) || 0,
+          carbs: parseFloat(item.carbs) || 0,
+          fats: parseFloat(item.fats) || 0,
+          fiber: parseFloat(item.fiber) || 0,
           category: item.category,
           preparationTime: item.preparationTime
         });
-        currentCalories += item.calories;
+        currentCalories += itemCalories;
       }
     }
   }
