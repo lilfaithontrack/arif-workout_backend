@@ -9,6 +9,17 @@ exports.generateNutritionPlan = async (req, res, next) => {
     const userId = req.user?.id;
     const { goal, dietaryPreference, calories, mealsPerDay } = req.query;
     
+    // Log ALL query parameters to debug
+    console.log('🔴 Backend - ALL query params:', req.query);
+    console.log('🔴 Backend - Specific params:', {
+      goal: goal,
+      dietaryPreference: dietaryPreference,
+      calories: calories,
+      mealsPerDay: mealsPerDay,
+      mealsPerDayType: typeof mealsPerDay,
+      mealsPerDayParsed: mealsPerDay ? parseInt(mealsPerDay) : null
+    });
+    
     // Try to get survey, but don't require it
     let survey = null;
     if (userId) {
@@ -16,6 +27,11 @@ exports.generateNutritionPlan = async (req, res, next) => {
         where: { userId, isActive: true },
         order: [['createdAt', 'DESC']]
       });
+      if (survey) {
+        console.log('🔴 Backend - Found survey with mealsPerDay:', survey.mealsPerDay);
+      } else {
+        console.log('🔴 Backend - No survey found');
+      }
     }
 
     // Use query params first, then survey, then defaults
@@ -26,11 +42,17 @@ exports.generateNutritionPlan = async (req, res, next) => {
     };
     const mappedGoal = goalMapping[goal] || goal;
     
+    // PRIORITIZE query params over survey - this is critical!
+    const finalMealsPerDay = mealsPerDay ? parseInt(mealsPerDay) : (survey?.mealsPerDay || 3);
+    const finalCalories = calories ? parseInt(calories) : (survey?.dailyCalorieTarget || 2000);
+    const finalGoal = mappedGoal || survey?.primaryGoal || 'general_fitness';
+    const finalDietaryPreference = dietaryPreference || survey?.dietaryPreference || 'balanced';
+    
     const customizedSurvey = {
-      primaryGoal: mappedGoal || survey?.primaryGoal || 'general_fitness',
-      dietaryPreference: dietaryPreference || survey?.dietaryPreference || 'balanced',
-      dailyCalorieTarget: calories ? parseInt(calories) : (survey?.dailyCalorieTarget || 2000),
-      mealsPerDay: mealsPerDay ? parseInt(mealsPerDay) : (survey?.mealsPerDay || 3),
+      primaryGoal: finalGoal,
+      dietaryPreference: finalDietaryPreference,
+      dailyCalorieTarget: finalCalories,
+      mealsPerDay: finalMealsPerDay, // Use the prioritized value
       weight: survey?.weight || 70,
       height: survey?.height || 170,
       age: survey?.age || 30,
@@ -38,13 +60,17 @@ exports.generateNutritionPlan = async (req, res, next) => {
       activityLevel: survey?.activityLevel || 'moderately_active'
     };
     
-    console.log('Backend received params:', {
-      goal: goal,
-      mappedGoal: mappedGoal,
-      calories: calories,
-      mealsPerDay: mealsPerDay,
-      dietaryPreference: dietaryPreference,
-      customizedSurvey: customizedSurvey
+    console.log('🔴 Backend - Final customized survey:', {
+      primaryGoal: customizedSurvey.primaryGoal,
+      dietaryPreference: customizedSurvey.dietaryPreference,
+      dailyCalorieTarget: customizedSurvey.dailyCalorieTarget,
+      mealsPerDay: customizedSurvey.mealsPerDay,
+      source: {
+        mealsPerDayFromQuery: !!mealsPerDay,
+        mealsPerDayFromSurvey: !!survey?.mealsPerDay,
+        caloriesFromQuery: !!calories,
+        caloriesFromSurvey: !!survey?.dailyCalorieTarget
+      }
     });
 
     const nutritionPlan = await buildNutritionPlan(customizedSurvey);
@@ -323,12 +349,18 @@ async function buildNutritionPlan(survey) {
   const meals = mealsPerDay || 3;
   const caloriesPerMeal = Math.floor(calculatedCalories / meals);
 
-  console.log('Building nutrition plan:', {
+  console.log('🔴 Backend - Building nutrition plan:', {
     mealsPerDay: meals,
+    mealsPerDayParam: mealsPerDay,
     calculatedCalories: calculatedCalories,
     caloriesPerMeal: caloriesPerMeal,
     primaryGoal: primaryGoal
   });
+  
+  // Validate mealsPerDay
+  if (meals !== mealsPerDay) {
+    console.warn('⚠️ Backend - mealsPerDay mismatch! Requested:', mealsPerDay, 'Using:', meals);
+  }
 
   const mealPlan = [];
   const mealTypes = getMealTypesForDay(meals);
@@ -349,11 +381,18 @@ async function buildNutritionPlan(survey) {
 
   const totalCalories = mealPlan.reduce((sum, meal) => sum + meal.totalCalories, 0);
 
-  console.log('Generated plan summary:', {
-    mealsCount: mealPlan.length,
+  console.log('🔴 Backend - Generated plan summary:', {
+    requestedMealsPerDay: mealsPerDay,
+    actualMealsCount: mealPlan.length,
     totalCalories: totalCalories,
-    targetCalories: calculatedCalories
+    targetCalories: calculatedCalories,
+    mealTypes: mealPlan.map(m => m.mealType)
   });
+  
+  // Validate meal count matches request
+  if (mealPlan.length !== mealsPerDay) {
+    console.error('❌ Backend - Meal count mismatch! Requested:', mealsPerDay, 'Generated:', mealPlan.length);
+  }
 
   return {
     dailyCalories: calculatedCalories,
