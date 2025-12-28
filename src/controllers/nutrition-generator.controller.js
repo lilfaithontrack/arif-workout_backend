@@ -19,8 +19,15 @@ exports.generateNutritionPlan = async (req, res, next) => {
     }
 
     // Use query params first, then survey, then defaults
+    // Map frontend goals to backend goals
+    const goalMapping = {
+      'maintenance': 'general_fitness',
+      'performance': 'endurance',
+    };
+    const mappedGoal = goalMapping[goal] || goal;
+    
     const customizedSurvey = {
-      primaryGoal: goal || survey?.primaryGoal || 'general_fitness',
+      primaryGoal: mappedGoal || survey?.primaryGoal || 'general_fitness',
       dietaryPreference: dietaryPreference || survey?.dietaryPreference || 'balanced',
       dailyCalorieTarget: calories ? parseInt(calories) : (survey?.dailyCalorieTarget || 2000),
       mealsPerDay: mealsPerDay ? parseInt(mealsPerDay) : (survey?.mealsPerDay || 3),
@@ -30,6 +37,15 @@ exports.generateNutritionPlan = async (req, res, next) => {
       gender: survey?.gender || 'male',
       activityLevel: survey?.activityLevel || 'moderately_active'
     };
+    
+    console.log('Backend received params:', {
+      goal: goal,
+      mappedGoal: mappedGoal,
+      calories: calories,
+      mealsPerDay: mealsPerDay,
+      dietaryPreference: dietaryPreference,
+      customizedSurvey: customizedSurvey
+    });
 
     const nutritionPlan = await buildNutritionPlan(customizedSurvey);
 
@@ -306,6 +322,13 @@ async function buildNutritionPlan(survey) {
   const meals = mealsPerDay || 3;
   const caloriesPerMeal = Math.floor(calculatedCalories / meals);
 
+  console.log('Building nutrition plan:', {
+    mealsPerDay: meals,
+    calculatedCalories: calculatedCalories,
+    caloriesPerMeal: caloriesPerMeal,
+    primaryGoal: primaryGoal
+  });
+
   const mealPlan = [];
   const mealTypes = getMealTypesForDay(meals);
 
@@ -323,8 +346,17 @@ async function buildNutritionPlan(survey) {
     });
   }
 
+  const totalCalories = mealPlan.reduce((sum, meal) => sum + meal.totalCalories, 0);
+
+  console.log('Generated plan summary:', {
+    mealsCount: mealPlan.length,
+    totalCalories: totalCalories,
+    targetCalories: calculatedCalories
+  });
+
   return {
     dailyCalories: calculatedCalories,
+    totalCalories: totalCalories, // Add actual total for verification
     macros,
     mealsPerDay: meals,
     meals: mealPlan,
