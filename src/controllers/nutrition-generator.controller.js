@@ -6,27 +6,29 @@ const { Op } = require('sequelize');
  */
 exports.generateNutritionPlan = async (req, res, next) => {
   try {
-    const userId = req.user.id;
+    const userId = req.user?.id;
     const { goal, dietaryPreference, calories, mealsPerDay } = req.query;
     
-    const survey = await UserSurvey.findOne({
-      where: { userId, isActive: true },
-      order: [['createdAt', 'DESC']]
-    });
-
-    if (!survey) {
-      return res.status(404).json({
-        success: false,
-        message: 'Please complete the fitness survey first'
+    // Try to get survey, but don't require it
+    let survey = null;
+    if (userId) {
+      survey = await UserSurvey.findOne({
+        where: { userId, isActive: true },
+        order: [['createdAt', 'DESC']]
       });
     }
 
+    // Use query params first, then survey, then defaults
     const customizedSurvey = {
-      ...survey.toJSON(),
-      primaryGoal: goal || survey.primaryGoal,
-      dietaryPreference: dietaryPreference || survey.dietaryPreference,
-      dailyCalorieTarget: calories ? parseInt(calories) : survey.dailyCalorieTarget,
-      mealsPerDay: mealsPerDay ? parseInt(mealsPerDay) : survey.mealsPerDay
+      primaryGoal: goal || survey?.primaryGoal || 'general_fitness',
+      dietaryPreference: dietaryPreference || survey?.dietaryPreference || 'balanced',
+      dailyCalorieTarget: calories ? parseInt(calories) : (survey?.dailyCalorieTarget || 2000),
+      mealsPerDay: mealsPerDay ? parseInt(mealsPerDay) : (survey?.mealsPerDay || 3),
+      weight: survey?.weight || 70,
+      height: survey?.height || 170,
+      age: survey?.age || 30,
+      gender: survey?.gender || 'male',
+      activityLevel: survey?.activityLevel || 'moderately_active'
     };
 
     const nutritionPlan = await buildNutritionPlan(customizedSurvey);
@@ -34,15 +36,7 @@ exports.generateNutritionPlan = async (req, res, next) => {
     res.status(200).json({
       success: true,
       message: 'Nutrition plan generated successfully',
-      data: {
-        plan: nutritionPlan,
-        surveyData: {
-          primaryGoal: customizedSurvey.primaryGoal,
-          dietaryPreference: customizedSurvey.dietaryPreference,
-          dailyCalorieTarget: customizedSurvey.dailyCalorieTarget,
-          mealsPerDay: customizedSurvey.mealsPerDay
-        }
-      }
+      data: nutritionPlan  // Return plan directly, not nested
     });
   } catch (error) {
     next(error);
@@ -288,13 +282,21 @@ async function buildNutritionPlan(survey) {
   
   const where = { isActive: true };
   
-  if (dietaryPreference && dietaryPreference !== 'flexible' && dietaryPreference !== 'omnivore') {
+  if (dietaryPreference && dietaryPreference !== 'flexible' && dietaryPreference !== 'omnivore' && dietaryPreference !== 'balanced') {
     applyDietaryPreference(where, dietaryPreference);
+  }
+
+  // Add goal-based filtering to get more relevant items
+  if (primaryGoal) {
+    const goalFilters = getGoalBasedFilters(primaryGoal);
+    if (goalFilters && Object.keys(goalFilters).length > 0) {
+      Object.assign(where, goalFilters);
+    }
   }
 
   const nutritionItems = await NutritionItem.findAll({
     where,
-    limit: 100,
+    limit: 200, // Increased limit for more variety
     order: [
       // Add random ordering to get different items each time
       [NutritionItem.sequelize.fn('RAND')]
@@ -308,10 +310,12 @@ async function buildNutritionPlan(survey) {
   const mealTypes = getMealTypesForDay(meals);
 
   // Shuffle items before building each meal for more variety
-  const shuffledItems = shuffleArray(nutritionItems);
-
+  // IMPORTANT: Create a fresh shuffle for each meal to ensure variety
   for (const mealType of mealTypes) {
-    const meal = buildMealPlan(shuffledItems, mealType, caloriesPerMeal);
+    // Create a fresh shuffle for each meal to ensure different items
+    const shuffledItems = shuffleArray([...nutritionItems]);
+    // Use enhanced meal building with goal consideration
+    const meal = buildMealPlanWithGoal(shuffledItems, mealType, caloriesPerMeal, primaryGoal);
     mealPlan.push({
       mealType,
       targetCalories: caloriesPerMeal,
@@ -408,7 +412,8 @@ function buildDailyMealPlan(nutritionItems, dailyCalories, mealsPerDay, goal) {
   const meals = [];
   
   for (let i = 0; i < mealTypes.length; i++) {
-    const meal = buildMealPlan(shuffledItems, mealTypes[i], mealCalories[i]);
+    // Use enhanced meal building with goal consideration
+    const meal = buildMealPlanWithGoal(shuffledItems, mealTypes[i], mealCalories[i], goal);
     meals.push({
       mealType: mealTypes[i],
       targetCalories: mealCalories[i],
@@ -721,6 +726,131 @@ function getMealPrepTips() {
 function getDayName(day) {
   const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   return days[(day - 1) % 7];
+}
+
+/**
+ * Get goal-based filters for nutrition items
+ */
+function getGoalBasedFilters(goal) {
+  const filters = {};
+  
+  switch (goal) {
+    case 'weight_loss':
+      // Prefer lower calorie, higher protein items
+      // This will be handled in the selection algorithm
+      break;
+    case 'muscle_gain':
+      // Prefer higher protein items
+      // This will be handled in the selection algorithm
+      break;
+    case 'high_protein':
+      // Prefer high protein items
+      // This will be handled in the selection algorithm
+      break;
+    case 'low_carb':
+      // Prefer low carb items
+      // This will be handled in the selection algorithm
+      break;
+  }
+  
+  return filters;
+}
+
+/**
+ * Enhanced meal building with goal-based prioritization
+ */
+function buildMealPlanWithGoal(nutritionItems, mealType, targetCalories, goal) {
+  const suitableItems = filterItemsByMealType(nutritionItems, mealType);
+  
+  // Shuffle items to add randomization
+  const shuffledItems = shuffleArray(suitableItems);
+  
+  // Score items based on goal
+  const scoredItems = shuffledItems.map(item => {
+    let score = Math.random() * 100; // Base randomization
+    
+    // Goal-based scoring
+    if (goal === 'weight_loss') {
+      // Prefer lower calorie density, higher protein
+      const calorieDensity = item.calories / (parseFloat(item.protein || 1) + 1);
+      score += (100 - calorieDensity) * 0.3;
+      score += parseFloat(item.protein || 0) * 2;
+    } else if (goal === 'muscle_gain' || goal === 'high_protein') {
+      // Prefer higher protein
+      score += parseFloat(item.protein || 0) * 5;
+    } else if (goal === 'low_carb') {
+      // Prefer lower carbs
+      score += (100 - parseFloat(item.carbs || 0)) * 0.5;
+    }
+    
+    return { ...item, score };
+  });
+  
+  // Sort by score (highest first)
+  scoredItems.sort((a, b) => b.score - a.score);
+  
+  const selectedItems = [];
+  let currentCalories = 0;
+  const tolerance = targetCalories * 0.20; // Increased tolerance for more variety
+
+  // Take a random subset from top 50% to increase variety
+  const topItems = scoredItems.slice(0, Math.floor(scoredItems.length * 0.5));
+  const startIndex = Math.floor(Math.random() * Math.max(1, topItems.length / 3));
+  const itemsToConsider = topItems.slice(startIndex);
+
+  for (const item of itemsToConsider) {
+    if (currentCalories >= targetCalories - tolerance) break;
+    if (currentCalories + item.calories <= targetCalories + tolerance) {
+      selectedItems.push({
+        id: item.id,
+        name: item.name,
+        servingSize: item.servingSize,
+        calories: item.calories,
+        protein: item.protein,
+        carbs: item.carbs,
+        fats: item.fats,
+        fiber: item.fiber,
+        category: item.category,
+        preparationTime: item.preparationTime
+      });
+      currentCalories += item.calories;
+    }
+  }
+
+  // If we don't have enough items, add more from the pool
+  if (selectedItems.length === 0 || currentCalories < targetCalories - tolerance) {
+    const remainingItems = itemsToConsider.filter(item => 
+      !selectedItems.some(selected => selected.id === item.id)
+    );
+    
+    for (const item of remainingItems) {
+      if (currentCalories >= targetCalories + tolerance) break;
+      if (currentCalories + item.calories <= targetCalories + tolerance) {
+        selectedItems.push({
+          id: item.id,
+          name: item.name,
+          servingSize: item.servingSize,
+          calories: item.calories,
+          protein: item.protein,
+          carbs: item.carbs,
+          fats: item.fats,
+          fiber: item.fiber,
+          category: item.category,
+          preparationTime: item.preparationTime
+        });
+        currentCalories += item.calories;
+      }
+    }
+  }
+
+  const macros = calculateMealMacros(selectedItems);
+
+  return {
+    items: selectedItems,
+    totalCalories: currentCalories,
+    macros,
+    tips: getMealTypeTips(mealType)
+  };
 }
 
 module.exports = exports;
