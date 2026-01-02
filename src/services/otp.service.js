@@ -6,40 +6,33 @@ const nodemailer = require('nodemailer');
  * Handles OTP generation, sending, and validation
  */
 
-// Configure email transporter (supports SMTP servers including arifworkout.com)
+// Configure email transporter - Uses Google SMTP (Gmail) by default
 const createTransporter = () => {
-  // For SMTP with custom domain (e.g., arifworkout.com)
-  if (process.env.EMAIL_HOST) {
+  // Priority 1: Use Google SMTP if EMAIL_HOST is set to smtp.gmail.com
+  if (process.env.EMAIL_HOST && process.env.EMAIL_HOST.includes('gmail.com')) {
     const port = parseInt(process.env.EMAIL_PORT) || 587;
     const isSecure = process.env.EMAIL_SECURE === 'true' || port === 465;
     
+    console.log('📧 Using Google SMTP (Gmail) configuration');
     return nodemailer.createTransport({
       host: process.env.EMAIL_HOST,
       port: port,
-      secure: isSecure, // true for 465 (SSL), false for other ports
+      secure: isSecure, // true for 465 (SSL), false for 587 (STARTTLS)
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASSWORD
       },
       tls: {
-        // Do not fail on invalid certificates (some servers use self-signed certs)
-        rejectUnauthorized: false,
-        // Enable TLS
-        ciphers: 'SSLv3'
-      },
-      // Additional options for SSL/TLS
-      ...(isSecure && {
-        requireTLS: false,
-        connectionTimeout: 30000,
-        greetingTimeout: 30000,
-        socketTimeout: 30000
-      })
+        rejectUnauthorized: false
+      }
     });
   }
 
-  // For regular Gmail (fallback)
+  // Priority 2: Use Gmail service (fallback if no EMAIL_HOST or EMAIL_HOST is not Gmail)
+  // This ensures we always use Google SMTP, not cPanel
+  console.log('📧 Using Gmail service (Google SMTP)');
   return nodemailer.createTransport({
-    service: process.env.EMAIL_SERVICE || 'gmail',
+    service: 'gmail',
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASSWORD
@@ -231,7 +224,17 @@ const verifyOTP = (providedOTP, storedOTP, otpExpiry) => {
  */
 const sendLoginOTPEmail = async (email, otp, name = 'User') => {
   try {
+    console.log(`📧 Preparing to send login OTP email to ${email}`);
+    console.log(`📧 OTP Code: ${otp}, Name: ${name}`);
+    
     const transporter = createTransporter();
+    
+    // Verify transporter configuration
+    if (!transporter) {
+      throw new Error('Email transporter not configured');
+    }
+    
+    console.log(`📧 Email transporter created successfully`);
 
     const mailOptions = {
       from: process.env.EMAIL_FROM || `"ARIF WORK OUT" <${process.env.EMAIL_USER}>`,
@@ -338,12 +341,25 @@ const sendLoginOTPEmail = async (email, otp, name = 'User') => {
       `
     };
 
+    console.log(`📧 Sending email with OTP ${otp} to ${email}...`);
     const info = await transporter.sendMail(mailOptions);
-    console.log('Login OTP Email sent:', info.messageId);
+    console.log('✅ Login OTP Email sent successfully:', {
+      messageId: info.messageId,
+      response: info.response,
+      accepted: info.accepted,
+      rejected: info.rejected
+    });
     return { success: true, messageId: info.messageId };
   } catch (error) {
-    console.error('Error sending login OTP email:', error);
-    throw new Error('Failed to send login OTP email');
+    console.error('❌ Error sending login OTP email:', error);
+    console.error('Error details:', {
+      message: error.message,
+      code: error.code,
+      command: error.command,
+      response: error.response,
+      responseCode: error.responseCode
+    });
+    throw new Error(`Failed to send login OTP email: ${error.message}`);
   }
 };
 

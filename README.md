@@ -109,11 +109,13 @@ JWT_SECRET=your-secret-key
 JWT_EXPIRES_IN=7d
 
 # Email (SMTP - arifworkout.com)
-EMAIL_HOST=arifworkout.com
-EMAIL_PORT=465
-EMAIL_SECURE=true
-EMAIL_USER=support@arifworkout.com
-EMAIL_PASSWORD=your-password
+# Google SMTP Configuration (Gmail)
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_SECURE=false
+EMAIL_USER=contact@arifworkout.com
+EMAIL_PASSWORD=your-16-char-app-password
+EMAIL_FROM="ARIF WORK OUT" <contact@arifworkout.com>
 EMAIL_FROM="ARIF WORK OUT <support@arifworkout.com>"
 
 # OTP Settings

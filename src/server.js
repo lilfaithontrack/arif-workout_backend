@@ -105,6 +105,40 @@ app.get('/health', (req, res) => {
   });
 });
 
+// Route diagnostics endpoint
+app.get('/api/routes', (req, res) => {
+  const routes = [];
+  
+  // Get all registered routes
+  app._router.stack.forEach((middleware) => {
+    if (middleware.route) {
+      const methods = Object.keys(middleware.route.methods).join(', ').toUpperCase();
+      routes.push({
+        method: methods,
+        path: middleware.route.path
+      });
+    } else if (middleware.name === 'router') {
+      // Handle mounted routers
+      middleware.handle.stack.forEach((handler) => {
+        if (handler.route) {
+          const methods = Object.keys(handler.route.methods).join(', ').toUpperCase();
+          routes.push({
+            method: methods,
+            path: handler.route.path,
+            mounted: middleware.regexp.source
+          });
+        }
+      });
+    }
+  });
+  
+  res.json({
+    success: true,
+    routes: routes,
+    authRoutes: routes.filter(r => r.path && r.path.includes('auth'))
+  });
+});
+
 // API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/courses', courseRoutes);

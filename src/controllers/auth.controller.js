@@ -615,12 +615,21 @@ exports.requestLoginOTP = async (req, res, next) => {
 
     // Send OTP email
     try {
-      await sendLoginOTPEmail(email, otpCode, user.name);
+      console.log(`📧 Attempting to send login OTP to ${email} for user ${user.name}`);
+      const emailResult = await sendLoginOTPEmail(email, otpCode, user.name);
+      console.log(`✅ Login OTP email sent successfully:`, emailResult);
     } catch (emailError) {
-      console.error('Failed to send login OTP email:', emailError);
+      console.error('❌ Failed to send login OTP email:', emailError);
+      console.error('Email error details:', {
+        message: emailError.message,
+        stack: emailError.stack,
+        email: email,
+        otpCode: otpCode
+      });
       return res.status(500).json({
         success: false,
-        message: 'Failed to send OTP email. Please try again later.'
+        message: 'Failed to send OTP email. Please try again later.',
+        error: process.env.NODE_ENV === 'development' ? emailError.message : undefined
       });
     }
 
