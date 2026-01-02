@@ -6,18 +6,34 @@ const nodemailer = require('nodemailer');
  * Handles OTP generation, sending, and validation
  */
 
-// Configure email transporter (supports Gmail and Google Workspace)
+// Configure email transporter (supports SMTP servers including arifworkout.com)
 const createTransporter = () => {
-  // For Google Workspace with custom domain
+  // For SMTP with custom domain (e.g., arifworkout.com)
   if (process.env.EMAIL_HOST) {
+    const port = parseInt(process.env.EMAIL_PORT) || 587;
+    const isSecure = process.env.EMAIL_SECURE === 'true' || port === 465;
+    
     return nodemailer.createTransport({
       host: process.env.EMAIL_HOST,
-      port: parseInt(process.env.EMAIL_PORT) || 587,
-      secure: process.env.EMAIL_SECURE === 'true', // true for 465, false for other ports
+      port: port,
+      secure: isSecure, // true for 465 (SSL), false for other ports
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASSWORD
-      }
+      },
+      tls: {
+        // Do not fail on invalid certificates (some servers use self-signed certs)
+        rejectUnauthorized: false,
+        // Enable TLS
+        ciphers: 'SSLv3'
+      },
+      // Additional options for SSL/TLS
+      ...(isSecure && {
+        requireTLS: false,
+        connectionTimeout: 30000,
+        greetingTimeout: 30000,
+        socketTimeout: 30000
+      })
     });
   }
 
@@ -57,7 +73,7 @@ const sendOTPEmail = async (email, otp, name = 'User') => {
     const transporter = createTransporter();
 
     const mailOptions = {
-      from: process.env.EMAIL_FROM || `"Arif's Apex Fitness" <${process.env.EMAIL_USER}>`,
+      from: process.env.EMAIL_FROM || `"ARIF WORK OUT" <${process.env.EMAIL_USER}>`,
       to: email,
       subject: 'Email Verification - OTP Code',
       html: `
@@ -132,7 +148,7 @@ const sendOTPEmail = async (email, otp, name = 'User') => {
             </div>
             <div class="content">
               <p>Hello <strong>${name}</strong>,</p>
-              <p>Thank you for signing up with Arif's Apex Fitness! To complete your registration, please verify your email address using the OTP code below:</p>
+              <p>Thank you for signing up with ARIF WORK OUT! To complete your registration, please verify your email address using the OTP code below:</p>
               
               <div class="otp-box">
                 <div style="color: #6c757d; font-size: 14px; margin-bottom: 10px;">Your OTP Code</div>
@@ -148,12 +164,12 @@ const sendOTPEmail = async (email, otp, name = 'User') => {
               
               <p style="margin-top: 30px;">
                 Best regards,<br>
-                <strong>Arif's Apex Fitness Team</strong>
+                <strong>ARIF WORK OUT Team</strong>
               </p>
             </div>
             <div class="footer">
               <p>This is an automated message, please do not reply to this email.</p>
-              <p>&copy; ${new Date().getFullYear()} Arif's Apex Fitness. All rights reserved.</p>
+              <p>&copy; ${new Date().getFullYear()} ARIF WORK OUT. All rights reserved.</p>
             </div>
           </div>
         </body>
@@ -207,10 +223,135 @@ const verifyOTP = (providedOTP, storedOTP, otpExpiry) => {
   };
 };
 
+/**
+ * Send Login OTP via Email
+ * @param {string} email - Recipient email address
+ * @param {string} otp - OTP code
+ * @param {string} name - User's name
+ */
+const sendLoginOTPEmail = async (email, otp, name = 'User') => {
+  try {
+    const transporter = createTransporter();
+
+    const mailOptions = {
+      from: process.env.EMAIL_FROM || `"ARIF WORK OUT" <${process.env.EMAIL_USER}>`,
+      to: email,
+      subject: 'Login Verification - OTP Code',
+      html: `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <style>
+            body {
+              font-family: 'Arial', sans-serif;
+              line-height: 1.6;
+              color: #333;
+              background-color: #f4f4f4;
+              margin: 0;
+              padding: 0;
+            }
+            .container {
+              max-width: 600px;
+              margin: 20px auto;
+              background: #ffffff;
+              border-radius: 8px;
+              overflow: hidden;
+              box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+            .header {
+              background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+              color: white;
+              padding: 30px;
+              text-align: center;
+            }
+            .header h1 {
+              margin: 0;
+              font-size: 24px;
+            }
+            .content {
+              padding: 40px 30px;
+            }
+            .otp-box {
+              background: #f8f9fa;
+              border: 2px dashed #667eea;
+              border-radius: 8px;
+              padding: 20px;
+              text-align: center;
+              margin: 30px 0;
+            }
+            .otp-code {
+              font-size: 36px;
+              font-weight: bold;
+              color: #667eea;
+              letter-spacing: 8px;
+              font-family: 'Courier New', monospace;
+            }
+            .warning {
+              background: #fff3cd;
+              border-left: 4px solid #ffc107;
+              padding: 12px;
+              margin: 20px 0;
+              font-size: 14px;
+            }
+            .footer {
+              background: #f8f9fa;
+              padding: 20px;
+              text-align: center;
+              font-size: 12px;
+              color: #6c757d;
+            }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <div class="header">
+              <h1>🔐 Login Verification</h1>
+            </div>
+            <div class="content">
+              <p>Hello <strong>${name}</strong>,</p>
+              <p>You requested to log in to your ARIF WORK OUT account. Use the OTP code below to complete your login:</p>
+              
+              <div class="otp-box">
+                <div style="color: #6c757d; font-size: 14px; margin-bottom: 10px;">Your Login OTP Code</div>
+                <div class="otp-code">${otp}</div>
+                <div style="color: #6c757d; font-size: 12px; margin-top: 10px;">Valid for ${process.env.OTP_EXPIRY_MINUTES || 10} minutes</div>
+              </div>
+              
+              <div class="warning">
+                ⚠️ <strong>Security Notice:</strong> Never share this code with anyone. Our team will never ask for your OTP. If you didn't request this login, please ignore this email and secure your account.
+              </div>
+              
+              <p>If you didn't request this login code, please ignore this email or contact our support team immediately.</p>
+              
+              <p style="margin-top: 30px;">
+                Best regards,<br>
+                <strong>ARIF WORK OUT Team</strong>
+              </p>
+            </div>
+            <div class="footer">
+              <p>This is an automated message, please do not reply to this email.</p>
+              <p>&copy; ${new Date().getFullYear()} ARIF WORK OUT. All rights reserved.</p>
+            </div>
+          </div>
+        </body>
+        </html>
+      `
+    };
+
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Login OTP Email sent:', info.messageId);
+    return { success: true, messageId: info.messageId };
+  } catch (error) {
+    console.error('Error sending login OTP email:', error);
+    throw new Error('Failed to send login OTP email');
+  }
+};
+
 module.exports = {
   generateOTP,
   getOTPExpiry,
   sendOTPEmail,
+  sendLoginOTPEmail,
   verifyOTP
 };
 

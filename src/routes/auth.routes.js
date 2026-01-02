@@ -57,6 +57,29 @@ router.post('/login',
 );
 
 // ============================================
+// OTP LOGIN (Passwordless Login)
+// ============================================
+
+// Request Login OTP
+router.post('/login/request-otp',
+  [
+    body('email').isEmail().normalizeEmail().withMessage('Valid email is required')
+  ],
+  validate,
+  authController.requestLoginOTP
+);
+
+// Verify Login OTP
+router.post('/login/verify-otp',
+  [
+    body('email').isEmail().normalizeEmail().withMessage('Valid email is required'),
+    body('otpCode').isLength({ min: 6, max: 6 }).withMessage('OTP must be 6 digits')
+  ],
+  validate,
+  authController.verifyLoginOTP
+);
+
+// ============================================
 // OAUTH LOGIN (Google/Facebook for Students)
 // ============================================
 

@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const User = require('../models/user.model');
-const { generateOTP, getOTPExpiry, sendOTPEmail, verifyOTP } = require('../services/otp.service');
+const OTP = require('../models/otp.model');
+const { generateOTP, getOTPExpiry, sendOTPEmail, sendLoginOTPEmail, verifyOTP } = require('../services/otp.service');
 
 
 /**
@@ -545,6 +546,195 @@ exports.updateStaffPassword = async (req, res, next) => {
     res.status(200).json({
       success: true,
       message: 'Password updated successfully'
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
+ * Request Login OTP
+ * Generates and sends OTP code for passwordless login
+ */
+exports.requestLoginOTP = async (req, res, next) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({
+        success: false,
+        message: 'Email is required'
+      });
+    }
+
+    // Find user by email
+    const user = await User.findOne({ where: { email } });
+
+    if (!user) {
+      // Don't reveal if user exists for security
+      return res.status(200).json({
+        success: true,
+        message: 'If an account exists with this email, an OTP has been sent.'
+      });
+    }
+
+    // Check if user is active and verified
+    if (!user.isActive || !user.isEmailVerified) {
+      return res.status(403).json({
+        success: false,
+        message: 'Account is not active or verified. Please verify your email first.'
+      });
+    }
+
+    // Generate OTP
+    const otpCode = generateOTP();
+    const otpExpiry = getOTPExpiry();
+
+    // Invalidate any existing login OTPs for this email
+    await OTP.update(
+      { consumed: true },
+      {
+        where: {
+          email: email,
+          type: 'login',
+          consumed: false
+        }
+      }
+    );
+
+    // Store OTP in database
+    await OTP.create({
+      userId: user.id,
+      email: email,
+      code: otpCode,
+      type: 'login',
+      expiresAt: otpExpiry,
+      attempts: 0,
+      consumed: false
+    });
+
+    // Send OTP email
+    try {
+      await sendLoginOTPEmail(email, otpCode, user.name);
+    } catch (emailError) {
+      console.error('Failed to send login OTP email:', emailError);
+      return res.status(500).json({
+        success: false,
+        message: 'Failed to send OTP email. Please try again later.'
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'OTP sent to your email. Please check your inbox.'
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
+ * Verify Login OTP
+ * Verifies OTP code and logs user in
+ */
+exports.verifyLoginOTP = async (req, res, next) => {
+  try {
+    const { email, otpCode } = req.body;
+
+    if (!email || !otpCode) {
+      return res.status(400).json({
+        success: false,
+        message: 'Email and OTP code are required'
+      });
+    }
+
+    // Find user
+    const user = await User.findOne({ where: { email } });
+
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid email or OTP code'
+      });
+    }
+
+    // Check if user is active and verified
+    if (!user.isActive || !user.isEmailVerified) {
+      return res.status(403).json({
+        success: false,
+        message: 'Account is not active or verified'
+      });
+    }
+
+    // Find the most recent non-consumed login OTP for this email
+    const otpRecord = await OTP.findOne({
+      where: {
+        email: email,
+        type: 'login',
+        consumed: false
+      },
+      order: [['createdAt', 'DESC']]
+    });
+
+    if (!otpRecord) {
+      return res.status(400).json({
+        success: false,
+        message: 'No OTP found. Please request a new one.'
+      });
+    }
+
+    // Check if OTP has expired
+    if (otpRecord.isExpired()) {
+      await otpRecord.update({ consumed: true });
+      return res.status(400).json({
+        success: false,
+        message: 'OTP has expired. Please request a new one.'
+      });
+    }
+
+    // Check if OTP matches
+    if (otpRecord.code !== otpCode) {
+      // Increment attempts
+      await otpRecord.incrementAttempts();
+
+      // Check if too many attempts (optional: lock after 5 attempts)
+      if (otpRecord.attempts >= 5) {
+        await otpRecord.update({ consumed: true });
+        return res.status(400).json({
+          success: false,
+          message: 'Too many failed attempts. Please request a new OTP.'
+        });
+      }
+
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid OTP code. Please try again.'
+      });
+    }
+
+    // Mark OTP as consumed
+    await otpRecord.update({ consumed: true });
+
+    // Update last login
+    await user.update({ lastLogin: new Date() });
+
+    // Generate token
+    const token = generateToken(user);
+
+    res.status(200).json({
+      success: true,
+      message: 'Login successful',
+      data: {
+        token,
+        user: {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          roles: user.roles,
+          isActive: user.isActive,
+          isEmailVerified: user.isEmailVerified
+        }
+      }
     });
   } catch (error) {
     next(error);

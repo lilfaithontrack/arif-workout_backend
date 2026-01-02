@@ -108,13 +108,16 @@ DB_PASSWORD=your_password
 JWT_SECRET=your-secret-key
 JWT_EXPIRES_IN=7d
 
-# Email (Google Workspace)
-EMAIL_HOST=smtp.gmail.com
-EMAIL_PORT=587
-EMAIL_SECURE=false
-EMAIL_USER=contact@yourdomain.com
-EMAIL_PASSWORD=your-app-password
-EMAIL_FROM="Your App <noreply@yourdomain.com>"
+# Email (SMTP - arifworkout.com)
+EMAIL_HOST=arifworkout.com
+EMAIL_PORT=465
+EMAIL_SECURE=true
+EMAIL_USER=support@arifworkout.com
+EMAIL_PASSWORD=your-password
+EMAIL_FROM="ARIF WORK OUT <support@arifworkout.com>"
+
+# OTP Settings
+OTP_EXPIRY_MINUTES=10
 
 # OAuth
 GOOGLE_CLIENT_ID=your-google-client-id

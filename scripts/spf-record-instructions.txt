@@ -1,0 +1,79 @@
+================================================================================
+SPF RECORD ADDITION INSTRUCTIONS FOR ARIF WORK OUT
+================================================================================
+
+STEP 1: Log into Space Square cPanel
+------------------------------------
+- Go to your Space Square hosting control panel
+- Log in with your credentials
+
+STEP 2: Navigate to DNS Zone Editor
+------------------------------------
+- Look for "DNS Zone Editor" or "Advanced DNS Zone Editor"
+- It's usually under "Domains" or "Email" section
+
+STEP 3: Add TXT Record
+----------------------
+Click "Add Record" or "Add" button, then fill in:
+
+┌─────────────────────────────────────────────────────────────┐
+│ Type:     TXT                                               │
+│ Name:     @  (or leave blank for root domain)              │
+│ TTL:      3600  (or use default)                           │
+│ Value:    v=spf1 a mx ip4:91.204.209.46 ~all               │
+└─────────────────────────────────────────────────────────────┘
+
+IMPORTANT: Copy the Value EXACTLY as shown above (including spaces)
+
+STEP 4: Save the Record
+------------------------
+- Click "Add Record" or "Save"
+- You should see the new TXT record in the list
+
+STEP 5: Wait for DNS Propagation
+---------------------------------
+- Wait 5-10 minutes for DNS to propagate
+- DNS changes can take up to 24 hours, but usually 5-10 minutes
+
+STEP 6: Verify the Record
+--------------------------
+Run this command to verify:
+  node scripts/add-spf-record-guide.js verify
+
+Or check online at:
+  https://mxtoolbox.com/spf.aspx
+  Enter: arifworkout.com
+
+================================================================================
+WHAT THIS DOES:
+================================================================================
+
+The SPF record tells email servers (like Gmail) that:
+- Emails from arifworkout.com are authorized to come from:
+  1. The domain's A record (a)
+  2. The domain's MX record (mx)
+  3. The specific IP address 91.204.209.46 (ip4:91.204.209.46)
+  4. All other sources should be treated as suspicious (~all)
+
+This helps prevent email spoofing and improves deliverability to Gmail.
+
+================================================================================
+TROUBLESHOOTING:
+================================================================================
+
+If you can't find "DNS Zone Editor":
+- Look for "Zone Editor" or "DNS Management"
+- Contact Space Square support if you can't find it
+
+If the record doesn't appear after adding:
+- Refresh the page
+- Check if you're editing the correct domain
+- Make sure you clicked "Save" or "Add Record"
+
+If verification fails after 10 minutes:
+- Double-check the Value field matches exactly
+- Make sure there are no extra spaces
+- Try removing and re-adding the record
+
+================================================================================
+

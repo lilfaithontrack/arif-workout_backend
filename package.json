@@ -7,6 +7,7 @@
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
     "test": "jest --coverage",
+    "test:otp": "node scripts/test-otp-login.js",
     "db:sync": "node src/scripts/sync-database.js",
     "db:sync:generators": "node src/scripts/sync-generator-models.js",
     "migrate:generators": "node src/migrations/create-generator-tables.js up",
