@@ -23,7 +23,13 @@ const generateToken = (user) => {
 
 /**
  * User Signup with Email & Password
- * Sends OTP for email verification
+ * 
+ * IMPORTANT: Users are AUTO-VERIFIED on signup - NO email verification required!
+ * Users can log in immediately after registration using:
+ * - Password login (loginWithPassword)
+ * - OTP login (requestLoginOTP -> verifyLoginOTP)
+ * 
+ * No verification email is sent during registration.
  */
 exports.signup = async (req, res, next) => {
   try {
@@ -50,11 +56,7 @@ exports.signup = async (req, res, next) => {
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Generate OTP
-    const otpCode = generateOTP();
-    const otpExpiry = getOTPExpiry();
-
-    // Create user (not verified yet)
+    // Create user (auto-verified and active - no email verification needed)
     const user = await User.create({
       name,
       email,
@@ -67,27 +69,19 @@ exports.signup = async (req, res, next) => {
         providerId: email,
         lastUsed: new Date()
       }],
-      otpCode,
-      otpExpiry,
-      isEmailVerified: false,
-      isActive: false  // Activate after OTP verification
+      otpCode: null,  // No OTP needed for signup
+      otpExpiry: null,
+      isEmailVerified: true,  // Auto-verify on signup
+      isActive: true  // Auto-activate on signup
     });
-
-    // Send OTP email
-    try {
-      await sendOTPEmail(email, otpCode, name);
-    } catch (emailError) {
-      console.error('Failed to send OTP email:', emailError);
-      // Continue even if email fails - user can request resend
-    }
 
     res.status(201).json({
       success: true,
-      message: 'Signup successful! Please check your email for the OTP code.',
+      message: 'Account created successfully! You can now log in.',
       data: {
         userId: user.id,
         email: user.email,
-        requiresVerification: true
+        requiresVerification: false  // No verification needed
       }
     });
   } catch (error) {
@@ -97,7 +91,12 @@ exports.signup = async (req, res, next) => {
 
 /**
  * Verify OTP Code
- * Activates user account after successful verification
+ * 
+ * @deprecated This endpoint is NO LONGER USED for signup verification.
+ * Users are auto-verified on signup and can log in immediately.
+ * 
+ * This endpoint is kept for backward compatibility only.
+ * For login, use verifyLoginOTP instead.
  */
 exports.verifyOTPCode = async (req, res, next) => {
   try {
@@ -170,7 +169,12 @@ exports.verifyOTPCode = async (req, res, next) => {
 
 /**
  * Resend OTP Code
- * Generates and sends a new OTP
+ * 
+ * @deprecated This endpoint is NO LONGER USED for signup verification.
+ * Users are auto-verified on signup and can log in immediately.
+ * 
+ * This endpoint is kept for backward compatibility only.
+ * For login OTP, use requestLoginOTP instead.
  */
 exports.resendOTP = async (req, res, next) => {
   try {
@@ -578,13 +582,8 @@ exports.requestLoginOTP = async (req, res, next) => {
       });
     }
 
-    // Check if user is active and verified
-    if (!user.isActive || !user.isEmailVerified) {
-      return res.status(403).json({
-        success: false,
-        message: 'Account is not active or verified. Please verify your email first.'
-      });
-    }
+    // Allow OTP login for all users (no verification requirement)
+    // Users are auto-verified on signup, so this check is not needed
 
     // Generate OTP
     const otpCode = generateOTP();
@@ -667,11 +666,11 @@ exports.verifyLoginOTP = async (req, res, next) => {
       });
     }
 
-    // Check if user is active and verified
-    if (!user.isActive || !user.isEmailVerified) {
-      return res.status(403).json({
-        success: false,
-        message: 'Account is not active or verified'
+    // Auto-verify and activate if not already done (for backward compatibility)
+    if (!user.isEmailVerified || !user.isActive) {
+      await user.update({
+        isEmailVerified: true,
+        isActive: true
       });
     }
 
