@@ -174,6 +174,32 @@ exports.uploadExerciseImage = async (req, res, next) => {
             })
         );
 
+        // If a video was uploaded to the 'main' subfolder, update the Exercise's videoUrl
+        const Exercise = require('../models/exercise.model');
+        const mainVideo = uploadedImages.find(img => img.mediaType === 'video' && img.subfolder === 'main');
+        
+        if (mainVideo) {
+            const exercise = await Exercise.findOne({ where: { slug: exerciseSlug } });
+            if (exercise) {
+                await exercise.update({
+                    videoUrl: `/videos/exercises/${exerciseSlug}/${mainVideo.filename}`
+                });
+                console.log(`✅ Updated Exercise.videoUrl for ${exerciseSlug}: ${exercise.videoUrl}`);
+            }
+        }
+
+        // Similarly, update imageUrl if main image is uploaded
+        const mainImage = uploadedImages.find(img => img.mediaType === 'image' && img.subfolder === 'main');
+        if (mainImage) {
+            const exercise = await Exercise.findOne({ where: { slug: exerciseSlug } });
+            if (exercise) {
+                await exercise.update({
+                    imageUrl: `/images/exercises/${exerciseSlug}/${mainImage.filename}`
+                });
+                console.log(`✅ Updated Exercise.imageUrl for ${exerciseSlug}: ${exercise.imageUrl}`);
+            }
+        }
+
         const imageCount = uploadedImages.filter(f => f.mediaType === 'image').length;
         const videoCount = uploadedImages.filter(f => f.mediaType === 'video').length;
         
