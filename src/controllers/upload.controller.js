@@ -181,8 +181,9 @@ exports.uploadExerciseImage = async (req, res, next) => {
         if (mainVideo) {
             const exercise = await Exercise.findOne({ where: { slug: exerciseSlug } });
             if (exercise) {
+                // Store the actual file path with /public/images/exercises/{slug}/main/{filename}
                 await exercise.update({
-                    videoUrl: `/videos/exercises/${exerciseSlug}/${mainVideo.filename}`
+                    videoUrl: `/public/images/exercises/${exerciseSlug}/main/${mainVideo.filename}`
                 });
                 console.log(`✅ Updated Exercise.videoUrl for ${exerciseSlug}: ${exercise.videoUrl}`);
             }
@@ -193,8 +194,9 @@ exports.uploadExerciseImage = async (req, res, next) => {
         if (mainImage) {
             const exercise = await Exercise.findOne({ where: { slug: exerciseSlug } });
             if (exercise) {
+                // Store the actual file path with /public/images/exercises/{slug}/main/{filename}
                 await exercise.update({
-                    imageUrl: `/images/exercises/${exerciseSlug}/${mainImage.filename}`
+                    imageUrl: `/public/images/exercises/${exerciseSlug}/main/${mainImage.filename}`
                 });
                 console.log(`✅ Updated Exercise.imageUrl for ${exerciseSlug}: ${exercise.imageUrl}`);
             }
