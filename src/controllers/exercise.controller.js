@@ -342,7 +342,15 @@ exports.getPublicBodyParts = async (req, res, next) => {
       { id: 'triceps', name: 'Triceps', slug: 'triceps', icon: 'arm-flex' },
       { id: 'traps', name: 'Traps', slug: 'traps', icon: 'human-male' },
       { id: 'full_body', name: 'Full Body', slug: 'full-body', icon: 'human-male-height' },
+      // Categories
       { id: 'cardio', name: 'Cardio', slug: 'cardio', icon: 'run-fast' },
+      { id: 'strength', name: 'Strength', slug: 'strength', icon: 'weight-lifter' },
+      { id: 'flexibility', name: 'Flexibility', slug: 'flexibility', icon: 'yoga' },
+      { id: 'balance', name: 'Balance', slug: 'balance', icon: 'yoga' },
+      { id: 'yoga', name: 'Yoga', slug: 'yoga', icon: 'yoga' },
+      { id: 'pilates', name: 'Pilates', slug: 'pilates', icon: 'yoga' },
+      { id: 'hiit', name: 'HIIT', slug: 'hiit', icon: 'run-fast' },
+      { id: 'sports', name: 'Sports', slug: 'sports', icon: 'run' },
     ];
 
     res.status(200).json({
