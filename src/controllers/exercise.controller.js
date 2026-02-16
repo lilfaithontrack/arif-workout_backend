@@ -317,3 +317,39 @@ exports.getMuscleGroups = async (req, res, next) => {
     next(error);
   }
 };
+/**
+ * Get public body parts (Rich list for UI)
+ */
+exports.getPublicBodyParts = async (req, res, next) => {
+  try {
+    // Standard body parts list with metadata
+    const bodyParts = [
+      { id: 'abs', name: 'Abs', slug: 'abs', icon: 'human-hands-down' },
+      { id: 'back', name: 'Back', slug: 'back', icon: 'human-male-board' },
+      { id: 'biceps', name: 'Biceps', slug: 'biceps', icon: 'arm-flex' },
+      { id: 'calves', name: 'Calves', slug: 'calves', icon: 'run' },
+      { id: 'chest', name: 'Chest', slug: 'chest', icon: 'human-male' },
+      { id: 'forearms', name: 'Forearms', slug: 'forearms', icon: 'arm-flex' },
+      { id: 'glutes', name: 'Glutes', slug: 'glutes', icon: 'run' },
+      { id: 'hamstrings', name: 'Hamstrings', slug: 'hamstrings', icon: 'run' },
+      { id: 'lats', name: 'Lats', slug: 'lats', icon: 'human-male-board' },
+      { id: 'legs', name: 'Legs', slug: 'legs', icon: 'run' },
+      { id: 'lower_back', name: 'Lower Back', slug: 'lower-back', icon: 'human-male-board' },
+      { id: 'middle_back', name: 'Middle Back', slug: 'middle-back', icon: 'human-male-board' },
+      { id: 'neck', name: 'Neck', slug: 'neck', icon: 'human-male' },
+      { id: 'quadriceps', name: 'Quadriceps', slug: 'quadriceps', icon: 'run' },
+      { id: 'shoulders', name: 'Shoulders', slug: 'shoulders', icon: 'human-hands-up' },
+      { id: 'triceps', name: 'Triceps', slug: 'triceps', icon: 'arm-flex' },
+      { id: 'traps', name: 'Traps', slug: 'traps', icon: 'human-male' },
+      { id: 'full_body', name: 'Full Body', slug: 'full-body', icon: 'human-male-height' },
+      { id: 'cardio', name: 'Cardio', slug: 'cardio', icon: 'run-fast' },
+    ];
+
+    res.status(200).json({
+      success: true,
+      data: { bodyParts }
+    });
+  } catch (error) {
+    next(error);
+  }
+};

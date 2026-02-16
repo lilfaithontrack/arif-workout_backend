@@ -20,6 +20,13 @@ router.get('/', exerciseController.getExercises);
 router.get('/categories', exerciseController.getCategories);
 
 /**
+ * @route   GET /api/exercises/body-parts
+ * @desc    Get public body parts list
+ * @access  Public
+ */
+router.get('/body-parts', exerciseController.getPublicBodyParts);
+
+/**
  * @route   GET /api/exercises/muscle-groups
  * @desc    Get muscle groups
  * @access  Public
