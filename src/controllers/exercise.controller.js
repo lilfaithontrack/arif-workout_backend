@@ -15,12 +15,12 @@ exports.getExercises = async (req, res, next) => {
     if (difficulty) where.difficulty = difficulty;
     if (equipment) {
       where.equipment = {
-        [Op.contains]: [equipment]
+        [Op.like]: `%"${equipment}"%`
       };
     }
     if (muscleGroup) {
       where.muscleGroups = {
-        [Op.contains]: [muscleGroup]
+        [Op.like]: `%"${muscleGroup}"%`
       };
     }
     if (search) {
@@ -324,7 +324,7 @@ exports.getPublicBodyParts = async (req, res, next) => {
   try {
     // Standard body parts list with metadata
     const bodyParts = [
-      { id: 'abs', name: 'Abs', slug: 'abs', icon: 'human-hands-down' },
+      { id: 'abs', name: 'Abs', slug: 'abs', icon: 'run' },
       { id: 'back', name: 'Back', slug: 'back', icon: 'human-male-board' },
       { id: 'biceps', name: 'Biceps', slug: 'biceps', icon: 'arm-flex' },
       { id: 'calves', name: 'Calves', slug: 'calves', icon: 'run' },
@@ -338,7 +338,7 @@ exports.getPublicBodyParts = async (req, res, next) => {
       { id: 'middle_back', name: 'Middle Back', slug: 'middle-back', icon: 'human-male-board' },
       { id: 'neck', name: 'Neck', slug: 'neck', icon: 'human-male' },
       { id: 'quadriceps', name: 'Quadriceps', slug: 'quadriceps', icon: 'run' },
-      { id: 'shoulders', name: 'Shoulders', slug: 'shoulders', icon: 'human-hands-up' },
+      { id: 'shoulders', name: 'Shoulders', slug: 'shoulders', icon: 'run' },
       { id: 'triceps', name: 'Triceps', slug: 'triceps', icon: 'arm-flex' },
       { id: 'traps', name: 'Traps', slug: 'traps', icon: 'human-male' },
       { id: 'full_body', name: 'Full Body', slug: 'full-body', icon: 'human-male-height' },
