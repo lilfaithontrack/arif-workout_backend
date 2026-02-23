@@ -1,5 +1,6 @@
 const { Exercise, User } = require('../models');
 const { Op } = require('sequelize');
+const { sequelize } = require('../config/database');
 const fs = require('fs');
 const path = require('path');
 
@@ -14,14 +15,10 @@ exports.getExercises = async (req, res, next) => {
     if (category) where.category = category;
     if (difficulty) where.difficulty = difficulty;
     if (equipment) {
-      where.equipment = {
-        [Op.like]: `%"${equipment}"%`
-      };
+      where.equipment = sequelize.fn('JSON_CONTAINS', sequelize.col('equipment'), `"${equipment}"`);
     }
     if (muscleGroup) {
-      where.muscleGroups = {
-        [Op.like]: `%"${muscleGroup}"%`
-      };
+      where.muscleGroups = sequelize.fn('JSON_CONTAINS', sequelize.col('muscleGroups'), `"${muscleGroup}"`);
     }
     if (search) {
       where[Op.or] = [
@@ -304,8 +301,17 @@ exports.getMuscleGroups = async (req, res, next) => {
 
     const muscleGroupsSet = new Set();
     exercises.forEach(ex => {
-      if (ex.muscleGroups) {
-        ex.muscleGroups.forEach(mg => muscleGroupsSet.add(mg));
+      let groups = ex.muscleGroups;
+      if (typeof groups === 'string') {
+        try {
+          groups = JSON.parse(groups);
+        } catch (e) {
+          groups = [];
+        }
+      }
+
+      if (Array.isArray(groups)) {
+        groups.forEach(mg => muscleGroupsSet.add(mg));
       }
     });
 
