@@ -6,10 +6,13 @@ const fs = require('fs');
 const getUploadBasePath = () => {
     // For deployment, use absolute path from environment variable
     if (process.env.UPLOAD_PATH) {
+        console.log('📁 Using UPLOAD_PATH from env:', process.env.UPLOAD_PATH);
         return process.env.UPLOAD_PATH;
     }
-    // Default: create uploads directory within backend
-    return path.join(__dirname, '../uploads');
+    // Default: create uploads directory within backend (relative to this file)
+    const defaultPath = path.resolve(__dirname, '..', 'uploads');
+    console.log('📁 Using default upload path:', defaultPath);
+    return defaultPath;
 };
 
 // Configure multer storage for category images
