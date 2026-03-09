@@ -155,9 +155,14 @@ exports.updateCategory = async (req, res, next) => {
       if (category.image) {
         const fs = require('fs').promises;
         const path = require('path');
-        const oldImagePath = path.join(__dirname, '../../public', category.image);
+        // Get the upload base path (same as middleware)
+        const uploadBasePath = process.env.UPLOAD_PATH || path.join(__dirname, '../uploads');
+        // Extract filename from the stored path (e.g., /images/categories/filename.jpg -> categories/filename.jpg)
+        const imagePath = category.image.replace('/images/', '');
+        const oldImagePath = path.join(uploadBasePath, imagePath);
         try {
           await fs.unlink(oldImagePath);
+          console.log('✅ Deleted old category image:', oldImagePath);
         } catch (err) {
           console.error('Error deleting old category image:', err);
         }
@@ -185,9 +190,14 @@ exports.deleteCategory = async (req, res, next) => {
     if (category.image) {
       const fs = require('fs').promises;
       const path = require('path');
-      const imagePath = path.join(__dirname, '../../public', category.image);
+      // Get the upload base path (same as middleware)
+      const uploadBasePath = process.env.UPLOAD_PATH || path.join(__dirname, '../uploads');
+      // Extract filename from the stored path (e.g., /images/categories/filename.jpg -> categories/filename.jpg)
+      const imageRelPath = category.image.replace('/images/', '');
+      const imagePath = path.join(uploadBasePath, imageRelPath);
       try {
         await fs.unlink(imagePath);
+        console.log('✅ Deleted category image:', imagePath);
       } catch (err) {
         console.error('Error deleting category image:', err);
       }
@@ -252,9 +262,14 @@ exports.updateSubcategory = async (req, res, next) => {
       if (subcategory.image) {
         const fs = require('fs').promises;
         const path = require('path');
-        const oldImagePath = path.join(__dirname, '../../public', subcategory.image);
+        // Get the upload base path (same as middleware)
+        const uploadBasePath = process.env.UPLOAD_PATH || path.join(__dirname, '../uploads');
+        // Extract filename from the stored path
+        const imageRelPath = subcategory.image.replace('/images/', '');
+        const oldImagePath = path.join(uploadBasePath, imageRelPath);
         try {
           await fs.unlink(oldImagePath);
+          console.log('✅ Deleted old subcategory image:', oldImagePath);
         } catch (err) {
           console.error('Error deleting old subcategory image:', err);
         }
@@ -282,9 +297,14 @@ exports.deleteSubcategory = async (req, res, next) => {
     if (subcategory.image) {
       const fs = require('fs').promises;
       const path = require('path');
-      const imagePath = path.join(__dirname, '../../public', subcategory.image);
+      // Get the upload base path (same as middleware)
+      const uploadBasePath = process.env.UPLOAD_PATH || path.join(__dirname, '../uploads');
+      // Extract filename from the stored path
+      const imageRelPath = subcategory.image.replace('/images/', '');
+      const imagePath = path.join(uploadBasePath, imageRelPath);
       try {
         await fs.unlink(imagePath);
+        console.log('✅ Deleted subcategory image:', imagePath);
       } catch (err) {
         console.error('Error deleting subcategory image:', err);
       }
