@@ -91,14 +91,20 @@ exports.createCategory = async (req, res, next) => {
     const { name, description } = req.body;
     const slug = name.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
 
-    const category = new Category({
+    // Handle image file if uploaded
+    let imagePath = null;
+    if (req.file) {
+      imagePath = `/images/categories/${req.file.filename}`;
+    }
+
+    const category = await Category.create({
       name,
       slug,
       description,
+      image: imagePath,
       createdBy: req.userId
     });
 
-    await category.save();
     res.status(201).json({ success: true, message: 'Category created', category });
   } catch (error) {
     next(error);
@@ -127,13 +133,39 @@ exports.getCategories = async (req, res, next) => {
 exports.updateCategory = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const updates = req.body;
+    const { name, description } = req.body;
 
-    if (updates.name) {
-      updates.slug = updates.name.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
+    const category = await Category.findByPk(id);
+    if (!category) {
+      return res.status(404).json({ success: false, message: 'Category not found' });
     }
 
-    const category = await Category.findByIdAndUpdate(id, updates, { new: true });
+    const updates = {};
+    if (name) {
+      updates.name = name;
+      updates.slug = name.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
+    }
+    if (description !== undefined) {
+      updates.description = description;
+    }
+
+    // Handle image file if uploaded
+    if (req.file) {
+      // Delete old image if exists
+      if (category.image) {
+        const fs = require('fs').promises;
+        const path = require('path');
+        const oldImagePath = path.join(__dirname, '../../public', category.image);
+        try {
+          await fs.unlink(oldImagePath);
+        } catch (err) {
+          console.error('Error deleting old category image:', err);
+        }
+      }
+      updates.image = `/images/categories/${req.file.filename}`;
+    }
+
+    await category.update(updates);
     res.status(200).json({ success: true, message: 'Category updated', category });
   } catch (error) {
     next(error);
@@ -143,7 +175,25 @@ exports.updateCategory = async (req, res, next) => {
 exports.deleteCategory = async (req, res, next) => {
   try {
     const { id } = req.params;
-    await Category.findByIdAndDelete(id);
+    
+    const category = await Category.findByPk(id);
+    if (!category) {
+      return res.status(404).json({ success: false, message: 'Category not found' });
+    }
+
+    // Delete image file if exists
+    if (category.image) {
+      const fs = require('fs').promises;
+      const path = require('path');
+      const imagePath = path.join(__dirname, '../../public', category.image);
+      try {
+        await fs.unlink(imagePath);
+      } catch (err) {
+        console.error('Error deleting category image:', err);
+      }
+    }
+
+    await category.destroy();
     res.status(200).json({ success: true, message: 'Category deleted' });
   } catch (error) {
     next(error);
@@ -156,16 +206,92 @@ exports.createSubcategory = async (req, res, next) => {
     const { name, description, categoryId } = req.body;
     const slug = name.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
 
-    const subcategory = new Subcategory({
+    // Handle image file if uploaded
+    let imagePath = null;
+    if (req.file) {
+      imagePath = `/images/subcategories/${req.file.filename}`;
+    }
+
+    const subcategory = await Subcategory.create({
       name,
       slug,
       description,
+      image: imagePath,
       categoryId,
       createdBy: req.userId
     });
 
-    await subcategory.save();
     res.status(201).json({ success: true, message: 'Subcategory created', subcategory });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.updateSubcategory = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { name, description } = req.body;
+
+    const subcategory = await Subcategory.findByPk(id);
+    if (!subcategory) {
+      return res.status(404).json({ success: false, message: 'Subcategory not found' });
+    }
+
+    const updates = {};
+    if (name) {
+      updates.name = name;
+      updates.slug = name.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
+    }
+    if (description !== undefined) {
+      updates.description = description;
+    }
+
+    // Handle image file if uploaded
+    if (req.file) {
+      // Delete old image if exists
+      if (subcategory.image) {
+        const fs = require('fs').promises;
+        const path = require('path');
+        const oldImagePath = path.join(__dirname, '../../public', subcategory.image);
+        try {
+          await fs.unlink(oldImagePath);
+        } catch (err) {
+          console.error('Error deleting old subcategory image:', err);
+        }
+      }
+      updates.image = `/images/subcategories/${req.file.filename}`;
+    }
+
+    await subcategory.update(updates);
+    res.status(200).json({ success: true, message: 'Subcategory updated', subcategory });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.deleteSubcategory = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    
+    const subcategory = await Subcategory.findByPk(id);
+    if (!subcategory) {
+      return res.status(404).json({ success: false, message: 'Subcategory not found' });
+    }
+
+    // Delete image file if exists
+    if (subcategory.image) {
+      const fs = require('fs').promises;
+      const path = require('path');
+      const imagePath = path.join(__dirname, '../../public', subcategory.image);
+      try {
+        await fs.unlink(imagePath);
+      } catch (err) {
+        console.error('Error deleting subcategory image:', err);
+      }
+    }
+
+    await subcategory.destroy();
+    res.status(200).json({ success: true, message: 'Subcategory deleted' });
   } catch (error) {
     next(error);
   }

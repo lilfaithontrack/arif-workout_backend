@@ -20,6 +20,11 @@ const Subcategory = sequelize.define('Subcategory', {
     type: DataTypes.TEXT,
     allowNull: true
   },
+  image: {
+    type: DataTypes.STRING(500),
+    allowNull: true,
+    comment: 'Path to subcategory image file'
+  },
   categoryId: {
     type: DataTypes.INTEGER,
     allowNull: false,

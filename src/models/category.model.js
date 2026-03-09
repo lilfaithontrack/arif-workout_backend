@@ -20,6 +20,11 @@ const Category = sequelize.define('Category', {
     type: DataTypes.TEXT,
     allowNull: true
   },
+  image: {
+    type: DataTypes.STRING(500),
+    allowNull: true,
+    comment: 'Path to category image file'
+  },
   createdBy: {
     type: DataTypes.INTEGER,
     allowNull: false,

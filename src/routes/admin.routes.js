@@ -7,6 +7,7 @@ const { authenticate } = require('../middleware/auth');
 const { requireAdmin } = require('../middleware/roles');
 const validate = require('../middleware/validate');
 const { uploadSingle, uploadMultiple } = require('../middleware/upload.middleware');
+const { uploadCategoryImage, uploadSubcategoryImage } = require('../middleware/category-upload.middleware');
 
 // All routes require admin authentication
 router.use(authenticate);
@@ -19,25 +20,35 @@ router.patch('/courses/:id/reject', adminController.rejectCourse);
 // Instructor management
 router.patch('/instructors/:id/approve', adminController.approveInstructor);
 
-// Category management
+// Category management (with file upload)
 router.post('/categories',
+  uploadCategoryImage,
   [body('name').trim().notEmpty()],
   validate,
   adminController.createCategory
 );
 router.get('/categories', adminController.getCategories);
-router.put('/categories/:id', adminController.updateCategory);
+router.put('/categories/:id',
+  uploadCategoryImage,
+  adminController.updateCategory
+);
 router.delete('/categories/:id', adminController.deleteCategory);
 
-// Subcategory management
+// Subcategory management (with file upload)
 router.post('/subcategories',
+  uploadSubcategoryImage,
   [
     body('name').trim().notEmpty(),
-    body('categoryId').isMongoId()
+    body('categoryId').notEmpty()
   ],
   validate,
   adminController.createSubcategory
 );
+router.put('/subcategories/:id',
+  uploadSubcategoryImage,
+  adminController.updateSubcategory
+);
+router.delete('/subcategories/:id', adminController.deleteSubcategory);
 
 // Package management
 router.post('/packages',

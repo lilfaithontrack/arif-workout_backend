@@ -1,4 +1,4 @@
-const { Advertisement, User } = require('../models');
+const { Advertisement, User, sequelize } = require('../models');
 const { Op } = require('sequelize');
 
 /**
@@ -25,16 +25,18 @@ exports.getAdvertisements = async (req, res, next) => {
     if (isActive !== undefined) where.isActive = isActive === 'true';
 
     if (placement) {
-      where.placement = {
-        [Op.contains]: [placement]
-      };
+      // MySQL JSON_CONTAINS for JSON array fields
+      where[Op.and] = where[Op.and] || [];
+      where[Op.and].push(
+        sequelize.literal(`JSON_CONTAINS(placement, '"${placement}"')`)
+      );
     }
 
     if (search) {
       where[Op.or] = [
-        { title: { [Op.iLike]: `%${search}%` } },
-        { advertiserName: { [Op.iLike]: `%${search}%` } },
-        { description: { [Op.iLike]: `%${search}%` } }
+        { title: { [Op.like]: `%${search}%` } },
+        { advertiserName: { [Op.like]: `%${search}%` } },
+        { description: { [Op.like]: `%${search}%` } }
       ];
     }
 
@@ -90,18 +92,22 @@ exports.getActiveAds = async (req, res, next) => {
     };
 
     if (placement) {
-      where.placement = {
-        [Op.contains]: [placement]
-      };
+      // MySQL JSON_CONTAINS for JSON array fields
+      where[Op.and] = where[Op.and] || [];
+      where[Op.and].push(
+        sequelize.literal(`JSON_CONTAINS(placement, '"${placement}"')`)
+      );
     }
 
     if (type) where.type = type;
     if (category) where.category = category;
 
     if (deviceType) {
-      where.targetDevices = {
-        [Op.contains]: [deviceType]
-      };
+      // MySQL JSON_CONTAINS for JSON array fields
+      where[Op.and] = where[Op.and] || [];
+      where[Op.and].push(
+        sequelize.literal(`JSON_CONTAINS(targetDevices, '"${deviceType}"')`)
+      );
     }
 
     const advertisements = await Advertisement.findAll({
