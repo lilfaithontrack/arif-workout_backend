@@ -2,16 +2,31 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
+// Get the base directory for uploads (works in both local and deployment)
+const getUploadBasePath = () => {
+    // For deployment, use absolute path from environment variable
+    if (process.env.UPLOAD_PATH) {
+        return process.env.UPLOAD_PATH;
+    }
+    // Default: create uploads directory within backend
+    return path.join(__dirname, '../uploads');
+};
+
 // Configure multer storage for category images
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         // Create directory path for categories
-        const uploadPath = path.join(__dirname, '../../public/images/categories');
+        const uploadPath = path.join(getUploadBasePath(), 'categories');
 
-        // Create directories if they don't exist
-        fs.mkdirSync(uploadPath, { recursive: true });
-
-        cb(null, uploadPath);
+        try {
+            // Create directories if they don't exist
+            fs.mkdirSync(uploadPath, { recursive: true });
+            console.log('✅ Category upload path created/verified:', uploadPath);
+            cb(null, uploadPath);
+        } catch (error) {
+            console.error('❌ Error creating category upload directory:', error);
+            cb(error, uploadPath);
+        }
     },
     filename: (req, file, cb) => {
         // Get file extension
@@ -29,12 +44,17 @@ const storage = multer.diskStorage({
 const subcategoryStorage = multer.diskStorage({
     destination: (req, file, cb) => {
         // Create directory path for subcategories
-        const uploadPath = path.join(__dirname, '../../public/images/subcategories');
+        const uploadPath = path.join(getUploadBasePath(), 'subcategories');
 
-        // Create directories if they don't exist
-        fs.mkdirSync(uploadPath, { recursive: true });
-
-        cb(null, uploadPath);
+        try {
+            // Create directories if they don't exist
+            fs.mkdirSync(uploadPath, { recursive: true });
+            console.log('✅ Subcategory upload path created/verified:', uploadPath);
+            cb(null, uploadPath);
+        } catch (error) {
+            console.error('❌ Error creating subcategory upload directory:', error);
+            cb(error, uploadPath);
+        }
     },
     filename: (req, file, cb) => {
         // Get file extension

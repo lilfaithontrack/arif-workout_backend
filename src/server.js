@@ -1,4 +1,5 @@
 require('dotenv').config();
+const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
@@ -93,7 +94,15 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Serve static files with CORS (exercise images)
-app.use('/images', cors(), express.static('public/images'));
+// Use environment variable for static files path in deployment
+if (process.env.STATIC_PATH) {
+    app.use('/images', cors(), express.static(path.join(process.env.STATIC_PATH, 'images')));
+    console.log(`📁 Serving static files from: ${path.join(process.env.STATIC_PATH, 'images')}`);
+} else {
+    // Default: serve from uploads directory within backend
+    app.use('/images', cors(), express.static(path.join(__dirname, '../uploads')));
+    console.log(`📁 Serving static files from: ${path.join(__dirname, '../uploads')}`);
+}
 
 // Health check
 app.get('/health', (req, res) => {
