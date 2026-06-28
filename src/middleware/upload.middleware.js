@@ -23,10 +23,10 @@ const storage = multer.diskStorage({
             return cb(new Error('exerciseSlug and subfolder are required'));
         }
 
-        // Sanitize exerciseSlug (only allow lowercase letters, numbers, and hyphens)
-        const sanitizedSlug = exerciseSlug.toLowerCase().replace(/[^a-z0-9-]/g, '');
-        if (sanitizedSlug !== exerciseSlug) {
-            return cb(new Error('Invalid exerciseSlug format. Use lowercase letters, numbers, and hyphens only.'));
+        // Sanitize exerciseSlug: lowercase, allow letters, numbers, hyphens, and underscores
+        const sanitizedSlug = exerciseSlug.toLowerCase().replace(/[^a-z0-9_-]/g, '');
+        if (!sanitizedSlug) {
+            return cb(new Error('Invalid exerciseSlug format. Use letters, numbers, hyphens, and underscores only.'));
         }
 
         // Validate subfolder
@@ -40,11 +40,14 @@ const storage = multer.diskStorage({
         // Create directories if they don't exist
         fs.mkdirSync(uploadPath, { recursive: true });
 
+        // Store sanitized slug on req for downstream use
+        req.sanitizedExerciseSlug = sanitizedSlug;
+
         cb(null, uploadPath);
     },
     filename: (req, file, cb) => {
         const { exerciseSlug, subfolder } = req.body;
-        const sanitizedSlug = exerciseSlug.toLowerCase().replace(/[^a-z0-9-]/g, '');
+        const sanitizedSlug = exerciseSlug.toLowerCase().replace(/[^a-z0-9_-]/g, '');
 
         // Get file extension
         const ext = path.extname(file.originalname).toLowerCase();
@@ -92,6 +95,6 @@ const upload = multer({
 // Export middleware functions
 module.exports = {
     uploadSingle: upload.single('image'),
-    uploadMultiple: upload.array('images', 10), // Max 10 files at once
+    uploadMultiple: upload.array('images', 20), // Max 20 files at once (bulk drag-and-drop)
     ALLOWED_SUBFOLDERS
 };

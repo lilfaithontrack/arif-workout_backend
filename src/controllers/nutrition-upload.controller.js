@@ -24,12 +24,12 @@ exports.createNutritionFolder = async (req, res, next) => {
             return res.status(400).json({ success: false, message: 'Nutrition slug is required' });
         }
 
-        // Sanitize slug
-        const sanitizedSlug = slug.toLowerCase().replace(/[^a-z0-9-]/g, '');
-        if (sanitizedSlug !== slug) {
+        // Sanitize slug: lowercase, allow letters, numbers, hyphens, and underscores
+        const sanitizedSlug = slug.toLowerCase().replace(/[^a-z0-9_-]/g, '');
+        if (!sanitizedSlug) {
             return res.status(400).json({
                 success: false,
-                message: 'Invalid slug format. Use lowercase letters, numbers, and hyphens only.'
+                message: 'Invalid slug format. Use letters, numbers, hyphens, and underscores only.'
             });
         }
 

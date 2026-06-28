@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arif Workout — Database Schema (seed.json based)</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #0d1117;
+    color: #c9d1d9;
+    padding: 40px 20px;
+    min-height: 100vh;
+  }
+  h1 {
+    text-align: center;
+    font-size: 28px;
+    color: #58a6ff;
+    margin-bottom: 8px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #8b949e;
+    font-size: 14px;
+    margin-bottom: 40px;
+  }
+  .erd {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .row {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 60px;
+    position: relative;
+  }
+  .row + .row { margin-top: 50px; }
+
+  /* Connector lines */
+  .connector {
+    position: absolute;
+    background: #30363d;
+    z-index: 0;
+  }
+  .connector.vertical {
+    width: 2px;
+    height: 50px;
+    left: 50%;
+    top: -50px;
+    transform: translateX(-50%);
+  }
+  .connector.horizontal {
+    height: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .connector-label {
+    position: absolute;
+    background: #161b22;
+    color: #8b949e;
+    font-size: 11px;
+    padding: 2px 8px;
+    border: 1px solid #30363d;
+    border-radius: 4px;
+    white-space: nowrap;
+    z-index: 1;
+  }
+
+  /* Table card */
+  .table-card {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    width: 320px;
+    overflow: hidden;
+    z-index: 1;
+    position: relative;
+    transition: border-color 0.2s;
+  }
+  .table-card:hover { border-color: #58a6ff; }
+  .table-card.lookup { border-top: 3px solid #f0883e; }
+  .table-card.main   { border-top: 3px solid #58a6ff; }
+  .table-card.junction { border-top: 3px solid #f778ba; }
+  .table-card.runtime { border-top: 3px solid #3fb950; }
+
+  .table-header {
+    padding: 12px 16px;
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #30363d;
+  }
+  .table-name { color: #e6edf3; }
+  .badge {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 500;
+  }
+  .badge.lookup   { background: #1f1208; color: #f0883e; }
+  .badge.main     { background: #0d2240; color: #58a6ff; }
+  .badge.junction { background: #2d0a1f; color: #f778ba; }
+  .badge.runtime  { background: #0d2818; color: #3fb950; }
+
+  .columns { padding: 4px 0; }
+  .col {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 16px;
+    font-size: 12px;
+    font-family: 'SF Mono', 'Consolas', monospace;
+  }
+  .col:hover { background: #1c2128; }
+  .col-name { color: #c9d1d9; }
+  .col-type { color: #8b949e; }
+  .col.pk { color: #f778ba; font-weight: 600; }
+  .col.fk { color: #f0883e; }
+  .col.seed { color: #3fb950; }
+  .col-sep { border-top: 1px solid #21262d; }
+
+  .legend {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 50px;
+    flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #8b949e;
+  }
+  .legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+
+  .mapping {
+    max-width: 800px;
+    margin: 50px auto 0;
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 24px;
+  }
+  .mapping h2 {
+    font-size: 16px;
+    color: #58a6ff;
+    margin-bottom: 16px;
+  }
+  .mapping table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    font-family: 'SF Mono', 'Consolas', monospace;
+  }
+  .mapping th {
+    text-align: left;
+    padding: 8px 12px;
+    color: #8b949e;
+    border-bottom: 1px solid #30363d;
+    font-weight: 500;
+  }
+  .mapping td {
+    padding: 6px 12px;
+    border-bottom: 1px solid #21262d;
+    color: #c9d1d9;
+  }
+  .mapping td:first-child { color: #3fb950; }
+  .mapping td:last-child { color: #f0883e; }
+</style>
+</head>
+<body>
+
+<h1>Arif Workout — Database Schema</h1>
+<p class="subtitle">Designed around seed.json structure: Program → Workout → Section → Exercise</p>
+
+<div class="erd">
+
+  <!-- Row 1: Category (lookup) -->
+  <div class="row">
+    <div class="table-card lookup">
+      <div class="table-header">
+        <span class="table-name">categories</span>
+        <span class="badge lookup">LOOKUP</span>
+      </div>
+      <div class="columns">
+        <div class="col"><span class="col-name col pk">id</span><span class="col-type">INT PK</span></div>
+        <div class="col"><span class="col-name col seed">name</span><span class="col-type">VARCHAR(255)</span></div>
+        <div class="col"><span class="col-name">slug</span><span class="col-type">VARCHAR(255) UQ</span></div>
+        <div class="col"><span class="col-name">description</span><span class="col-type">TEXT</span></div>
+        <div class="col"><span class="col-name">image</span><span class="col-type">VARCHAR(500)</span></div>
+        <div class="col"><span class="col-name col fk">createdBy</span><span class="col-type">INT FK→users</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Connector -->
+  <div style="width:2px;height:40px;background:#30363d;"></div>
+  <div style="font-size:11px;color:#8b949e;margin:-30px 0 10px 0;">1 category : N programs</div>
+
+  <!-- Row 2: Programs -->
+  <div class="row">
+    <div class="table-card main">
+      <div class="table-header">
+        <span class="table-name">programs</span>
+        <span class="badge main">MAIN</span>
+      </div>
+      <div class="columns">
+        <div class="col"><span class="col-name col pk">id</span><span class="col-type">INT PK</span></div>
+        <div class="col"><span class="col-name col seed">name</span><span class="col-type">VARCHAR(255)</span></div>
+        <div class="col"><span class="col-name">slug</span><span class="col-type">VARCHAR(255) UQ</span></div>
+        <div class="col"><span class="col-name">description</span><span class="col-type">TEXT</span></div>
+        <div class="col"><span class="col-name col fk">categoryId</span><span class="col-type">INT FK→categories</span></div>
+        <div class="col"><span class="col-name col seed">categoryName</span><span class="col-type">VARCHAR(100)</span></div>
+        <div class="col"><span class="col-name">level</span><span class="col-type">ENUM</span></div>
+        <div class="col"><span class="col-name">goal</span><span class="col-type">ENUM</span></div>
+        <div class="col"><span class="col-name col seed">workoutsCount</span><span class="col-type">INT</span></div>
+        <div class="col"><span class="col-name">isActive</span><span class="col-type">BOOL</span></div>
+        <div class="col"><span class="col-name">orderIndex</span><span class="col-type">INT</span></div>
+        <div class="col"><span class="col-name col fk">createdBy</span><span class="col-type">INT FK→users</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Connector -->
+  <div style="width:2px;height:40px;background:#30363d;"></div>
+  <div style="font-size:11px;color:#8b949e;margin:-30px 0 10px 0;">1 program : N workouts</div>
+
+  <!-- Row 3: Program Workouts -->
+  <div class="row">
+    <div class="table-card main">
+      <div class="table-header">
+        <span class="table-name">program_workouts</span>
+        <span class="badge main">MAIN</span>
+      </div>
+      <div class="columns">
+        <div class="col"><span class="col-name col pk">id</span><span class="col-type">INT PK</span></div>
+        <div class="col"><span class="col-name col fk">programId</span><span class="col-type">INT FK→programs</span></div>
+        <div class="col"><span class="col-name col seed">name</span><span class="col-type">VARCHAR(255)</span></div>
+        <div class="col"><span class="col-name">description</span><span class="col-type">TEXT</span></div>
+        <div class="col"><span class="col-name">level</span><span class="col-type">ENUM</span></div>
+        <div class="col"><span class="col-name col seed">durationMinutes</span><span class="col-type">INT</span></div>
+        <div class="col"><span class="col-name col seed">exercisesCount</span><span class="col-type">INT</span></div>
+        <div class="col"><span class="col-name">weekNumber</span><span class="col-type">INT</span></div>
+        <div class="col"><span class="col-name">dayNumber</span><span class="col-type">INT</span></div>
+        <div class="col"><span class="col-name">focusArea</span><span class="col-type">VARCHAR(100)</span></div>
+        <div class="col"><span class="col-name">orderIndex</span><span class="col-type">INT</span></div>
+        <div class="col"><span class="col-name">isActive</span><span class="col-type">BOOL</span></div>
+        <div class="col"><span class="col-name">phase</span><span class="col-type">ENUM (NASM)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Connector -->
+  <div style="width:2px;height:40px;background:#30363d;"></div>
+  <div style="font-size:11px;color:#8b949e;margin:-30px 0 10px 0;">1 workout : N workout_exercises</div>
+
+  <!-- Row 4: Junction + Lookups -->
+  <div class="row">
+    <!-- Workout Sections (lookup) -->
+    <div class="table-card lookup">
+      <div class="table-header">
+        <span class="table-name">workout_sections</span>
+        <span class="badge lookup">LOOKUP</span>
+      </div>
+      <div class="columns">
+        <div class="col"><span class="col-name col pk">id</span><span class="col-type">UUID PK</span></div>
+        <div class="col"><span class="col-name col seed">name</span><span class="col-type">VARCHAR(100)</span></div>
+        <div class="col"><span class="col-name col seed">slug</span><span class="col-type">VARCHAR(100) UQ</span></div>
+        <div class="col"><span class="col-name">description</span><span class="col-type">TEXT</span></div>
+        <div class="col"><span class="col-name">ordinal</span><span class="col-type">INT</span></div>
+        <div class="col"><span class="col-name">color</span><span class="col-type">VARCHAR(20)</span></div>
+        <div class="col"><span class="col-name">isActive</span><span class="col-type">BOOL</span></div>
+      </div>
+    </div>
+
+    <!-- Workout Exercises (junction) -->
+    <div class="table-card junction">
+      <div class="table-header">
+        <span class="table-name">workout_exercises</span>
+        <span class="badge junction">JUNCTION</span>
+      </div>
+      <div class="columns">
+        <div class="col"><span class="col-name col pk">id</span><span class="col-type">INT PK</span></div>
+        <div class="col"><span class="col-name col fk">programWorkoutId</span><span class="col-type">FK→program_workouts</span></div>
+        <div class="col"><span class="col-name col fk">exerciseId</span><span class="col-type">FK→exercises</span></div>
+        <div class="col"><span class="col-name col seed">section</span><span class="col-type">ENUM</span></div>
+        <div class="col"><span class="col-name col seed">sectionName</span><span class="col-type">VARCHAR(100)</span></div>
+        <div class="col"><span class="col-name col seed">orderIndex</span><span class="col-type">INT</span></div>
+        <div class="col"><span class="col-name col seed">sets</span><span class="col-type">INT</span></div>
+        <div class="col"><span class="col-name col seed">reps</span><span class="col-type">INT</span></div>
+        <div class="col"><span class="col-name col seed">repsDisplay</span><span class="col-type">VARCHAR(50)</span></div>
+        <div class="col"><span class="col-name col seed">restSeconds</span><span class="col-type">INT</span></div>
+        <div class="col"><span class="col-name col seed">tempo</span><span class="col-type">VARCHAR(20)</span></div>
+        <div class="col"><span class="col-name">weight</span><span class="col-type">DECIMAL(6,2)</span></div>
+        <div class="col"><span class="col-name">intensity</span><span class="col-type">ENUM</span></div>
+        <div class="col"><span class="col-name">isActive</span><span class="col-type">BOOL</span></div>
+      </div>
+    </div>
+
+    <!-- Exercises (master) -->
+    <div class="table-card main">
+      <div class="table-header">
+        <span class="table-name">exercises</span>
+        <span class="badge main">MASTER</span>
+      </div>
+      <div class="columns">
+        <div class="col"><span class="col-name col pk">id</span><span class="col-type">INT PK</span></div>
+        <div class="col"><span class="col-name col seed">name</span><span class="col-type">VARCHAR(255)</span></div>
+        <div class="col"><span class="col-name">slug</span><span class="col-type">VARCHAR(255) UQ</span></div>
+        <div class="col"><span class="col-name">description</span><span class="col-type">TEXT</span></div>
+        <div class="col"><span class="col-name">category</span><span class="col-type">ENUM</span></div>
+        <div class="col"><span class="col-name">muscleGroups</span><span class="col-type">JSON</span></div>
+        <div class="col"><span class="col-name">equipment</span><span class="col-type">JSON</span></div>
+        <div class="col"><span class="col-name">difficulty</span><span class="col-type">ENUM</span></div>
+        <div class="col"><span class="col-name">instructions</span><span class="col-type">JSON</span></div>
+        <div class="col"><span class="col-name">videoUrl</span><span class="col-type">VARCHAR(500)</span></div>
+        <div class="col"><span class="col-name">imageUrl</span><span class="col-type">VARCHAR(500)</span></div>
+        <div class="col"><span class="col-name">isActive</span><span class="col-type">BOOL</span></div>
+        <div class="col"><span class="col-name col fk">createdBy</span><span class="col-type">INT FK→users</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Connector -->
+  <div style="width:2px;height:40px;background:#30363d;"></div>
+  <div style="font-size:11px;color:#8b949e;margin:-30px 0 10px 0;">runtime: users enroll in programs</div>
+
+  <!-- Row 5: User Programs (runtime) -->
+  <div class="row">
+    <div class="table-card runtime">
+      <div class="table-header">
+        <span class="table-name">user_programs</span>
+        <span class="badge runtime">RUNTIME</span>
+      </div>
+      <div class="columns">
+        <div class="col"><span class="col-name col pk">id</span><span class="col-type">INT PK</span></div>
+        <div class="col"><span class="col-name col fk">userId</span><span class="col-type">INT FK→users</span></div>
+        <div class="col"><span class="col-name col fk">programId</span><span class="col-type">INT FK→programs</span></div>
+        <div class="col"><span class="col-name col fk">currentWorkoutId</span><span class="col-type">FK→program_workouts</span></div>
+        <div class="col"><span class="col-name">status</span><span class="col-type">ENUM</span></div>
+        <div class="col"><span class="col-name">progressPercentage</span><span class="col-type">DECIMAL(5,2)</span></div>
+        <div class="col"><span class="col-name">completedWorkouts</span><span class="col-type">INT</span></div>
+        <div class="col"><span class="col-name">startDate</span><span class="col-type">DATETIME</span></div>
+        <div class="col"><span class="col-name">rating</span><span class="col-type">INT</span></div>
+        <div class="col"><span class="col-name">isFavorite</span><span class="col-type">BOOL</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Legend -->
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:#f0883e"></div>Lookup table</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#58a6ff"></div>Main entity</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#f778ba"></div>Junction table</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#3fb950"></div>Runtime / app data</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#3fb950;border-radius:0;width:20px;height:2px"></div>seed.json field</div>
+</div>
+
+<!-- Field mapping -->
+<div class="mapping">
+  <h2>seed.json → Database mapping</h2>
+  <table>
+    <thead>
+      <tr><th>seed.json path</th><th>→</th><th>table.column</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>program.category</td><td>→</td><td>categories.name</td></tr>
+      <tr><td>program.programName</td><td>→</td><td>programs.name</td></tr>
+      <tr><td>program.workouts[]</td><td>→</td><td>program_workouts (1 row each)</td></tr>
+      <tr><td>workout.workoutName</td><td>→</td><td>program_workouts.name</td></tr>
+      <tr><td>workout.exerciseCount</td><td>→</td><td>program_workouts.exercisesCount</td></tr>
+      <tr><td>workout.durationMinutes</td><td>→</td><td>program_workouts.durationMinutes</td></tr>
+      <tr><td>section.sectionName</td><td>→</td><td>workout_sections.name + workout_exercises.sectionName</td></tr>
+      <tr><td>section.exercises[]</td><td>→</td><td>workout_exercises (1 row each)</td></tr>
+      <tr><td>exercise.name</td><td>→</td><td>exercises.name (deduplicated master)</td></tr>
+      <tr><td>exercise.reps</td><td>→</td><td>workout_exercises.reps + repsDisplay</td></tr>
+      <tr><td>exercise.sets</td><td>→</td><td>workout_exercises.sets</td></tr>
+      <tr><td>exercise.tempo</td><td>→</td><td>workout_exercises.tempo</td></tr>
+      <tr><td>exercise.rest</td><td>→</td><td>workout_exercises.restSeconds</td></tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

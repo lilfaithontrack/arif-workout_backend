@@ -30,6 +30,18 @@ const Advertisement = require('./advertisement.model');
 const Habit = require('./habit.model');
 const HabitCompletion = require('./habitcompletion.model');
 
+// NEW: Program hierarchy models
+const Program = require('./program.model');
+const ProgramWorkout = require('./programworkout.model');
+const WorkoutExercise = require('./workoutexercise.model');
+const UserProgram = require('./userprogram.model');
+const WorkoutSection = require('./workoutsection.model');
+
+// NEW: OPT Model
+const Phase = require('./phase.model');
+const Assessment = require('./assessment.model');
+const AssessmentResult = require('./assessmentresult.model');
+
 
 // TODO: Convert these models to Sequelize
 // const Media = require('./media.model');
@@ -191,13 +203,78 @@ HabitCompletion.belongsTo(Habit, { foreignKey: 'habitId', as: 'habit' });
 User.hasMany(HabitCompletion, { foreignKey: 'userId', as: 'habitCompletions' });
 HabitCompletion.belongsTo(User, { foreignKey: 'userId', as: 'user' });
 
+// NEW: Program hierarchy relationships
+
+// User <-> Program (created by)
+User.hasMany(Program, { foreignKey: 'createdBy', as: 'createdPrograms' });
+Program.belongsTo(User, { foreignKey: 'createdBy', as: 'creator' });
+
+// Category <-> Program
+Category.hasMany(Program, { foreignKey: 'categoryId', as: 'programs' });
+Program.belongsTo(Category, { foreignKey: 'categoryId', as: 'category' });
+
+// Program <-> ProgramWorkout
+Program.hasMany(ProgramWorkout, { foreignKey: 'programId', as: 'workouts' });
+ProgramWorkout.belongsTo(Program, { foreignKey: 'programId', as: 'program' });
+
+// WorkoutSection <-> WorkoutExercise
+WorkoutSection.hasMany(WorkoutExercise, { foreignKey: 'section', sourceKey: 'slug', as: 'exercises' });
+WorkoutExercise.belongsTo(WorkoutSection, { foreignKey: 'section', targetKey: 'slug', as: 'sectionInfo' });
+
+// ProgramWorkout <-> WorkoutExercise
+ProgramWorkout.hasMany(WorkoutExercise, { foreignKey: 'programWorkoutId', as: 'exercises' });
+WorkoutExercise.belongsTo(ProgramWorkout, { foreignKey: 'programWorkoutId', as: 'programWorkout' });
+
+// Exercise <-> WorkoutExercise
+Exercise.hasMany(WorkoutExercise, { foreignKey: 'exerciseId', as: 'workoutExercises' });
+WorkoutExercise.belongsTo(Exercise, { foreignKey: 'exerciseId', as: 'exercise' });
+
+// User <-> UserProgram (enrollments)
+User.hasMany(UserProgram, { foreignKey: 'userId', as: 'programEnrollments' });
+UserProgram.belongsTo(User, { foreignKey: 'userId', as: 'user' });
+
+// Program <-> UserProgram (enrollments)
+Program.hasMany(UserProgram, { foreignKey: 'programId', as: 'enrollments' });
+UserProgram.belongsTo(Program, { foreignKey: 'programId', as: 'program' });
+
+// ProgramWorkout <-> UserProgram (current workout)
+ProgramWorkout.hasMany(UserProgram, { foreignKey: 'currentWorkoutId', as: 'currentForUsers' });
+UserProgram.belongsTo(ProgramWorkout, { foreignKey: 'currentWorkoutId', as: 'currentWorkout' });
+
 // TODO: Add relationships for unconverted models once they're converted
 // User.hasMany(Course, { foreignKey: 'instructorId', as: 'courses' });
 // User.hasMany(Order, { foreignKey: 'userId', as: 'orders' });
 
+// OPT Model relationships
+
+// Phase <-> Program
+Phase.hasMany(Program, { foreignKey: 'optPhaseId', as: 'programs' });
+Program.belongsTo(Phase, { foreignKey: 'optPhaseId', as: 'optPhaseInfo' });
+
+// Phase <-> ProgramWorkout
+Phase.hasMany(ProgramWorkout, { foreignKey: 'phaseId', as: 'workouts' });
+ProgramWorkout.belongsTo(Phase, { foreignKey: 'phaseId', as: 'phaseInfo' });
+
+// Assessment <-> AssessmentResult
+Assessment.hasMany(AssessmentResult, { foreignKey: 'assessmentId', as: 'results' });
+AssessmentResult.belongsTo(Assessment, { foreignKey: 'assessmentId', as: 'assessment' });
+
+// User <-> AssessmentResult (as subject)
+User.hasMany(AssessmentResult, { foreignKey: 'userId', as: 'optAssessmentResults' });
+AssessmentResult.belongsTo(User, { foreignKey: 'userId', as: 'subject' });
+
+// User <-> AssessmentResult (as practitioner)
+User.hasMany(AssessmentResult, { foreignKey: 'assessedBy', as: 'conductedOptAssessments' });
+AssessmentResult.belongsTo(User, { foreignKey: 'assessedBy', as: 'practitioner' });
+
+// Program <-> AssessmentResult (optional link)
+Program.hasMany(AssessmentResult, { foreignKey: 'programId', as: 'optAssessmentResults' });
+AssessmentResult.belongsTo(Program, { foreignKey: 'programId', as: 'linkedProgram' });
+
 // Export all models and sequelize
 module.exports = {
   sequelize,
+  Op: require('sequelize').Op,
   User,
   OTP,
   Category,
@@ -223,6 +300,13 @@ module.exports = {
   AIWorkoutPlan,
   Advertisement,
   Habit,
-  HabitCompletion
-
+  HabitCompletion,
+  Program,
+  ProgramWorkout,
+  WorkoutExercise,
+  UserProgram,
+  WorkoutSection,
+  Phase,
+  Assessment,
+  AssessmentResult
 };

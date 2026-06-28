@@ -98,6 +98,17 @@ const Exercise = sequelize.define('Exercise', {
     defaultValue: [],
     comment: 'Array of exercise variations'
   },
+  // NASM exercise classification
+  movementType: {
+    type: DataTypes.ENUM('stable', 'stabilization', 'functional', 'power'),
+    defaultValue: 'stable',
+    comment: 'NASM movement classification: stable (bench), stabilization (stability ball), functional (standing cable), power (explosive)'
+  },
+  planeOfMotion: {
+    type: DataTypes.ENUM('sagittal', 'frontal', 'transverse', 'multiplanar'),
+    defaultValue: 'sagittal',
+    comment: 'Primary plane of motion for this exercise'
+  },
   isActive: {
     type: DataTypes.BOOLEAN,
     defaultValue: true
@@ -117,7 +128,8 @@ const Exercise = sequelize.define('Exercise', {
     { fields: ['category'] },
     { fields: ['difficulty'] },
     { fields: ['isActive'] },
-    { fields: ['createdBy'] }
+    { fields: ['createdBy'] },
+    { fields: ['movementType'] }
   ]
 });
 

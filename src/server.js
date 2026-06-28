@@ -37,6 +37,9 @@ const nutritionGeneratorRoutes = require('./routes/nutrition-generator.routes');
 const advertisementRoutes = require('./routes/advertisement.routes');
 const nutritionUploadRoutes = require('./routes/nutrition-upload.routes');
 const habitRoutes = require('./routes/habit.routes');
+const programRoutes = require('./routes/program.routes');
+const programWorkoutRoutes = require('./routes/program-workout.routes');
+const optModelRoutes = require('./routes/optmodel.routes');
 
 
 // Initialize express app
@@ -48,27 +51,29 @@ connectDB();
 // Trust proxy (for rate limiting behind reverse proxy)
 app.set('trust proxy', 1);
 
-// Rate limiting
-const limiter = rateLimit({
-  windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS) || 15 * 60 * 1000, // 15 minutes
-  max: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS) || 100,
-  message: 'Too many requests from this IP, please try again later.',
-  standardHeaders: true,
-  legacyHeaders: false,
-});
-
-// Apply rate limiting to all routes
-app.use('/api/', limiter);
+// Rate limiting — disabled for development
+// const limiter = rateLimit({
+//   windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS) || 15 * 60 * 1000,
+//   max: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS) || 1000,
+//   message: 'Too many requests from this IP, please try again later.',
+//   standardHeaders: true,
+//   legacyHeaders: false,
+// });
+// app.use('/api/', limiter);
 
 // Middleware
 app.use(helmet({
-  crossOriginResourcePolicy: { policy: "cross-origin" } // Allow images to load cross-origin
+  crossOriginResourcePolicy: { policy: "cross-origin" }, // Allow images to load cross-origin
+  crossOriginEmbedderPolicy: false,
+  referrerPolicy: { policy: "no-referrer-when-downgrade" }, // Allow referrer for cross-origin API calls
+  contentSecurityPolicy: false, // Disable CSP for admin panel to allow cross-origin API
 })); // Security headers
 app.use(cors({
   origin: [
     'http://localhost:5173',
     'http://localhost:8081',
     'http://localhost:8080',
+    'http://192.168.8.184:8080',
     'https://admin.arifworkout.com',
     'http://admin.arifworkout.com',
     process.env.CORS_ORIGIN
@@ -99,9 +104,9 @@ if (process.env.STATIC_PATH) {
     app.use('/images', cors(), express.static(path.join(process.env.STATIC_PATH, 'images')));
     console.log(`📁 Serving static files from: ${path.join(process.env.STATIC_PATH, 'images')}`);
 } else {
-    // Default: serve from uploads directory within backend
-    app.use('/images', cors(), express.static(path.join(__dirname, '../uploads')));
-    console.log(`📁 Serving static files from: ${path.join(__dirname, '../uploads')}`);
+    // Default: serve from public/images directory within backend
+    app.use('/images', cors(), express.static(path.join(__dirname, '../public/images')));
+    console.log(`📁 Serving static files from: ${path.join(__dirname, '../public/images')}`);
 }
 
 // Health check
@@ -174,7 +179,9 @@ app.use('/api/nutrition-generator', nutritionGeneratorRoutes); // Nutrition gene
 app.use('/api/advertisements', advertisementRoutes); // Advertisement management
 app.use('/api/nutrition-upload', nutritionUploadRoutes); // Nutrition image upload
 app.use('/api/habits', habitRoutes); // Habit tracker
-
+app.use('/api/programs', programRoutes); // Program hierarchy (Programs -> Workouts -> Exercises)
+app.use('/api/program-workouts', programWorkoutRoutes); // Standalone program workout endpoints (admin panel)
+app.use('/api/opt-model', optModelRoutes); // OPT Model CRUD (phases, sections, assessments, results)
 
 // Root route
 app.get('/', (req, res) => {

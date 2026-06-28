@@ -12,12 +12,12 @@ exports.createExerciseFolder = async (req, res, next) => {
             return res.status(400).json({ success: false, message: 'Exercise slug is required' });
         }
 
-        // Sanitize slug
-        const sanitizedSlug = slug.toLowerCase().replace(/[^a-z0-9-]/g, '');
-        if (sanitizedSlug !== slug) {
+        // Sanitize slug: lowercase, allow letters, numbers, hyphens, and underscores
+        const sanitizedSlug = slug.toLowerCase().replace(/[^a-z0-9_-]/g, '');
+        if (!sanitizedSlug) {
             return res.status(400).json({
                 success: false,
-                message: 'Invalid slug format. Use lowercase letters, numbers, and hyphens only.'
+                message: 'Invalid slug format. Use letters, numbers, hyphens, and underscores only.'
             });
         }
 
@@ -106,8 +106,8 @@ exports.deleteExerciseFolder = async (req, res, next) => {
     try {
         const { slug } = req.params;
 
-        // Sanitize slug
-        const sanitizedSlug = slug.toLowerCase().replace(/[^a-z0-9-]/g, '');
+        // Sanitize slug: lowercase, allow letters, numbers, hyphens, and underscores
+        const sanitizedSlug = slug.toLowerCase().replace(/[^a-z0-9_-]/g, '');
         const folderPath = path.join(__dirname, '../../public/images/exercises', sanitizedSlug);
 
         // Check if folder exists
@@ -151,6 +151,10 @@ exports.uploadExerciseImage = async (req, res, next) => {
             return res.status(400).json({ success: false, message: 'No files uploaded' });
         }
 
+        // Use sanitized slug (from middleware) for consistent folder/URL paths
+        const sanitizedSlug = req.sanitizedExerciseSlug
+            || exerciseSlug.toLowerCase().replace(/[^a-z0-9_-]/g, '');
+
         // Create database records for uploaded files
         const uploadedImages = await Promise.all(
             files.map(async (file) => {
@@ -158,13 +162,13 @@ exports.uploadExerciseImage = async (req, res, next) => {
                 const mediaType = file.mimetype.startsWith('video/') ? 'video' : 'image';
                 
                 const imageRecord = await ExerciseImage.create({
-                    exerciseSlug,
+                    exerciseSlug: sanitizedSlug,
                     subfolder,
                     mediaType,
                     filename: file.filename,
                     originalName: file.originalname,
                     path: file.path,
-                    url: `/images/exercises/${exerciseSlug}/${subfolder}/${file.filename}`,
+                    url: `/images/exercises/${sanitizedSlug}/${subfolder}/${file.filename}`,
                     size: file.size,
                     mimeType: file.mimetype,
                     uploadedBy: req.userId
@@ -181,9 +185,9 @@ exports.uploadExerciseImage = async (req, res, next) => {
         if (mainVideo) {
             const exercise = await Exercise.findOne({ where: { slug: exerciseSlug } });
             if (exercise) {
-                // Store the actual file path with /public/images/exercises/{slug}/main/{filename}
+                // Store the URL matching the static route (/images/exercises/{slug}/main/{filename})
                 await exercise.update({
-                    videoUrl: `/public/images/exercises/${exerciseSlug}/main/${mainVideo.filename}`
+                    videoUrl: `/images/exercises/${sanitizedSlug}/main/${mainVideo.filename}`
                 });
                 console.log(`✅ Updated Exercise.videoUrl for ${exerciseSlug}: ${exercise.videoUrl}`);
             }
@@ -194,9 +198,9 @@ exports.uploadExerciseImage = async (req, res, next) => {
         if (mainImage) {
             const exercise = await Exercise.findOne({ where: { slug: exerciseSlug } });
             if (exercise) {
-                // Store the actual file path with /public/images/exercises/{slug}/main/{filename}
+                // Store the URL matching the static route (/images/exercises/{slug}/main/{filename})
                 await exercise.update({
-                    imageUrl: `/public/images/exercises/${exerciseSlug}/main/${mainImage.filename}`
+                    imageUrl: `/images/exercises/${sanitizedSlug}/main/${mainImage.filename}`
                 });
                 console.log(`✅ Updated Exercise.imageUrl for ${exerciseSlug}: ${exercise.imageUrl}`);
             }
@@ -302,8 +306,14 @@ exports.downloadImageFromUrl = async (req, res, next) => {
             });
         }
 
-        // Sanitize exerciseSlug
-        const sanitizedSlug = exerciseSlug.toLowerCase().replace(/[^a-z0-9-]/g, '');
+        // Sanitize exerciseSlug: lowercase, allow letters, numbers, hyphens, and underscores
+        const sanitizedSlug = exerciseSlug.toLowerCase().replace(/[^a-z0-9_-]/g, '');
+        if (!sanitizedSlug) {
+            return res.status(400).json({
+                success: false,
+                message: 'Invalid exerciseSlug format. Use letters, numbers, hyphens, and underscores only.'
+            });
+        }
 
         // Validate subfolder
         if (!ALLOWED_SUBFOLDERS.includes(subfolder)) {
