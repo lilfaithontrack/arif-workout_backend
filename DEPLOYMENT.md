@@ -2,7 +2,7 @@
 
 ## File Upload Configuration (Backend Directory Structure)
 
-The upload system now works entirely within the backend directory, making deployment simpler and more contained.
+The upload system works entirely within the backend's `public/images` directory.
 
 ### 1. Backend Directory Structure
 
@@ -14,9 +14,22 @@ backend/
 │   ├── models/
 │   ├── routes/
 │   └── server.js
-├── uploads/              ← Created automatically
-│   ├── categories/       ← Category images
-│   └── subcategories/    ← Subcategory images
+├── public/               ← Static files root
+│   └── images/           ← All uploaded images/videos
+│       ├── exercises/    ← Exercise media (auto-created per slug)
+│       │   └── {slug}/   ← One folder per exercise slug
+│       │       ├── main/
+│       │       ├── variations/
+│       │       ├── form-guide/
+│       │       ├── muscles/
+│       │       ├── equipment/
+│       │       ├── progression/
+│       │       └── common-mistakes/
+│       ├── categories/
+│       ├── subcategories/
+│       ├── nutrition/
+│       ├── advertisements/
+│       └── users/
 ├── package.json
 ├── .env.production
 └── DEPLOYMENT.md
@@ -24,70 +37,76 @@ backend/
 
 ### 2. Environment Variables
 
-Create `.env.production` in your backend directory:
+Create `.env` (or set in cPanel) in your backend directory:
 
 ```bash
 # File Upload Configuration
-UPLOAD_PATH=/home/yourusername/backend/uploads
-STATIC_PATH=/home/yourusername/backend/uploads
+# Point STATIC_PATH to the backend's public directory
+# The server serves /images from {STATIC_PATH}/images
+STATIC_PATH=/home/yourusername/backend/public
 ```
 
 ### 3. cPanel Deployment Steps
 
-1. **Upload backend folder to cPanel**
-2. **Set environment variables** in cPanel:
-   - `UPLOAD_PATH=/home/yourusername/backend/uploads`
-   - `STATIC_PATH=/home/yourusername/backend/uploads`
+1. **Upload backend folder to cPanel** (e.g. `/home/arifworkout/backend/`)
+2. **Set environment variables** in cPanel or `.env`:
+   - `STATIC_PATH=/home/arifworkout/backend/public`
+   - `NODE_ENV=production`
+   - `DB_HOST=localhost`, `DB_NAME=arif_workout`, etc.
 
-3. **Create directories** (optional - created automatically):
+3. **Create the public/images directory** (optional — created automatically on first upload):
    ```
-   /home/yourusername/backend/uploads/categories/
-   /home/yourusername/backend/uploads/subcategories/
+   mkdir -p /home/arifworkout/backend/public/images/exercises
    ```
 
-4. **Set permissions**:
+4. **Set permissions** so Node can write to the images directory:
    ```bash
-   chmod 755 /home/yourusername/backend/uploads
-   chmod 755 /home/yourusername/backend/uploads/categories
-   chmod 755 /home/yourusername/backend/uploads/subcategories
+   chmod 755 /home/arifworkout/backend/public
+   chmod -R 755 /home/arifworkout/backend/public/images
    ```
 
 ### 4. How It Works
 
-- **Default**: Files are saved to `backend/uploads/`
-- **Images served at**: `/images/categories/filename.jpg`
-- **Database stores**: `/images/categories/filename.jpg`
-- **Automatic**: Directories are created if they don't exist
+- **Files saved to**: `{STATIC_PATH}/images/exercises/{slug}/{subfolder}/{filename}`
+- **Images served at**: `https://api.arifworkout.com/images/exercises/{slug}/{subfolder}/{filename}`
+- **Database stores**: `/images/exercises/{slug}/{subfolder}/{filename}`
+- **Automatic**: Subfolders are created with `mkdirSync({ recursive: true })` on first upload — no manual setup needed per exercise
 
 ### 5. cPanel Specific Example
 
 If your backend is at `/home/arifworkout/backend/`:
 
 ```bash
-UPLOAD_PATH=/home/arifworkout/backend/uploads
-STATIC_PATH=/home/arifworkout/backend/uploads
+STATIC_PATH=/home/arifworkout/backend/public
 ```
 
 Files will be saved to:
-- `/home/arifworkout/backend/uploads/categories/`
-- `/home/arifworkout/backend/uploads/subcategories/`
+- `/home/arifworkout/backend/public/images/exercises/{slug}/main/video.mp4`
+- `/home/arifworkout/backend/public/images/categories/filename.jpg`
 
 And accessible via:
+- `https://api.arifworkout.com/images/exercises/{slug}/main/video.mp4`
 - `https://api.arifworkout.com/images/categories/filename.jpg`
 
-### 6. Directory Permissions (Optional)
+### 6. Folder Creation Behavior
 
-The system creates directories automatically, but you can set permissions manually:
+- **Exercise folders**: Created automatically when an admin uploads media via the admin panel (drag-and-drop or file picker). The multer middleware calls `fs.mkdirSync(uploadPath, { recursive: true })`.
+- **Category/subcategory folders**: Created automatically on first upload.
+- **No manual folder creation needed** — the system handles it.
+
+### 7. Migrating Existing Local Images to cPanel
+
+If you have exercise images locally that you want on the server:
 
 ```bash
-chmod 755 /home/yourusername/backend/uploads
-chmod 755 /home/yourusername/backend/uploads/categories
-chmod 755 /home/yourusername/backend/uploads/subcategories
+# Upload the entire public/images folder from your local machine
+# to /home/arifworkout/backend/public/images/ on cPanel
+scp -r backend/public/images/ user@server:/home/arifworkout/backend/public/
 ```
 
-### 5. Nginx Configuration (if using Nginx)
+Or use cPanel's File Manager to upload a ZIP and extract it.
 
-Add this to your Nginx config to serve uploaded files:
+### 8. Nginx Configuration (if using Nginx)
 
 ```nginx
 server {
@@ -95,13 +114,7 @@ server {
     server_name your-domain.com;
     
     location /images/ {
-        alias /var/www/arif-workout/public/images/;
-        expires 1y;
-        add_header Cache-Control "public, immutable";
-    }
-    
-    location /uploads/ {
-        alias /var/www/arif-workout/uploads/;
+        alias /home/arifworkout/backend/public/images/;
         expires 1y;
         add_header Cache-Control "public, immutable";
     }
@@ -114,145 +127,41 @@ server {
 }
 ```
 
-### 6. Apache Configuration (if using Apache)
-
-Add this to your .htaccess or Apache config:
+### 9. Apache Configuration (if using Apache)
 
 ```apache
 <IfModule mod_alias.c>
-    Alias /images /var/www/arif-workout/public/images
-    Alias /uploads /var/www/arif-workout/uploads
+    Alias /images /home/arifworkout/backend/public/images
 </IfModule>
 
-<Directory /var/www/arif-workout/public/images>
-    Options -Indexes
-    AllowOverride None
-    Require all granted
-</Directory>
-
-<Directory /var/www/arif-workout/uploads>
+<Directory /home/arifworkout/backend/public/images>
     Options -Indexes
     AllowOverride None
     Require all granted
 </Directory>
 ```
 
-### 7. Testing the Upload
+### 10. Testing the Upload
 
 After deployment, test the upload functionality:
 
-1. Check server logs for upload path messages
-2. Verify files are being saved to the correct directory
-3. Test image URLs are accessible via browser
+1. Check server logs for: `📁 Serving static files from: .../public/images`
+2. Upload a test image via the admin panel
+3. Verify the file appears in `/home/arifworkout/backend/public/images/exercises/{slug}/main/`
+4. Test the image URL is accessible via browser
 
-### 8. Cloud Storage Alternative
+### 11. Debugging Tips
 
-For better scalability, consider using cloud storage:
+If uploads don't work:
 
-```javascript
-// Example for AWS S3 (in production)
-const AWS = require('aws-sdk');
-const s3 = new AWS.S3();
+1. Check the server logs for the static files path message
+2. Verify `STATIC_PATH` env variable is set correctly to the `public` directory
+3. Ensure `public/images/` exists and has write permissions (`chmod 755`)
+4. Test file creation manually: `touch /home/arifworkout/backend/public/images/test.txt`
 
-const storage = multer.memoryStorage();
-const upload = multer({ storage });
+### 12. Common Issues
 
-// Then upload to S3 instead of local disk
-```
-
-### 9. Debugging Tips
-
-If uploads still don't work:
-
-1. Check the server logs for directory creation messages
-2. Verify the UPLOAD_PATH environment variable is set correctly
-3. Ensure the directories exist and have proper permissions
-4. Test file creation manually: `touch /var/www/arif-workout/uploads/test.txt`
-
-### 10. Common Issues
-
-- **Permission Denied**: Fix with proper chmod/chown
-- **Directory Not Found**: Create directories manually
-- **Wrong Path**: Check UPLOAD_PATH environment variable
-- **CORS Issues**: Ensure static files are served with CORS headers
-
-## SQL for Database Setup
-
-Here's the SQL to create the necessary tables with image columns:
-
-```sql
--- Add image columns to categories table (if not exists)
-ALTER TABLE categories 
-ADD COLUMN IF NOT EXISTS image VARCHAR(500) NULL 
-COMMENT 'Path to category image file' 
-AFTER description;
-
--- Add image columns to subcategories table (if not exists)
-ALTER TABLE subcategories 
-ADD COLUMN IF NOT EXISTS image VARCHAR(500) NULL 
-COMMENT 'Path to subcategory image file' 
-AFTER description;
-
--- Create advertisements table (if not exists)
-CREATE TABLE IF NOT EXISTS advertisements (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255) NOT NULL COMMENT 'Advertisement title',
-    description TEXT NULL COMMENT 'Advertisement description/content',
-    type ENUM('banner', 'popup', 'sidebar', 'inline', 'video', 'native') NOT NULL DEFAULT 'banner',
-    category ENUM('fitness', 'nutrition', 'equipment', 'supplements', 'apparel', 'general') NOT NULL DEFAULT 'general',
-    imageUrl VARCHAR(500) NULL COMMENT 'Main advertisement image URL',
-    thumbnailUrl VARCHAR(500) NULL COMMENT 'Thumbnail image URL',
-    videoUrl VARCHAR(500) NULL COMMENT 'Video advertisement URL',
-    targetUrl VARCHAR(1000) NOT NULL COMMENT 'URL where ad clicks should redirect',
-    ctaText VARCHAR(100) NULL DEFAULT 'Learn More' COMMENT 'Call-to-action button text',
-    placement JSON NULL COMMENT 'Array of page placements',
-    position ENUM('top', 'bottom', 'left', 'right', 'center', 'floating') NULL DEFAULT 'top',
-    dimensions JSON NULL COMMENT 'Width and height',
-    startDate DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    endDate DATETIME NULL,
-    targetAudience JSON NULL,
-    targetDevices JSON NULL,
-    priority INT NOT NULL DEFAULT 5,
-    dailyBudget DECIMAL(10, 2) NULL,
-    totalBudget DECIMAL(10, 2) NULL,
-    costPerClick DECIMAL(10, 2) NULL,
-    costPerImpression DECIMAL(10, 4) NULL,
-    impressions INT DEFAULT 0,
-    clicks INT DEFAULT 0,
-    conversions INT DEFAULT 0,
-    totalSpent DECIMAL(10, 2) DEFAULT 0,
-    advertiserName VARCHAR(255) NOT NULL,
-    advertiserEmail VARCHAR(255) NULL,
-    advertiserPhone VARCHAR(50) NULL,
-    advertiserWebsite VARCHAR(500) NULL,
-    status ENUM('draft', 'pending', 'approved', 'active', 'paused', 'completed', 'rejected') NOT NULL DEFAULT 'draft',
-    isActive BOOLEAN DEFAULT FALSE,
-    moderationNotes TEXT NULL,
-    createdBy INT NULL,
-    approvedBy INT NULL,
-    approvedAt DATETIME NULL,
-    maxImpressions INT NULL,
-    maxClicks INT NULL,
-    frequency JSON NULL,
-    tags JSON NULL,
-    notes TEXT NULL,
-    createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    
-    INDEX idx_status (status),
-    INDEX idx_isActive (isActive),
-    INDEX idx_type (type),
-    INDEX idx_category (category),
-    INDEX idx_startDate (startDate),
-    INDEX idx_endDate (endDate),
-    INDEX idx_priority (priority),
-    INDEX idx_createdBy (createdBy),
-    INDEX idx_approvedBy (approvedBy),
-    INDEX idx_advertiserName (advertiserName),
-    
-    FOREIGN KEY (createdBy) REFERENCES users(id) ON DELETE SET NULL ON UPDATE CASCADE,
-    FOREIGN KEY (approvedBy) REFERENCES users(id) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-```
-
-This should resolve your image upload issues in deployment!
+- **Permission Denied**: Fix with `chmod -R 755 public/images` and ensure the Node process owns the directory
+- **Directory Not Found**: Create `public/images/` manually — subfolders are auto-created
+- **Wrong Path**: Check `STATIC_PATH` points to `backend/public` (not `backend/uploads`)
+- **CORS Issues**: Static files are served with `cors()` middleware — already handled
