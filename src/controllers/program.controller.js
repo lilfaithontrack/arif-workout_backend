@@ -74,7 +74,8 @@ exports.getProgramById = async (req, res) => {
     const { includeWorkouts = true } = req.query;
 
     const includeOptions = [
-      { model: Category, as: 'category', attributes: ['id', 'name'] }
+      { model: Category, as: 'category', attributes: ['id', 'name'] },
+      { model: Phase, as: 'optPhaseInfo', attributes: ['id', 'phaseNumber', 'name', 'intensity'], required: false }
     ];
 
     if (includeWorkouts === 'true') {
@@ -83,6 +84,9 @@ exports.getProgramById = async (req, res) => {
         as: 'workouts',
         where: { isActive: true },
         required: false,
+        include: [
+          { model: Phase, as: 'phaseInfo', attributes: ['id', 'phaseNumber', 'name', 'intensity'], required: false }
+        ],
         order: [['orderIndex', 'ASC']]
       });
     }
@@ -124,11 +128,15 @@ exports.getProgramBySlug = async (req, res) => {
       where: { slug, isActive: true },
       include: [
         { model: Category, as: 'category', attributes: ['id', 'name'] },
+        { model: Phase, as: 'optPhaseInfo', attributes: ['id', 'phaseNumber', 'name', 'intensity'], required: false },
         {
           model: ProgramWorkout,
           as: 'workouts',
           where: { isActive: true },
           required: false,
+          include: [
+            { model: Phase, as: 'phaseInfo', attributes: ['id', 'phaseNumber', 'name', 'intensity'], required: false }
+          ],
           order: [['orderIndex', 'ASC']]
         }
       ]
@@ -163,7 +171,15 @@ exports.createProgram = async (req, res) => {
       bannerImageUrl,
       tags,
       equipment,
-      orderIndex
+      orderIndex,
+      optPhaseId,
+      optPhase,
+      optPhaseNumber,
+      assessmentRequired,
+      hasAssessments,
+      progressionType,
+      isActive,
+      isFeatured
     } = req.body;
 
     const slug = generateSlug(name);
@@ -188,6 +204,14 @@ exports.createProgram = async (req, res) => {
       tags,
       equipment,
       orderIndex,
+      optPhaseId,
+      optPhase,
+      optPhaseNumber,
+      assessmentRequired,
+      hasAssessments,
+      progressionType,
+      isActive,
+      isFeatured,
       createdBy: req.user.id
     });
 
@@ -283,7 +307,8 @@ exports.getWorkoutById = async (req, res) => {
           model: Program,
           as: 'program',
           attributes: ['id', 'name', 'slug']
-        }
+        },
+        { model: Phase, as: 'phaseInfo', attributes: ['id', 'phaseNumber', 'name', 'intensity'], required: false }
       ],
       order: [['orderIndex', 'ASC']]
     });
@@ -327,7 +352,13 @@ exports.addWorkoutToProgram = async (req, res) => {
       focusArea,
       orderIndex,
       instructions,
-      exercises
+      exercises,
+      phaseId,
+      phase,
+      phaseNumber,
+      isAssessment,
+      assessmentType,
+      isActive
     } = req.body;
 
     const program = await Program.findByPk(programId);
@@ -346,6 +377,12 @@ exports.addWorkoutToProgram = async (req, res) => {
       focusArea,
       orderIndex,
       instructions,
+      phaseId,
+      phase,
+      phaseNumber,
+      isAssessment,
+      assessmentType,
+      isActive,
       exercisesCount: exercises?.length || 0
     });
 
@@ -814,7 +851,8 @@ exports.getWorkoutWithSections = async (req, res) => {
           model: Program,
           as: 'program',
           attributes: ['id', 'name', 'level', 'optPhase']
-        }
+        },
+        { model: Phase, as: 'phaseInfo', attributes: ['id', 'phaseNumber', 'name', 'intensity'], required: false }
       ]
     });
 
@@ -888,12 +926,14 @@ exports.getFullProgramDetail = async (req, res) => {
       where: { id, isActive: true },
       include: [
         { model: Category, as: 'category', attributes: ['id', 'name', 'slug'] },
+        { model: Phase, as: 'optPhaseInfo', attributes: ['id', 'phaseNumber', 'name', 'intensity'], required: false },
         {
           model: ProgramWorkout,
           as: 'workouts',
           where: { isActive: true },
           required: false,
           include: [
+            { model: Phase, as: 'phaseInfo', attributes: ['id', 'phaseNumber', 'name', 'intensity'], required: false },
             {
               model: WorkoutExercise,
               as: 'exercises',
