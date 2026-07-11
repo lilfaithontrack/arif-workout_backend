@@ -13,21 +13,23 @@ const generateSlug = (name) => {
 // Get all programs with filtering
 exports.getPrograms = async (req, res) => {
   try {
-    const { 
-      category, 
-      level, 
-      goal, 
-      isFeatured, 
+    const {
+      category,
+      level,
+      goal,
+      optPhase,
+      isFeatured,
       search,
-      page = 1, 
-      limit = 20 
+      page = 1,
+      limit = 20
     } = req.query;
 
     const whereClause = { isActive: true };
-    
+
     if (category) whereClause.categoryId = category;
     if (level) whereClause.level = level;
     if (goal) whereClause.goal = goal;
+    if (optPhase) whereClause.optPhase = optPhase;
     if (isFeatured === 'true') whereClause.isFeatured = true;
     
     if (search) {
